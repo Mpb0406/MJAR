@@ -39,7 +39,31 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
 // @route   DELETE /api/training/:id
 // @access  Private
 const deleteTrainingDay = asyncHandler(async (req, res) => {
-  res.send(`Delete Training Day ${req.params.id}`);
+  const trainingDay = await TrainingDay.findById(req.params.id);
+
+  // Check if Training Day exists by ID
+  if (!trainingDay) {
+    res.status(401);
+    throw new Error("Training Day Not Found");
+  }
+
+  // Check for User
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(401);
+    throw new Error("User Not Found");
+  }
+
+  // Check if Logged User Matches Training Day User
+  if (trainingDay.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User Not Authorized");
+  }
+
+  await trainingDay.remove();
+
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
