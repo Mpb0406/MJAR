@@ -3,7 +3,7 @@ const TrainingDay = require("../Models/trainingDayModel");
 const User = require("../Models/userModel");
 
 // @desc    Create New Training Day
-// @route   POST /api/trainingday/
+// @route   POST /api/training/
 // @access  Private
 const newTrainingDay = asyncHandler(async (req, res) => {
   if (!req.body.day) {
@@ -20,4 +20,12 @@ const newTrainingDay = asyncHandler(async (req, res) => {
   res.status(201).json(trainingDay);
 });
 
-module.exports = { newTrainingDay };
+// @desc    Get All User Training Days
+// @route   GET /api/training/mytraining
+// @access  Private
+const getMyTraining = asyncHandler(async (req, res) => {
+  const training = await TrainingDay.find({ user: req.user.id });
+  res.json(training);
+});
+
+module.exports = { newTrainingDay, getMyTraining };
