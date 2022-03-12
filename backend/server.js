@@ -14,6 +14,7 @@ const port = process.env.PORT || 5000;
 
 //Routes
 app.use("/api/users", require("./Routes/userRoutes"));
+app.use("/api/trainingday", require("./Routes/trainingDayRoutes"));
 
 app.use(errorHandler);
 
