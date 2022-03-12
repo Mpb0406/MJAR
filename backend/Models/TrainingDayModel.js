@@ -8,33 +8,29 @@ const trainingDaySchema = mongoose.Schema(
       ref: "User",
     },
     day: {
-      day: {
-        type: Number,
-        required: true,
-      },
-      lift: [
-        {
-          exercise: {
-            type: String,
-            required: true,
-          },
-          sets: [
-            {
-              reps: {
-                type: Number,
-                required: true,
-              },
-              rpe: {
-                type: Number,
-              },
-              setType: {
-                type: String,
-              },
-            },
-          ],
-        },
-      ],
+      type: String,
+      required: true,
     },
+    lifts: [
+      {
+        exercise: {
+          type: String,
+        },
+        sets: [
+          {
+            reps: {
+              type: Number,
+            },
+            rpe: {
+              type: Number,
+            },
+            setType: {
+              type: String,
+            },
+          },
+        ],
+      },
+    ],
   },
   {
     timestamps: true,
