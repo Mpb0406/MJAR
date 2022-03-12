@@ -4,11 +4,17 @@ const TrainingDay = require("../Models/trainingDayModel");
 const {
   newTrainingDay,
   getMyTraining,
+  updateTrainingDay,
+  deleteTrainingDay,
 } = require("../Controllers/trainingDayControllers");
 const { protect } = require("../Middleware/authMiddleware");
 
 router.post("/", protect, newTrainingDay);
 
 router.get("/mytraining", protect, getMyTraining);
+
+router.put("/:id", protect, updateTrainingDay);
+
+router.delete("/:id", protect, deleteTrainingDay);
 
 module.exports = router;

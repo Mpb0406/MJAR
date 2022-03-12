@@ -28,4 +28,23 @@ const getMyTraining = asyncHandler(async (req, res) => {
   res.json(training);
 });
 
-module.exports = { newTrainingDay, getMyTraining };
+// @desc    Update Training Day - Add and edit lifts
+// @route   PUT /api/training/:id
+// @access  Private
+const updateTrainingDay = asyncHandler(async (req, res) => {
+  res.send(`Update Training Day ${req.params.id}`);
+});
+
+// @desc    Delete Training Day
+// @route   DELETE /api/training/:id
+// @access  Private
+const deleteTrainingDay = asyncHandler(async (req, res) => {
+  res.send(`Delete Training Day ${req.params.id}`);
+});
+
+module.exports = {
+  newTrainingDay,
+  getMyTraining,
+  updateTrainingDay,
+  deleteTrainingDay,
+};
