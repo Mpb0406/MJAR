@@ -6,6 +6,7 @@ const {
   getMyTraining,
   updateTrainingDay,
   deleteTrainingDay,
+  addNewSet,
 } = require("../Controllers/trainingDayControllers");
 const { protect } = require("../Middleware/authMiddleware");
 
@@ -16,5 +17,7 @@ router.get("/mytraining", protect, getMyTraining);
 router.put("/:id", protect, updateTrainingDay);
 
 router.delete("/:id", protect, deleteTrainingDay);
+
+router.put("/:dayId/:liftId", protect, addNewSet);
 
 module.exports = router;
