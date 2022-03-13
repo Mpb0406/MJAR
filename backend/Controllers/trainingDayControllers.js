@@ -2,6 +2,14 @@ const asyncHandler = require("express-async-handler");
 const TrainingDay = require("../Models/trainingDayModel");
 const User = require("../Models/userModel");
 
+// @desc    Get All User Training Days
+// @route   GET /api/training/mytraining
+// @access  Private
+const getMyTraining = asyncHandler(async (req, res) => {
+  const training = await TrainingDay.find({ user: req.user.id });
+  res.json(training);
+});
+
 // @desc    Create New Training Day
 // @route   POST /api/training/
 // @access  Private
@@ -20,19 +28,29 @@ const newTrainingDay = asyncHandler(async (req, res) => {
   res.status(201).json(trainingDay);
 });
 
-// @desc    Get All User Training Days
-// @route   GET /api/training/mytraining
-// @access  Private
-const getMyTraining = asyncHandler(async (req, res) => {
-  const training = await TrainingDay.find({ user: req.user.id });
-  res.json(training);
-});
-
-// @desc    Update Training Day - Add and edit lifts
+// @desc    Add New Lift to Training Day
 // @route   PUT /api/training/:id
 // @access  Private
 const updateTrainingDay = asyncHandler(async (req, res) => {
-  res.send(`Update Training Day ${req.params.id}`);
+  // Get Form Data
+  const { exercise } = req.body;
+
+  // Build out object
+  const lift = {
+    exercise,
+    sets: [],
+  };
+
+  try {
+    //Find Training Day
+    const day = await TrainingDay.findOne({ _id: req.params.id });
+    day.lifts.push(lift);
+    await day.save();
+    res.json(day);
+  } catch (error) {
+    console.error(error);
+    res.status(400);
+  }
 });
 
 // @desc    Delete Training Day
