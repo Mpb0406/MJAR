@@ -144,7 +144,9 @@ const deleteSet = asyncHandler(async (req, res) => {
   const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
 
   //Get Set
-  const set = lift.sets.filter((set) => set._id !== req.params.setId);
+  const set = lift.sets.filter(
+    (set) => set._id.toString() !== req.params.setId
+  );
 
   res.send(set);
 });

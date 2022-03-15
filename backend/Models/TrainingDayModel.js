@@ -18,6 +18,10 @@ const trainingDaySchema = mongoose.Schema(
         },
         sets: [
           {
+            weight: {
+              type: Number,
+              required: true,
+            },
             reps: {
               type: Number,
             },
