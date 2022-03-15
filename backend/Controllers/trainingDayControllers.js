@@ -118,10 +118,35 @@ const addNewSet = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update a Set
-// @route   PUT /api/training/:id
+// @route   PUT /api/training/:dayId/:liftId/:setId
 // @access  Private
 const updateSet = asyncHandler(async (req, res) => {
-  res.send("Update a set");
+  // Get Training Day
+  const day = await TrainingDay.findOne({ _id: req.params.dayId });
+
+  // Get Lift
+  const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
+
+  //Get Set
+  const set = lift.sets.filter((set) => set._id == req.params.setId)[0];
+
+  res.send(set);
+});
+
+// @desc    Delete a Set
+// @route   DELETE /api/training/:dayId/:liftId
+// @access  Private
+const deleteSet = asyncHandler(async (req, res) => {
+  // Get Training Day
+  const day = await TrainingDay.findOne({ _id: req.params.dayId });
+
+  // Get Lift
+  const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
+
+  //Get Set
+  const set = lift.sets.filter((set) => set._id !== req.params.setId);
+
+  res.send(set);
 });
 
 module.exports = {
@@ -131,4 +156,5 @@ module.exports = {
   deleteTrainingDay,
   addNewSet,
   updateSet,
+  deleteSet,
 };
