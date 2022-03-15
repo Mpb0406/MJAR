@@ -84,6 +84,9 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Add a Set to a Lift
+// @route   PUT /api/training/:dayId/:liftId
+// @access  Private
 const addNewSet = asyncHandler(async (req, res) => {
   const { reps, rpe, setType } = req.body;
 
@@ -103,15 +106,22 @@ const addNewSet = asyncHandler(async (req, res) => {
     const day = await TrainingDay.findOne({ _id: req.params.dayId });
 
     // Get Lift by ID (Exists as req.params.liftId)
-    const lift = day.lifts.filter((lift) => lift._id === req.params.liftId);
+    const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
+
+    lift.sets.push(setFields);
+    await day.save();
+    res.json({ day });
   } catch (error) {
     console.error(error);
     res.status(400);
   }
+});
 
-  res.send(
-    `Add a new set to Lift ${req.params.liftId} on Training Day ${req.params.dayId}`
-  );
+// @desc    Update a Set
+// @route   PUT /api/training/:id
+// @access  Private
+const updateSet = asyncHandler(async (req, res) => {
+  res.send("Update a set");
 });
 
 module.exports = {
@@ -120,4 +130,5 @@ module.exports = {
   updateTrainingDay,
   deleteTrainingDay,
   addNewSet,
+  updateSet,
 };
