@@ -84,6 +84,19 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete A Lift from a Training Day
+// @route   DELETE /api/training/:dayId/:liftId
+// @access  Private
+const deleteLift = asyncHandler(async (req, res) => {
+  // Get Day
+  const day = await TrainingDay.findOne({ _id: req.params.dayId });
+
+  // Get Lift
+  const lift = day.filter;
+
+  res.send(day);
+});
+
 // @desc    Add a Set to a Lift
 // @route   PUT /api/training/:dayId/:liftId
 // @access  Private
@@ -171,4 +184,5 @@ module.exports = {
   addNewSet,
   updateSet,
   deleteSet,
+  deleteLift,
 };
