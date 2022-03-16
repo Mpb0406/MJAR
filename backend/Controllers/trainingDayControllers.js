@@ -88,7 +88,7 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
 // @route   PUT /api/training/:dayId/:liftId
 // @access  Private
 const addNewSet = asyncHandler(async (req, res) => {
-  const { reps, rpe, setType } = req.body;
+  const { weight, reps, rpe, setType } = req.body;
 
   if (!reps) {
     res.status(400);
@@ -96,6 +96,7 @@ const addNewSet = asyncHandler(async (req, res) => {
   }
 
   const setFields = {
+    weight,
     reps,
     rpe,
     setType,
@@ -121,16 +122,27 @@ const addNewSet = asyncHandler(async (req, res) => {
 // @route   PUT /api/training/:dayId/:liftId/:setId
 // @access  Private
 const updateSet = asyncHandler(async (req, res) => {
+  const { weight, reps, rpe, setType } = req.body;
+
   // Get Training Day
-  const day = await TrainingDay.findOne({ _id: req.params.dayId });
+  let day = await TrainingDay.findOne({ _id: req.params.dayId });
 
   // Get Lift
   const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
 
-  //Get Set
-  const set = lift.sets.filter((set) => set._id == req.params.setId)[0];
+  // Get Set to be Updated
+  const set = lift.sets.filter(
+    (set) => set._id.toString() == req.params.setId
+  )[0];
 
-  res.send(set);
+  if (weight) set.weight = weight;
+  if (reps) set.reps = reps;
+  if (rpe) set.rpe = rpe;
+  if (setType) set.setType = setType;
+
+  await day.save();
+
+  res.send(day);
 });
 
 // @desc    Delete a Set
