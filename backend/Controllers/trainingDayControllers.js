@@ -173,6 +173,10 @@ const deleteSet = asyncHandler(async (req, res) => {
     (set) => set._id.toString() !== req.params.setId
   );
 
+  lift.sets = set;
+
+  await day.save();
+
   res.send(set);
 });
 
