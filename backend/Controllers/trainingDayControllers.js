@@ -92,7 +92,12 @@ const deleteLift = asyncHandler(async (req, res) => {
   const day = await TrainingDay.findOne({ _id: req.params.dayId });
 
   // Get Lift
-  const lift = day.filter;
+  const updatedLifts = day.lifts.filter(
+    (lift) => lift._id.toString() !== req.params.liftId
+  );
+
+  day.lifts = updatedLifts;
+  await day.save();
 
   res.send(day);
 });
