@@ -13,7 +13,7 @@ const {
 } = require("../Controllers/trainingDayControllers");
 const { protect } = require("../Middleware/authMiddleware");
 
-router.post("/", protect, newTrainingDay);
+router.post("/:weekId", protect, newTrainingDay);
 
 router.get("/mytraining", protect, getMyTraining);
 

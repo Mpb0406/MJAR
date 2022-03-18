@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const TrainingDay = require("../Models/trainingDayModel");
+const TrainingWeek = require("../Models/trainingWeekModel");
 const User = require("../Models/userModel");
 
 // @desc    Get All User Training Days
@@ -19,13 +20,20 @@ const newTrainingDay = asyncHandler(async (req, res) => {
     throw new Error("Please Add Day");
   }
 
+  // Get Training Week to push day onto
+  const week = await TrainingWeek.findOne({ _id: req.params.weekId });
+
   const trainingDay = await TrainingDay.create({
     user: req.user.id,
     day: req.body.day,
     lifts: [],
   });
 
-  res.status(201).json(trainingDay);
+  week.trainingDays.push(trainingDay);
+
+  week.save();
+
+  res.status(201).json(week);
 });
 
 // @desc    Delete Training Day
