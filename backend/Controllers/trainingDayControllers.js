@@ -12,7 +12,7 @@ const getMyTraining = asyncHandler(async (req, res) => {
 });
 
 // @desc    Create New Training Day
-// @route   POST /api/training/
+// @route   POST /api/training/:weekId
 // @access  Private
 const newTrainingDay = asyncHandler(async (req, res) => {
   if (!req.body.day) {
