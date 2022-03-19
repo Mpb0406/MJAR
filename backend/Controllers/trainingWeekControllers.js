@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const TrainingWeek = require("../Models/trainingWeekModel");
+const TrainingBlock = require("../Models/trainingBlockModel");
 const User = require("../Models/userModel");
 
 // @desc    Get Training Weeks
@@ -17,11 +18,18 @@ const getTrainingWeeks = asyncHandler(async (req, res) => {
 const createWeek = asyncHandler(async (req, res) => {
   const { week } = req.body;
 
+  // Get Training Block
+  const block = await TrainingBlock.findOne({ _id: req.params.blockId });
+
   const trainingWeek = await TrainingWeek.create({
     user: req.user.id,
     week,
     trainingDays: [],
   });
+
+  block.weeks.push(trainingWeek);
+
+  block.save();
 
   res.json(trainingWeek);
 });

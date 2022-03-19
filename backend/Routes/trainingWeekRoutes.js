@@ -10,7 +10,7 @@ const {
 
 router.get("/mytraining", protect, getTrainingWeeks);
 
-router.post("/", protect, createWeek);
+router.post("/:blockId", protect, createWeek);
 
 router.delete("/:weekId", protect, deleteWeek);
 
