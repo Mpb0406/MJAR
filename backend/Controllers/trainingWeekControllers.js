@@ -18,6 +18,7 @@ const createWeek = asyncHandler(async (req, res) => {
   const { week } = req.body;
 
   const trainingWeek = await TrainingWeek.create({
+    user: req.user.id,
     week,
     trainingDays: [],
   });

@@ -15,7 +15,15 @@ const getTrainingBlocks = asyncHandler(async (req, res) => {
 // @route   POST /api/trainingblocks
 // @access  Private
 const createTrainingBlock = asyncHandler(async (req, res) => {
-  res.send("Create new training block");
+  const { block } = req.body;
+
+  const newBlock = await TrainingBlock.create({
+    user: req.user.id,
+    block,
+    weeks: [],
+  });
+
+  res.json(newBlock);
 });
 
 // @desc    Delete a Training Block
