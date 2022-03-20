@@ -23,6 +23,12 @@ const newTrainingDay = asyncHandler(async (req, res) => {
   // Get Training Week to push day onto
   const week = await TrainingWeek.findOne({ _id: req.params.weekId });
 
+  // Check if Week Exists
+  if (!week) {
+    res.status(400);
+    throw new Error("Training Week Not Found");
+  }
+
   const trainingDay = await TrainingDay.create({
     user: req.user.id,
     day: req.body.day,
@@ -42,6 +48,12 @@ const newTrainingDay = asyncHandler(async (req, res) => {
 const deleteTrainingDay = asyncHandler(async (req, res) => {
   const trainingDay = await TrainingDay.findById(req.params.dayId);
   const week = await TrainingWeek.findById(req.params.weekId);
+
+  // Check if Week Exists
+  if (!week) {
+    res.status(400);
+    throw new Error("Training Week Not Found");
+  }
 
   // Check if Training Day exists by ID
   if (!trainingDay) {
@@ -91,6 +103,13 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
   try {
     //Find Training Day
     const day = await TrainingDay.findOne({ _id: req.params.id });
+
+    // Check if Day Exists
+    if (!day) {
+      res.status(400);
+      throw new Error("Training Day Not Found");
+    }
+
     day.lifts.push(liftFields);
     await day.save();
     res.json(day);

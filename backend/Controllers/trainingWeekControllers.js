@@ -21,6 +21,12 @@ const createWeek = asyncHandler(async (req, res) => {
   // Get Training Block
   const block = await TrainingBlock.findOne({ _id: req.params.blockId });
 
+  //Check if Block Exists
+  if (!block) {
+    res.status(400);
+    throw new Error("No Training Block Found");
+  }
+
   const trainingWeek = await TrainingWeek.create({
     user: req.user.id,
     week,
@@ -40,6 +46,12 @@ const createWeek = asyncHandler(async (req, res) => {
 const deleteWeek = asyncHandler(async (req, res) => {
   const trainingWeek = await TrainingWeek.findById({ _id: req.params.weekId });
   const block = await TrainingBlock.findById(req.params.blockId);
+
+  // Check for Training Block
+  if (!block) {
+    res.status(400);
+    throw new Error("No Training Block Found");
+  }
 
   // Check for week
   if (!trainingWeek) {
