@@ -13,7 +13,7 @@ const getTrainingWeeks = asyncHandler(async (req, res) => {
 });
 
 // @desc    Create New Training Week
-// @route   POST /api/trainingweeks
+// @route   POST /api/trainingweeks/:blockId
 // @access  Private
 const createWeek = asyncHandler(async (req, res) => {
   const { week } = req.body;
@@ -56,7 +56,7 @@ const deleteWeek = asyncHandler(async (req, res) => {
 
   await trainingWeek.remove();
 
-  res.send(req.params.weekId);
+  res.json(req.params.weekId);
 });
 
 module.exports = {

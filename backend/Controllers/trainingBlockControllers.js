@@ -8,7 +8,9 @@ const User = require("../Models/userModel");
 // @route   GET /api/trainingblocks/mytraining
 // @access  Private
 const getTrainingBlocks = asyncHandler(async (req, res) => {
-  res.send("Get all training Blocks");
+  const blocks = await TrainingBlock.find({ user: req.user.id });
+
+  res.json(blocks);
 });
 
 // @desc    Create New Training Block
@@ -30,6 +32,17 @@ const createTrainingBlock = asyncHandler(async (req, res) => {
 // @route   DELETE /api/trainingblocks/:blockId
 // @access  Private
 const deleteTrainingBlock = asyncHandler(async (req, res) => {
+  const block = await TrainingBlock.findById({ _id: req.params.blockId });
+
+  if (!block) {
+    res.status(401);
+    throw new Error("Training Block Not Found");
+  }
+
+  await block.remove();
+
+  res.json(req.params.blockId);
+
   res.send(`Delete block ${req.params.blockId}`);
 });
 
