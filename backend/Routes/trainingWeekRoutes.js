@@ -12,6 +12,6 @@ router.get("/mytraining", protect, getTrainingWeeks);
 
 router.post("/:blockId", protect, createWeek);
 
-router.delete("/:weekId", protect, deleteWeek);
+router.delete("/:blockId/:weekId", protect, deleteWeek);
 
 module.exports = router;

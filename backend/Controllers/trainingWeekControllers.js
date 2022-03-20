@@ -39,6 +39,7 @@ const createWeek = asyncHandler(async (req, res) => {
 // @access  Private
 const deleteWeek = asyncHandler(async (req, res) => {
   const trainingWeek = await TrainingWeek.findById({ _id: req.params.weekId });
+  const block = await TrainingBlock.findById(req.params.blockId);
 
   // Check for week
   if (!trainingWeek) {
@@ -54,9 +55,16 @@ const deleteWeek = asyncHandler(async (req, res) => {
     throw new Error("User Not Found");
   }
 
+  const updatedWeeks = block.weeks.filter(
+    (week) => week.toString() !== req.params.weekId
+  );
+
+  block.weeks = updatedWeeks;
+  block.save();
+
   await trainingWeek.remove();
 
-  res.json(req.params.weekId);
+  res.json(req.params.blockId);
 });
 
 module.exports = {
