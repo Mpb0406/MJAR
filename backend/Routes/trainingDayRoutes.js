@@ -19,7 +19,7 @@ router.get("/mytraining", protect, getMyTraining);
 
 router.put("/:id", protect, updateTrainingDay);
 
-router.delete("/:id", protect, deleteTrainingDay);
+router.delete("/:weekId/:dayId", protect, deleteTrainingDay);
 
 router.post("/:dayId/:liftId", protect, addNewSet);
 
