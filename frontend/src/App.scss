@@ -1,0 +1,12 @@
+@import "./customBootstrap.scss";
+@import "~bootstrap/scss/bootstrap";
+* {
+  margin: 2rem 0 0 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #0f091b;
+}
+
+.dis-font {
+  font-family: "Dangrek", cursive;
+}

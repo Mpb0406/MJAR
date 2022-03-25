@@ -1,0 +1,9 @@
+$theme-colors: (
+  "primary": orange,
+  "info": tomato,
+  "danger": teal,
+  "dark": #1e2b3f,
+  "light": #ddd,
+);
+
+@import "~bootstrap/scss/bootstrap";
