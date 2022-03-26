@@ -6,7 +6,7 @@ import "../App.scss";
 const Register = () => {
   return (
     <>
-      <Form.Group className="d-flex flex-column flex-column align-items-center">
+      <Form.Group className="d-flex flex-column flex-column align-items-center mt-5">
         <h3 className="text-light dis-font fs-1 mb-4">Create An Account</h3>
         <Form.Control
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"

@@ -5,11 +5,13 @@ import Login from "./Pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./customBootstrap.scss";
 import "./App.scss";
+import Header from "./Components/Header";
 
 function App() {
   return (
     <>
       <Router>
+        <Header />
         <div className="container">
           <Routes>
             <Route path="/Register" element={<Register />} />
