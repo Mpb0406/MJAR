@@ -1,9 +1,20 @@
 $theme-colors: (
-  "primary": orange,
-  "info": tomato,
-  "danger": teal,
-  "dark": #1e2b3f,
+  "primary": #1e2b3f,
+  "secondary": #712336,
+  "dark": #0f091b,
   "light": #ddd,
+  "info": #60676e,
+  "danger": teal,
+  "input": #2c3034,
+);
+$max-width: (
+  "property": max-width,
+  "class": mw,
+  "values": (
+    100: 100%,
+    75: 75%,
+    50: 50%,
+  ),
 );
 
 @import "~bootstrap/scss/bootstrap";

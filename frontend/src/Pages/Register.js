@@ -7,28 +7,28 @@ const Register = () => {
   return (
     <>
       <Form.Group className="d-flex flex-column flex-column align-items-center">
-        <h3 className="text-light dis-font fs-1">Create An Account</h3>
+        <h3 className="text-light dis-font fs-1 mb-4">Create An Account</h3>
         <Form.Control
-          className="my-3 w-50 bg-dark"
+          className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Name"
           variant="dark"
         />
         <Form.Control
-          className="my-3 w-50"
+          className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Email"
           variant="dark"
         />
         <Form.Control
-          className="my-3 w-50"
+          className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Password"
           variant="dark"
         />
         <Form.Control
-          className="my-3 w-50"
+          className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Confirm Password"
           variant="dark"
         />
-        <Button className="btn-dark mt-3">Create Account</Button>
+        <Button className="btn-primary mt-4 fw-bold">Create Account</Button>
       </Form.Group>
     </>
   );
