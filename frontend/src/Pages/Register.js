@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.scss";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const { name, email, password, password2 } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  console.log(formData);
   return (
     <>
       <Form.Group className="d-flex flex-column flex-column align-items-center mt-5">
@@ -12,23 +29,35 @@ const Register = () => {
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Name"
           variant="dark"
+          name="name"
+          value={name}
+          onChange={onChange}
         />
         <Form.Control
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Email"
           variant="dark"
+          name="email"
+          value={email}
+          onChange={onChange}
         />
         <Form.Control
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Password"
           variant="dark"
+          name="password"
+          value={password}
+          onChange={onChange}
         />
         <Form.Control
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Confirm Password"
           variant="dark"
+          name="password2"
+          value={password2}
+          onChange={onChange}
         />
-        <Button className="btn-primary mt-4 fw-bold">Create Account</Button>
+        <Button className="btn-primary mt-4 btn-lg">Create Account</Button>
       </Form.Group>
     </>
   );
