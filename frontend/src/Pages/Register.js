@@ -20,7 +20,6 @@ const Register = () => {
     }));
   };
 
-  console.log(formData);
   return (
     <>
       <Form.Group className="d-flex flex-column flex-column align-items-center mt-5">
@@ -37,6 +36,7 @@ const Register = () => {
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Email"
           variant="dark"
+          type="email"
           name="email"
           value={email}
           onChange={onChange}
@@ -45,6 +45,7 @@ const Register = () => {
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Password"
           variant="dark"
+          type="password"
           name="password"
           value={password}
           onChange={onChange}
@@ -53,6 +54,7 @@ const Register = () => {
           className="my-3 bg-input text-light fw-bold input-width border-primary border-2"
           placeholder="Confirm Password"
           variant="dark"
+          type="password"
           name="password2"
           value={password2}
           onChange={onChange}
