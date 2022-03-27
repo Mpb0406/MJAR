@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./customBootstrap.scss";
 import "./App.scss";
 import Header from "./Components/Header";
+import mjarLogo from "./img/MJAR Ellipse Logo.png";
 
 function App() {
   return (

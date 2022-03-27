@@ -18,11 +18,11 @@ const Header = () => {
             <Nav
               bg-primary
               className="me-auto bg-primary justify-content-end bg-primary">
-              <Nav.Link className="bg-primary text-info fs-5" href="#home">
-                Home
+              <Nav.Link className="bg-primary text-info fs-5" href="/register">
+                Sign Up
               </Nav.Link>
-              <Nav.Link className="bg-primary text-light fs-5" href="#features">
-                My Training
+              <Nav.Link className="bg-primary text-light fs-5" href="/login">
+                Login
               </Nav.Link>
               <div className="profile bg-primary d-flex align-items-center ms-3">
                 <div className="profile-pic"></div>
