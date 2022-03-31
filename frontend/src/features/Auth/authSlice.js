@@ -11,6 +11,7 @@ const initialState = {
   message: "",
 };
 
+// Register User
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
@@ -27,6 +28,11 @@ export const register = createAsyncThunk(
     }
   }
 );
+
+// Logout User
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout;
+});
 
 export const authSlice = createSlice({
   name: "auth",
