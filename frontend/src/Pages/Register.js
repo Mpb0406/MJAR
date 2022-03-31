@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.scss";
@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../features/Auth/authSlice";
+import Loader from "../Components/Loader";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +24,16 @@ const Register = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess || user) {
+      navigate("/");
+    }
+    dispatch(reset);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -44,6 +55,10 @@ const Register = () => {
       dispatch(register(userData));
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <form onSubmit={onSubmit}>
