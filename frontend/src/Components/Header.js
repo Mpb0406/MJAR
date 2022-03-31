@@ -1,7 +1,21 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout, reset } from "../features/Auth/authSlice";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/login");
+  };
+
   return (
     <Navbar className="navbar-dark" bg="primary" expand="lg">
       <Container className="bg-primary">
@@ -23,6 +37,12 @@ const Header = () => {
               </Nav.Link>
               <Nav.Link className="bg-primary text-light fs-5" href="/login">
                 Login
+              </Nav.Link>
+              <Nav.Link
+                onClick={onLogout}
+                className="bg-primary text-light fs-5"
+                href="/login">
+                Logout
               </Nav.Link>
               <div className="profile bg-primary d-flex align-items-center ms-3">
                 <div className="profile-pic"></div>
