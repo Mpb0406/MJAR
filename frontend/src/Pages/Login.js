@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login, reset } from "../features/Auth/authSlice";
+import { toast } from "react-toastify";
+import Loader from "../Components/Loader";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +15,11 @@ const Login = () => {
   });
 
   const { email, password } = formData;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
 
   const onChange = (e) =>
     setFormData((prevState) => ({
