@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { logout, reset } from "../features/Auth/authSlice";
 
 const Header = () => {
@@ -17,6 +17,9 @@ const Header = () => {
   };
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [activeTab, setActiveTab] = useState("");
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
@@ -42,13 +45,13 @@ const Header = () => {
                 bg-primary
                 className="me-auto bg-primary justify-content-end bg-primary">
                 <Nav.Link
-                  className="bg-primary text-info fs-5"
+                  className="bg-primary fs-5 hover-text"
                   href="/register">
                   My Training
                 </Nav.Link>
                 <Nav.Link
                   onClick={onLogout}
-                  className="bg-primary text-light fs-5"
+                  className="bg-primary fs-5 hover-text"
                   href="/login">
                   Logout
                 </Nav.Link>
@@ -64,11 +67,17 @@ const Header = () => {
                 bg-primary
                 className="me-auto bg-primary justify-content-end bg-primary">
                 <Nav.Link
-                  className="bg-primary text-info fs-5"
+                  className={`bg-primary fs-5 ${
+                    pathname === "/register" ? "text-light" : "hover-text"
+                  }`}
                   href="/register">
                   Sign Up
                 </Nav.Link>
-                <Nav.Link className="bg-primary text-light fs-5" href="/login">
+                <Nav.Link
+                  className={`bg-primary fs-5 ${
+                    pathname === "/login" ? "text-light" : "hover-text"
+                  }`}
+                  href="/login">
                   Login
                 </Nav.Link>
               </Nav>

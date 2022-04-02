@@ -33,3 +33,10 @@
   border-radius: 50%;
   background-color: gray;
 }
+
+.hover-text {
+  color: $info;
+  &:hover {
+    color: $light;
+  }
+}
