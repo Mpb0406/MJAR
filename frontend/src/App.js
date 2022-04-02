@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TrainingBlocks from "./Pages/TrainingBlocks";
 import Block from "./Pages/Block";
+import TrainingDays from "./Pages/TrainingDays";
 import { Container } from "react-bootstrap";
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
             <Route path="/Register" element={<Register />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Training" element={<TrainingBlocks />} />
-            <Route path="/blockId" element={<Block />} />
+            <Route path="/training/blockId" element={<Block />} />
+            <Route path="/training/weekId" element={<TrainingDays />} />
           </Routes>
         </Container>
       </Router>

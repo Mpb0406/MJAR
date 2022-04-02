@@ -12,7 +12,7 @@ const BlockCard = () => {
         </Card.Title>
         <Card.Text className="bg-primary z-10">4 Weeks Logged</Card.Text>
         <Link
-          to="/blockId"
+          to="/training/blockId"
           className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
           View/Edit
         </Link>

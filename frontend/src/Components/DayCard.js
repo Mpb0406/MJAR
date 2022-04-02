@@ -1,29 +1,23 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import week from "../img/week.png";
+import block from "../img/block.png";
 
-const WeekCard = () => {
+const DayCard = () => {
   return (
     <Card className="my-3" bg="primary">
-      <Card.Body className="bg-primary text-light">
+      <Card.Body className="bg-primary text-light position-relative ">
         <Card.Title className=" fs-4 z-10 text-drop-shadow bg-none">
-          Week 1
+          Hypertrophy Block
         </Card.Title>
-        <Card.Text className="bg-primary z-10">
-          5 Days Logged <br />
-          <Card.Text className="bg-primary z-10 fs-small text-info fw-bold">
-            2/21/22 - 2/27/22
-          </Card.Text>
-        </Card.Text>
-
+        <Card.Text className="bg-primary z-10">4 Weeks Logged</Card.Text>
         <Link
-          to="/training/weekId"
+          to="/training/dayId"
           className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
           View/Edit
         </Link>
         <img
-          src={week}
+          src={block}
           className="h-50 position-absolute absolute-center z-5"
           alt=""
         />
@@ -32,4 +26,4 @@ const WeekCard = () => {
   );
 };
 
-export default WeekCard;
+export default DayCard;

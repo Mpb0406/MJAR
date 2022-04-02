@@ -46,7 +46,7 @@ const Header = () => {
                 className="me-auto bg-primary justify-content-end bg-primary">
                 <Nav.Link
                   className={`bg-primary fs-5 ${
-                    pathname === "/training" ? "text-light" : "hover-text"
+                    pathname === "/training/" ? "text-light" : "hover-text"
                   }`}
                   href="/training">
                   My Training
