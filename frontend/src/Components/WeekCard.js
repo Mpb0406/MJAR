@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import block from "../img/block.png";
 
-const BlockCard = () => {
+const WeekCard = () => {
   return (
     <Card className="my-3" bg="primary">
       <Card.Body className="bg-primary text-light position-relative ">
@@ -26,4 +26,4 @@ const BlockCard = () => {
   );
 };
 
-export default BlockCard;
+export default WeekCard;

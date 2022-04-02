@@ -9,6 +9,7 @@ import Header from "./Components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TrainingBlocks from "./Pages/TrainingBlocks";
+import Block from "./Pages/Block";
 import { Container } from "react-bootstrap";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/Register" element={<Register />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Training" element={<TrainingBlocks />} />
+            <Route path="/blockId" element={<Block />} />
           </Routes>
         </Container>
       </Router>

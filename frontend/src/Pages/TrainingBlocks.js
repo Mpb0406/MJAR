@@ -1,6 +1,6 @@
 import React from "react";
 import BlockCard from "../Components/BlockCard";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Button } from "react-bootstrap";
 
 const TrainingBlocks = () => {
   return (
@@ -29,6 +29,9 @@ const TrainingBlocks = () => {
             <BlockCard />
           </Col>
         </Row>
+        <Container className="d-flex justify-content-center mt-4 mb-5">
+          <Button variant="secondary">Add New Block</Button>
+        </Container>
       </Container>
     </div>
   );
