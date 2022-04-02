@@ -28,7 +28,7 @@ const Header = () => {
   }, [user]);
 
   return (
-    <Navbar className="navbar-dark" bg="primary" expand="lg">
+    <Navbar fixed="top" className="navbar-dark" bg="primary" expand="lg">
       <Container className="bg-primary">
         <Navbar.Brand href="/" className="bg-primary logo text-light fs-4">
           MJAR
@@ -45,8 +45,10 @@ const Header = () => {
                 bg-primary
                 className="me-auto bg-primary justify-content-end bg-primary">
                 <Nav.Link
-                  className="bg-primary fs-5 hover-text"
-                  href="/register">
+                  className={`bg-primary fs-5 ${
+                    pathname === "/training" ? "text-light" : "hover-text"
+                  }`}
+                  href="/training">
                   My Training
                 </Nav.Link>
                 <Nav.Link

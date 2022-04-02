@@ -40,3 +40,34 @@
     color: $light;
   }
 }
+
+.hover-secondary {
+  color: #d03057;
+  transition: 0.2s ease;
+  &:hover {
+    color: #92213c;
+  }
+}
+
+.absolute-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+}
+
+.z-5 {
+  z-index: 5;
+}
+
+.z-10 {
+  z-index: 50;
+}
+
+.text-drop-shadow {
+  filter: drop-shadow(10px 10px 30px black);
+}
+
+.bg-none {
+  background: transparent;
+}
