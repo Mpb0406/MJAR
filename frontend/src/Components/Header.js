@@ -58,7 +58,11 @@ const Header = () => {
                   Logout
                 </Nav.Link>
                 <div className="profile bg-primary d-flex align-items-center ms-3">
-                  <div className="profile-pic"></div>
+                  <div className="profile-pic position-relative">
+                    <h5 className="bg-none text-light position-absolute top-50 start-50 translate-50">
+                      M
+                    </h5>
+                  </div>
                   <div className="profile-name bg-primary text-light ms-2 fw-bold">
                     Mike
                   </div>

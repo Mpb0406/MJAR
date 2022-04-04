@@ -7,8 +7,9 @@ import strength from "../img/strength.png";
 const BlockCard = () => {
   return (
     <Card
-      className="d-flex flex-row align-items-center my-3 border border-info "
-      bg="dark">
+      className="d-flex flex-row align-items-center my-3 border-2 border-info"
+      bg="dark"
+      role="button">
       <Container>
         <Row>
           <Col xs={3} md={2} lg={1}>
@@ -21,7 +22,9 @@ const BlockCard = () => {
           <Col>
             <Card.Body className="bg-none text-light">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between my-0">
-                <h3 className="fs-4">Strength Block</h3>
+                <h3 className="fs-4 hover-primary absolute-center">
+                  Strength Block
+                </h3>
                 <h4 className="fs-6">4 Weeks Logged</h4>
               </Card.Title>
             </Card.Body>
