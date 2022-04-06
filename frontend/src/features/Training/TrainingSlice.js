@@ -74,6 +74,19 @@ export const trainingSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(getWeeks.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getWeeks.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.weeks = action.payload;
+      })
+      .addCase(getWeeks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
