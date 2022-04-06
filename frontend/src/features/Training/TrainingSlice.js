@@ -30,6 +30,25 @@ export const getBlocks = createAsyncThunk(
   }
 );
 
+// Get Training Weeks by Block ID
+export const getWeeks = createAsyncThunk(
+  "training/getWeeks",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.getWeeks(token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,

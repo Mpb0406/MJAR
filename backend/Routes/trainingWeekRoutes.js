@@ -8,7 +8,7 @@ const {
   deleteWeek,
 } = require("../Controllers/trainingWeekControllers");
 
-router.get("/mytraining", protect, getTrainingWeeks);
+router.get("/:blockId/mytraining", protect, getTrainingWeeks);
 
 router.post("/:blockId", protect, createWeek);
 

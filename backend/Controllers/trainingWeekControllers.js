@@ -7,7 +7,15 @@ const User = require("../Models/userModel");
 // @route   Get /api/trainingweeks/mytraining
 // @access  Private
 const getTrainingWeeks = asyncHandler(async (req, res) => {
-  const weeks = await TrainingWeek.find({ user: req.user.id });
+  const block = await TrainingBlock.findById({ _id: req.params.blockId });
+
+  if (!block) {
+    res.status(400);
+    throw new Error("Block Not Found");
+  }
+
+  // Create Array of Weeks Object IDs
+  const weeks = await TrainingWeek.find({ _id: { $in: block.weeks } });
 
   res.json(weeks);
 });
