@@ -16,7 +16,8 @@ export const getBlocks = createAsyncThunk(
   "training/getBlocks",
   async (_, thunkAPI) => {
     try {
-      return await TrainingService.getBlocks();
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.getBlocks(token);
     } catch (error) {
       const message =
         (error.response &&

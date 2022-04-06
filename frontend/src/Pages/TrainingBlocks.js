@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BlockCard from "../Components/BlockCard";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getBlocks } from "../features/Training/TrainingSlice";
 
 const TrainingBlocks = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  const { blocks, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.training
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    dispatch(getBlocks());
+  }, []);
+
   return (
     <div className="mt-5">
       <h3 className="fs-1 text-light">My Training Blocks</h3>
