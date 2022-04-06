@@ -38,7 +38,7 @@ const Header = () => {
           className="navbar-dark"
           aria-controls="basic-navbar-nav"
         />
-        <Navbar.Collapse className="navbar-dark" id="basic-navbar-nav">
+        <Navbar.Collapse className="navbar-dark bg-none" id="basic-navbar-nav">
           <Container className="navbar-dark justify-content-end bg-primary">
             {loggedIn ? (
               <Nav

@@ -1,8 +1,9 @@
 import React from "react";
-import { Card, Container, Col, Row } from "react-bootstrap";
+import { Card, Container, Col, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import hypertrophy from "../img/hypertrophy.png";
 import strength from "../img/strength.png";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const BlockCard = () => {
   return (
@@ -22,9 +23,7 @@ const BlockCard = () => {
           <Col>
             <Card.Body className="bg-none text-light">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between my-0">
-                <h3 className="fs-4 hover-primary absolute-center">
-                  Strength Block
-                </h3>
+                <h3 className="fs-4 hover-primary">Strength Block</h3>
                 <h4 className="fs-6">4 Weeks Logged</h4>
               </Card.Title>
             </Card.Body>
@@ -33,11 +32,13 @@ const BlockCard = () => {
             <Card.Body className="bg-none text-light text-center ms-4">
               <Card.Text className="d-flex flex-column align-items-xs-center align-items-md-end justify-content-between my-0">
                 <h4 className="fs-6 text-sm-center">2/21/22 - 3/30/22</h4>
-                <Link
-                  to="/training/blockId"
-                  className="text-decoration-none hover-secondary hover-secondary fs-5 mt-3">
-                  View/Edit
-                </Link>
+                <Button variant="secondary rounded-pill d-flex align-items-center justify-content-center mt-1">
+                  <Link
+                    to="/training/blockId"
+                    className="text-decoration-none bg-none text-light px-2">
+                    View
+                  </Link>
+                </Button>
               </Card.Text>
             </Card.Body>
           </Col>
