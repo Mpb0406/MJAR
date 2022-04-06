@@ -33,10 +33,10 @@ export const getBlocks = createAsyncThunk(
 // Get Training Weeks by Block ID
 export const getWeeks = createAsyncThunk(
   "training/getWeeks",
-  async (_, thunkAPI) => {
+  async (blockId, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await TrainingService.getWeeks(token);
+      return await TrainingService.getWeeks(blockId, token);
     } catch (error) {
       const message =
         (error.response &&

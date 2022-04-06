@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import WeekCard from "../Components/WeekCard";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getWeeks } from "../features/Training/TrainingSlice";
 
 const Block = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Get Pieces of State
+  const { user } = useSelector((state) => state.auth);
+  const { blocks, weeks, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    dispatch(getWeeks("62379e104b57528883f7103e"));
+  }, []);
+
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
       <h3 className="text-light dis-font fs-1 mb-2">Hypertrophy Block</h3>
