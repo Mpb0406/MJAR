@@ -4,6 +4,7 @@ import WeekCard from "../Components/WeekCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getWeeks } from "../features/Training/TrainingSlice";
+import Loader from "../Components/Loader";
 
 const Block = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,9 @@ const Block = () => {
 
   // Get Pieces of State
   const { user } = useSelector((state) => state.auth);
-  const { weeks, message, isError } = useSelector((state) => state.training);
+  const { weeks, message, isError, isLoading } = useSelector(
+    (state) => state.training
+  );
 
   useEffect(() => {
     if (isError) {
@@ -26,6 +29,10 @@ const Block = () => {
 
     dispatch(getWeeks(blockId));
   }, [dispatch, isError, message, navigate, user, blockId]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">

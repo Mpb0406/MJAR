@@ -2,15 +2,20 @@ import React, { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import DayCard from "../Components/DayCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
+import Loader from "../Components/Loader";
 
 const TrainingDays = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { weekId } = useParams();
+
   const { user } = useSelector((state) => state.auth);
-  const { isError, message } = useSelector((state) => state.training);
+  const { isError, message, isLoading, days } = useSelector(
+    (state) => state.training
+  );
 
   useEffect(() => {
     if (isError) {
@@ -21,8 +26,12 @@ const TrainingDays = () => {
       navigate("/login");
     }
 
-    dispatch(getDays("62379eba4b57528883f71045"));
+    dispatch(getDays(weekId));
   }, [dispatch, isError, message, user, navigate]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
@@ -31,17 +40,10 @@ const TrainingDays = () => {
         Feb 21, 2022 - Feb 27, 2022{" "}
       </h4>
       <Container fluid="lg" className="block-container mt-4 px-4">
-        <Row>
-          <Col lg={6} md={12}>
-            <DayCard />
-            <DayCard />
-            <DayCard />
-          </Col>
-          <Col lg={6} md={12}>
-            <DayCard />
-            <DayCard />
-          </Col>
-        </Row>
+        {days.map((day) => (
+          <DayCard name={day.day} lifts={day.lifts} id={day._id} />
+        ))}
+
         <Container className="d-flex justify-content-center mt-4 mb-5">
           <Button variant="secondary">Add New Day</Button>
         </Container>

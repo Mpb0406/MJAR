@@ -3,14 +3,16 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import block from "../img/block.png";
 
-const DayCard = () => {
+const DayCard = ({ name, lifts, id }) => {
   return (
     <Card className="my-3" bg="primary">
       <Card.Body className="bg-primary text-light position-relative ">
         <Card.Title className=" fs-4 z-10 text-drop-shadow bg-none">
-          Hypertrophy Block
+          {name}
         </Card.Title>
-        <Card.Text className="bg-primary z-10">4 Weeks Logged</Card.Text>
+        <Card.Text className="bg-primary z-10">{`${lifts.length} ${
+          lifts.length === 1 ? "Lift" : "Lifts"
+        } Logged`}</Card.Text>
         <Link
           to="/training/dayId"
           className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
