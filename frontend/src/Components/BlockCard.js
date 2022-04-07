@@ -1,9 +1,7 @@
 import React from "react";
 import { Card, Container, Col, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import hypertrophy from "../img/hypertrophy.png";
 import strength from "../img/strength.png";
-import { AiOutlineArrowRight } from "react-icons/ai";
 
 const BlockCard = () => {
   return (

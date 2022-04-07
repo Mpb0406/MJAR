@@ -11,9 +11,7 @@ const Block = () => {
 
   // Get Pieces of State
   const { user } = useSelector((state) => state.auth);
-  const { blocks, weeks, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const { message, isError } = useSelector((state) => state.training);
 
   useEffect(() => {
     if (isError) {
@@ -25,7 +23,7 @@ const Block = () => {
     }
 
     dispatch(getWeeks("62379e104b57528883f7103e"));
-  }, []);
+  }, [dispatch, isError, message, navigate, user]);
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">

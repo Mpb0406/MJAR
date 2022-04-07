@@ -15,7 +15,7 @@ const { protect } = require("../Middleware/authMiddleware");
 
 router.post("/:weekId", protect, newTrainingDay);
 
-router.get("/mytraining", protect, getMyTraining);
+router.get("/:weekId/mytraining", protect, getMyTraining);
 
 router.put("/:id", protect, updateTrainingDay);
 

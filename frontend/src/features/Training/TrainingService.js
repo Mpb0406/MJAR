@@ -32,10 +32,25 @@ const getWeeks = async (blockId, token) => {
 };
 
 // ****** Training Days ******
+const getDays = async (weekId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.get(
+    `/api/training/${weekId}/mytraining`,
+    config
+  );
+
+  return response.data;
+};
 
 const TrainingService = {
   getBlocks,
   getWeeks,
+  getDays,
 };
 
 export default TrainingService;

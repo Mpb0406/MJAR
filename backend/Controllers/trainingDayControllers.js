@@ -3,12 +3,21 @@ const TrainingDay = require("../Models/trainingDayModel");
 const TrainingWeek = require("../Models/trainingWeekModel");
 const User = require("../Models/userModel");
 
-// @desc    Get All User Training Days
+// @desc    Get Training Days By Week
 // @route   GET /api/training/mytraining
 // @access  Private
 const getMyTraining = asyncHandler(async (req, res) => {
-  const training = await TrainingDay.find({ user: req.user.id });
-  res.json(training);
+  const week = await TrainingWeek.findById({ _id: req.params.weekId });
+
+  if (!week) {
+    res.status(400);
+    throw new Error("Training Week Not Found");
+  }
+
+  // Find All Days with Object Id's Found in trainingDays Array for Week
+  const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+  res.json(days);
 });
 
 // @desc    Create New Training Day

@@ -9,9 +9,7 @@ const TrainingBlocks = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { blocks, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.training
-  );
+  const { isError, message } = useSelector((state) => state.training);
 
   useEffect(() => {
     if (isError) {
@@ -23,7 +21,7 @@ const TrainingBlocks = () => {
     }
 
     dispatch(getBlocks());
-  }, []);
+  }, [dispatch, isError, message, navigate, user]);
 
   return (
     <div className="mt-5">

@@ -49,6 +49,25 @@ export const getWeeks = createAsyncThunk(
   }
 );
 
+// Get Training Days by Week ID
+export const getDays = createAsyncThunk(
+  "training/getDays",
+  async (weekId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.getDays(weekId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,
@@ -84,6 +103,19 @@ export const trainingSlice = createSlice({
         state.weeks = action.payload;
       })
       .addCase(getWeeks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getDays.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getDays.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.days = action.payload;
+      })
+      .addCase(getDays.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -14,7 +14,7 @@ const getTrainingWeeks = asyncHandler(async (req, res) => {
     throw new Error("Block Not Found");
   }
 
-  // Create Array of Weeks Object IDs
+  // Find All Weeks with Object Id's Found in Weeks Array for Block
   const weeks = await TrainingWeek.find({ _id: { $in: block.weeks } });
 
   res.json(weeks);

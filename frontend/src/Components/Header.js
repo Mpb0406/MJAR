@@ -17,7 +17,6 @@ const Header = () => {
   };
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState("");
 
   const { pathname } = useLocation();
 
