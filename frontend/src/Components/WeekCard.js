@@ -3,22 +3,22 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import week from "../img/week.png";
 
-const WeekCard = () => {
+const WeekCard = ({ name, days, id, blockId }) => {
   return (
     <Card className="my-3" bg="primary">
       <Card.Body className="bg-primary text-light">
         <Card.Title className=" fs-4 z-10 text-drop-shadow bg-none">
-          Week 1
+          {name}
         </Card.Title>
         <Card.Text className="bg-primary z-10">
-          5 Days Logged <br />
+          {`${days.length} ${days.length === 1 ? "Day" : "Days"} Logged`} <br />
           <Card.Text className="bg-primary z-10 fs-small text-info fw-bold">
             2/21/22 - 2/27/22
           </Card.Text>
         </Card.Text>
 
         <Link
-          to="/training/weekId"
+          to={`/training/${blockId}/${id}`}
           className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
           View/Edit
         </Link>

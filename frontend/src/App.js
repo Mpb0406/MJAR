@@ -24,7 +24,10 @@ function App() {
             <Route path="/Login" element={<Login />} />
             <Route path="/Training" element={<TrainingBlocks />} />
             <Route path="/training/:blockId" element={<Block />} />
-            <Route path="/training/weekId" element={<TrainingDays />} />
+            <Route
+              path="/training/:blockId/:weekId"
+              element={<TrainingDays />}
+            />
           </Routes>
         </Container>
       </Router>
