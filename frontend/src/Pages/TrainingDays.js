@@ -10,7 +10,7 @@ const TrainingDays = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { weekId } = useParams();
+  const { blockId, weekId } = useParams();
 
   const { user } = useSelector((state) => state.auth);
   const { isError, message, isLoading, days } = useSelector(
@@ -41,7 +41,13 @@ const TrainingDays = () => {
       </h4>
       <Container fluid="lg" className="block-container mt-4 px-4">
         {days.map((day) => (
-          <DayCard name={day.day} lifts={day.lifts} id={day._id} />
+          <DayCard
+            name={day.day}
+            lifts={day.lifts}
+            id={day._id}
+            block={blockId}
+            week={weekId}
+          />
         ))}
 
         <Container className="d-flex justify-content-center mt-4 mb-5">

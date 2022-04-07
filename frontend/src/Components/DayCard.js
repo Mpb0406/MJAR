@@ -1,9 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import block from "../img/block.png";
+import blockpic from "../img/block.png";
 
-const DayCard = ({ name, lifts, id }) => {
+const DayCard = ({ name, lifts, id, block, week }) => {
   return (
     <Card className="my-3" bg="primary">
       <Card.Body className="bg-primary text-light position-relative ">
@@ -14,12 +14,12 @@ const DayCard = ({ name, lifts, id }) => {
           lifts.length === 1 ? "Lift" : "Lifts"
         } Logged`}</Card.Text>
         <Link
-          to="/training/dayId"
+          to={`/training/${block}/${week}/${id}`}
           className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
           View/Edit
         </Link>
         <img
-          src={block}
+          src={blockpic}
           className="h-50 position-absolute absolute-center z-5"
           alt=""
         />
