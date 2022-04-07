@@ -23,7 +23,7 @@ function App() {
             <Route path="/Register" element={<Register />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Training" element={<TrainingBlocks />} />
-            <Route path="/training/blockId" element={<Block />} />
+            <Route path="/training/:blockId" element={<Block />} />
             <Route path="/training/weekId" element={<TrainingDays />} />
           </Routes>
         </Container>

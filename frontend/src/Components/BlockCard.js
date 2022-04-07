@@ -3,7 +3,7 @@ import { Card, Container, Col, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import strength from "../img/strength.png";
 
-const BlockCard = () => {
+const BlockCard = ({ name, weeks, id }) => {
   return (
     <Card
       className="d-flex flex-row align-items-center my-3 border-2 border-info"
@@ -21,8 +21,10 @@ const BlockCard = () => {
           <Col>
             <Card.Body className="bg-none text-light">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between my-0">
-                <h3 className="fs-4 hover-primary">Strength Block</h3>
-                <h4 className="fs-6">4 Weeks Logged</h4>
+                <h3 className="fs-4 hover-primary">{name}</h3>
+                <h4 className="fs-6">{`${weeks.length} ${
+                  weeks.length === 1 ? "Week" : "Weeks"
+                } Logged`}</h4>
               </Card.Title>
             </Card.Body>
           </Col>
@@ -32,7 +34,7 @@ const BlockCard = () => {
                 <h4 className="fs-6 text-sm-center">2/21/22 - 3/30/22</h4>
                 <Button variant="secondary rounded-pill d-flex align-items-center justify-content-center mt-1">
                   <Link
-                    to="/training/blockId"
+                    to={`/training/${id}`}
                     className="text-decoration-none bg-none text-light px-2">
                     View
                   </Link>

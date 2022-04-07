@@ -4,12 +4,15 @@ import { Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getBlocks } from "../features/Training/TrainingSlice";
+import Loader from "../Components/Loader";
 
 const TrainingBlocks = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { isError, message } = useSelector((state) => state.training);
+  const { isError, message, isLoading, blocks } = useSelector(
+    (state) => state.training
+  );
 
   useEffect(() => {
     if (isError) {
@@ -23,6 +26,10 @@ const TrainingBlocks = () => {
     dispatch(getBlocks());
   }, [dispatch, isError, message, navigate, user]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="mt-5">
       <h3 className="fs-1 text-light">My Training Blocks</h3>
@@ -33,8 +40,10 @@ const TrainingBlocks = () => {
             Show More
           </button>
         </div>
-        <BlockCard />
-        <BlockCard />
+
+        {blocks.map((block) => (
+          <BlockCard name={block.block} weeks={block.weeks} id={block._id} />
+        ))}
       </Container>
     </div>
   );
