@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BlockCard from "../Components/BlockCard";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getBlocks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
+import NewBlockModal from "../Modals/NewBlockModal";
 
 const TrainingBlocks = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const TrainingBlocks = () => {
   const { isError, message, isLoading, blocks } = useSelector(
     (state) => state.training
   );
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (isError) {
@@ -45,6 +48,13 @@ const TrainingBlocks = () => {
           <BlockCard name={block.block} weeks={block.weeks} id={block._id} />
         ))}
       </Container>
+      <Container className="d-flex justify-content-center mb-5">
+        <Button variant="secondary" className="">
+          New Training Block
+        </Button>
+      </Container>
+
+      <NewBlockModal />
     </div>
   );
 };
