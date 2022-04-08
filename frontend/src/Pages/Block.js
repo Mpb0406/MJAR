@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Button } from "react-bootstrap";
 import WeekCard from "../Components/WeekCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getWeeks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
+import NewWeekModal from "../Modals/NewWeekModal";
 
 const Block = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { blockId } = useParams();
+
+  const [show, setShow] = useState(false);
+  const handleOpen = () => setShow(true);
 
   // Get Pieces of State
   const { user } = useSelector((state) => state.auth);
@@ -73,9 +77,13 @@ const Block = () => {
           </Col>
         </Row> */}
         <Container className="d-flex justify-content-center mt-4 mb-5">
-          <Button variant="secondary">Add New Week</Button>
+          <Button variant="secondary" onClick={handleOpen}>
+            Add New Week
+          </Button>
         </Container>
       </Container>
+
+      <NewWeekModal show={show} setShow={setShow} />
     </div>
   );
 };
