@@ -16,6 +16,8 @@ const TrainingBlocks = () => {
   );
 
   const [show, setShow] = useState(false);
+  const handleOpen = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   useEffect(() => {
     if (isError) {
@@ -49,12 +51,12 @@ const TrainingBlocks = () => {
         ))}
       </Container>
       <Container className="d-flex justify-content-center mb-5">
-        <Button variant="secondary" className="">
+        <Button variant="secondary" className="" onClick={handleOpen}>
           New Training Block
         </Button>
       </Container>
 
-      <NewBlockModal />
+      <NewBlockModal show={show} setShow={setShow} />
     </div>
   );
 };

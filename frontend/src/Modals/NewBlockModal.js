@@ -1,9 +1,11 @@
 import React from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 
-const NewBlockModal = () => {
+const NewBlockModal = ({ show, setShow }) => {
+  const handleClose = () => setShow(false);
+
   return (
-    <Modal show>
+    <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
         <Modal.Title className="bg-white">Add New Block</Modal.Title>
       </Modal.Header>
@@ -17,7 +19,9 @@ const NewBlockModal = () => {
         </Form>
       </Modal.Body>
       <Modal.Footer className="bg-white">
-        <Button variant="info">Cancel</Button>
+        <Button variant="info" onClick={handleClose}>
+          Cancel
+        </Button>
         <Button variant="primary">Add Block</Button>
       </Modal.Footer>
     </Modal>
