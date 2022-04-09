@@ -5,6 +5,7 @@ const initialState = {
   blocks: [],
   weeks: [],
   days: [],
+  day: {},
   isLoading: false,
   isSuccess: false,
   isError: true,
