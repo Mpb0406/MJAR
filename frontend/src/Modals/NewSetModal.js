@@ -3,39 +3,36 @@ import {
   Modal,
   Form,
   InputGroup,
-  Button,
-  Badge,
   FormControl,
+  Badge,
+  Button,
+  FloatingLabel,
 } from "react-bootstrap";
 
-const NewLiftModal = ({ show, setShow }) => {
+const NewSetModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
-        <Modal.Title className="bg-white">Add New Lift</Modal.Title>
+        <Modal.Title className="bg-white">Add New Set</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-white">
-        <Form className="bg-white">
-          <InputGroup className="mb-3 bg-white">
-            <Form.Select className="bg-white">
-              <option className="bg-white">Main Lift</option>
-              <option value="1" className="bg-white">
-                Squat
-              </option>
-              <option value="2" className="bg-white">
-                Bench Press
-              </option>
-              <option value="3" className="bg-white">
-                Deadlift
-              </option>
-            </Form.Select>
-          </InputGroup>
-          <InputGroup className="bg-white">
-            <InputGroup.Text>Accessory</InputGroup.Text>
-            <FormControl />
-          </InputGroup>
+        <Form className="bg-white d-flex justify-content-between">
+          <Form.Control className="mx-1" placeholder="Weight" />
+          <Form.Control className="mx-1" placeholder="Reps" />
+          <Form.Control className="mx-1" placeholder="RPE" />
+          <Form.Select className="mx-1">
+            <option className="bg-white" value="warmUp">
+              Warm Up
+            </option>
+            <option className="bg-white" value="topSet">
+              Top Set
+            </option>
+            <option className="bg-white" value="workSet">
+              Working Set
+            </option>
+          </Form.Select>
         </Form>
         <p
           className="bg-white mt-4 mx-3 fw-bold fst-italic"
@@ -57,4 +54,4 @@ const NewLiftModal = ({ show, setShow }) => {
   );
 };
 
-export default NewLiftModal;
+export default NewSetModal;
