@@ -23,43 +23,47 @@ const TrainingDay = () => {
       <h1 className="pb-1">Training Day</h1>
 
       {day.lifts.map((lift) => (
-        <Table
-          striped
-          bordered
-          hover
-          variant="dark"
-          className="mt-4 position-relative"
-          responsive="sm">
-          <thead>
-            <tr className="text-center">
-              <th colSpan={5}>{lift.exercise}</th>
-            </tr>
-            <tr>
-              <th>Set</th>
-              <th>Weight</th>
-              <th>Reps</th>
-              <th>RPE</th>
-              <th>Set-Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lift.sets.map((set, idx) => (
-              <tr>
-                <td>{idx + 1}</td>
-                <td>{set.weight}</td>
-                <td>{set.reps}</td>
-                <td>{set.rpe}</td>
-                <td>{set.setType}</td>
+        <>
+          <Table
+            striped
+            bordered
+            hover
+            variant="dark"
+            className="mt-4 position-relative"
+            responsive="sm">
+            <thead>
+              <tr className="text-center">
+                <th colSpan={5}>{lift.exercise}</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+              <tr>
+                <th>Set</th>
+                <th>Weight</th>
+                <th>Reps</th>
+                <th>RPE</th>
+                <th>Set-Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lift.sets.map((set, idx) => (
+                <tr>
+                  <td>{idx + 1}</td>
+                  <td>{set.weight}</td>
+                  <td>{set.reps}</td>
+                  <td>{set.rpe}</td>
+                  <td>{set.setType}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <div className="d-grid w-75 m-auto gap-3 px-2 py-2">
+            <Button variant="secondary" onClick={handleOpenSet}>
+              New Set
+            </Button>
+          </div>
+        </>
       ))}
 
       <div className="d-grid w-75 m-auto gap-3 px-2 pt-2">
-        <Button variant="secondary" onClick={handleOpenSet}>
-          New Set
-        </Button>
         <Button variant="primary" onClick={handleOpenLift}>
           Add Lift
         </Button>
