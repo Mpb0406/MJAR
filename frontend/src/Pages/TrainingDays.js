@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Button } from "react-bootstrap";
 import DayCard from "../Components/DayCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
+import NewDayModal from "../Modals/NewDayModal";
 
 const TrainingDays = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,10 @@ const TrainingDays = () => {
   const { isError, message, isLoading, days } = useSelector(
     (state) => state.training
   );
+
+  const [show, setShow] = useState(false);
+
+  const handleOpen = () => setShow(true);
 
   useEffect(() => {
     if (isError) {
@@ -51,9 +56,13 @@ const TrainingDays = () => {
         ))}
 
         <Container className="d-flex justify-content-center mt-4 mb-5">
-          <Button variant="secondary">Add New Day</Button>
+          <Button variant="secondary" onClick={handleOpen}>
+            Add New Day
+          </Button>
         </Container>
       </Container>
+
+      <NewDayModal show={show} setShow={setShow} />
     </div>
   );
 };

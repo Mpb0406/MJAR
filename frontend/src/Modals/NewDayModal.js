@@ -1,23 +1,22 @@
 import React from "react";
-import { Modal, Form, Button, Badge } from "react-bootstrap";
+import { Modal, Button, Badge, Form } from "react-bootstrap";
 
-const NewWeekModal = ({ show, setShow }) => {
+const NewDayModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
-        <Modal.Title className="bg-white">Add New Week</Modal.Title>
+        <Modal.Title className="bg-white">Add New Training Day</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-white">
         <Form className="bg-white">
           <Form.Select>
-            <option className="bg-white">Week 1</option>
-            <option className="bg-white">Week 2</option>
-            <option className="bg-white">Week 3</option>
-            <option className="bg-white">Week 4</option>
-            <option className="bg-white">Week 5</option>
-            <option className="bg-white">Week 6</option>
+            <option className="bg-white">Day 1 - Squats & Bench</option>
+            <option className="bg-white">Day 2 - Bro Chest</option>
+            <option className="bg-white">Day 3 - Deadlifts & Legs</option>
+            <option className="bg-white">Day 4 - Squats & Bench</option>
+            <option className="bg-white">Day 5 - Deadlifts & Back</option>
           </Form.Select>
         </Form>
         <p
@@ -26,8 +25,7 @@ const NewWeekModal = ({ show, setShow }) => {
           <Badge bg="secondary" className="me-2">
             i
           </Badge>
-          Core lifts are performed to a top set at RPE 8 with working sets at
-          80% of the top set.
+          Squats x 7, Bench x 5, Upper Body Accessories
         </p>
       </Modal.Body>
       <Modal.Footer className="bg-white">
@@ -40,4 +38,4 @@ const NewWeekModal = ({ show, setShow }) => {
   );
 };
 
-export default NewWeekModal;
+export default NewDayModal;
