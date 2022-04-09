@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, Button } from "react-bootstrap";
+import NewLiftModal from "../Modals/NewLiftModal";
 
 const TrainingDay = () => {
+  const [showLift, setShowLift] = useState(false);
+
+  const handleOpenLift = () => setShowLift(true);
+
   return (
     <div className="mt-5 text-light">
       <h1 className="pb-1">Training Day</h1>
@@ -50,8 +55,12 @@ const TrainingDay = () => {
       </Table>
       <div className="d-grid w-75 m-auto gap-3 px-2 pt-2">
         <Button variant="secondary">New Set</Button>
-        <Button variant="primary">Add Lift</Button>
+        <Button variant="primary" onClick={handleOpenLift}>
+          Add Lift
+        </Button>
       </div>
+
+      <NewLiftModal show={showLift} setShow={setShowLift} />
     </div>
   );
 };
