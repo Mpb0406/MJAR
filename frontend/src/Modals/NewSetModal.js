@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  Modal,
-  Form,
-  InputGroup,
-  FormControl,
-  Badge,
-  Button,
-  FloatingLabel,
-} from "react-bootstrap";
+import { Modal, Form, Badge, Button } from "react-bootstrap";
 
 const NewSetModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
+
+  const rpe = ["<6", 6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -21,7 +15,17 @@ const NewSetModal = ({ show, setShow }) => {
         <Form className="bg-white d-flex justify-content-between">
           <Form.Control className="mx-1" placeholder="Weight" />
           <Form.Control className="mx-1" placeholder="Reps" />
-          <Form.Control className="mx-1" placeholder="RPE" />
+
+          <Form.Select className="mx-1">
+            <option className="bg-white" value="placeholder">
+              RPE
+            </option>
+            {rpe.map((x) => (
+              <option className="bg-white" value={x}>
+                {x}
+              </option>
+            ))}
+          </Form.Select>
           <Form.Select className="mx-1">
             <option className="bg-white" value="warmUp">
               Warm Up
