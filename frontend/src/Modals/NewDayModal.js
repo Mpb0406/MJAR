@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Button, Badge, Form } from "react-bootstrap";
 
 const NewDayModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
+
+  const days = [
+    "Day 1 - Squats & Bench",
+    "Day 2 - Bro Chest",
+    "Day 3 - Deadlifts & Legs",
+    "Day 4 - Squats & Bench",
+    "Day 5 - Deadlifts & Back",
+  ];
+
+  const [formData, setFormData] = useState({
+    day: "Day 1 - Squats & Bench",
+  });
+  const { day } = formData;
+
+  const onChange = (e) =>
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+
+  console.log(formData);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -11,12 +32,10 @@ const NewDayModal = ({ show, setShow }) => {
       </Modal.Header>
       <Modal.Body className="bg-white">
         <Form className="bg-white">
-          <Form.Select>
-            <option className="bg-white">Day 1 - Squats & Bench</option>
-            <option className="bg-white">Day 2 - Bro Chest</option>
-            <option className="bg-white">Day 3 - Deadlifts & Legs</option>
-            <option className="bg-white">Day 4 - Squats & Bench</option>
-            <option className="bg-white">Day 5 - Deadlifts & Back</option>
+          <Form.Select name="day" value={day} onChange={onChange}>
+            {days.map((day) => (
+              <option className="bg-white">{day}</option>
+            ))}
           </Form.Select>
         </Form>
         <p
