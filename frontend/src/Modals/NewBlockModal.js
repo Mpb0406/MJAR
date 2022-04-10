@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 
 const NewBlockModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
+
+  const [formData, setFormData] = useState({
+    block: "Hypertrophy Block",
+  });
+
+  const { block } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  console.log(formData);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -11,7 +26,8 @@ const NewBlockModal = ({ show, setShow }) => {
       </Modal.Header>
       <Modal.Body className="bg-white">
         <Form className="bg-white">
-          <Form.Select>
+          <Form.Select name="block" value={block} onChange={onChange}>
+            {/* <option className="bg-white">Pick Training Block</option> */}
             <option className="bg-white">Hypertrophy Block</option>
             <option className="bg-white">Strength Block</option>
             <option className="bg-white">Peak Block</option>
