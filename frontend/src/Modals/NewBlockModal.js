@@ -17,8 +17,6 @@ const NewBlockModal = ({ show, setShow }) => {
     }));
   };
 
-  console.log(formData);
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
@@ -27,7 +25,6 @@ const NewBlockModal = ({ show, setShow }) => {
       <Modal.Body className="bg-white">
         <Form className="bg-white">
           <Form.Select name="block" value={block} onChange={onChange}>
-            {/* <option className="bg-white">Pick Training Block</option> */}
             <option className="bg-white">Hypertrophy Block</option>
             <option className="bg-white">Strength Block</option>
             <option className="bg-white">Peak Block</option>

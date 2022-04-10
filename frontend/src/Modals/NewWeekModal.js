@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Button, Badge } from "react-bootstrap";
 
 const NewWeekModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
+
+  const weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"];
+
+  const [formData, setFormData] = useState({
+    week: "Week 1",
+  });
+  const { week } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -11,13 +25,10 @@ const NewWeekModal = ({ show, setShow }) => {
       </Modal.Header>
       <Modal.Body className="bg-white">
         <Form className="bg-white">
-          <Form.Select>
-            <option className="bg-white">Week 1</option>
-            <option className="bg-white">Week 2</option>
-            <option className="bg-white">Week 3</option>
-            <option className="bg-white">Week 4</option>
-            <option className="bg-white">Week 5</option>
-            <option className="bg-white">Week 6</option>
+          <Form.Select name="week" value={week} onChange={onChange}>
+            {weeks.map((week) => (
+              <option className="bg-white">{week}</option>
+            ))}
           </Form.Select>
         </Form>
         <p
