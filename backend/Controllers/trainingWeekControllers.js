@@ -45,7 +45,9 @@ const createWeek = asyncHandler(async (req, res) => {
 
   block.save();
 
-  res.json(trainingWeek);
+  const allWeeks = await TrainingWeek.find({ user: req.user.id });
+
+  res.json(allWeeks);
 });
 
 // @desc    Delete A Training Week

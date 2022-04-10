@@ -73,6 +73,25 @@ export const getWeeks = createAsyncThunk(
   }
 );
 
+// Create New Week
+export const newWeek = createAsyncThunk(
+  "training/newWeek",
+  async ([blockId, formData], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return TrainingService.newWeek(token, blockId, formData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // ****** Training Days ******
 
 // Get Training Days by Week ID
@@ -153,6 +172,19 @@ export const trainingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.blocks = action.payload;
+      })
+      .addCase(newWeek.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(newWeek.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.weeks = action.payload;
+      })
+      .addCase(newWeek.rejected, (state, action) => {
+        state.isLoading = false;
+        state.rejected = true;
+        state.message = action.payload;
       });
   },
 });

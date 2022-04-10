@@ -2,7 +2,7 @@ import axios from "axios";
 
 // ****** Training Blocks ******
 
-//Get Training Blocks
+// Get Training Blocks
 const getBlocks = async (token) => {
   const config = {
     headers: {
@@ -14,6 +14,7 @@ const getBlocks = async (token) => {
   return response.data;
 };
 
+// Create New Block
 const newBlock = async (token, formData) => {
   const config = {
     headers: {
@@ -27,6 +28,7 @@ const newBlock = async (token, formData) => {
 
 // ****** Training Weeks ******
 
+// Get Training Weeks
 const getWeeks = async (blockId, token) => {
   const config = {
     headers: {
@@ -42,7 +44,26 @@ const getWeeks = async (blockId, token) => {
   return response.data;
 };
 
+// Create Training Week
+const newWeek = async (token, blockId, formData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.post(
+    `/api/trainingweeks/${blockId}`,
+    formData,
+    config
+  );
+
+  return response.data;
+};
+
 // ****** Training Days ******
+
+// Get Training Days
 const getDays = async (weekId, token) => {
   const config = {
     headers: {
@@ -63,6 +84,7 @@ const TrainingService = {
   getWeeks,
   getDays,
   newBlock,
+  newWeek,
 };
 
 export default TrainingService;

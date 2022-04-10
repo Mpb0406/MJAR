@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Form, Button, Badge } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { newWeek } from "../features/Training/TrainingSlice";
+import { useParams } from "react-router-dom";
 
 const NewWeekModal = ({ show, setShow }) => {
+  const dispatch = useDispatch();
+  const { blockId } = useParams();
+
   const handleClose = () => setShow(false);
 
   const weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"];
@@ -18,19 +24,25 @@ const NewWeekModal = ({ show, setShow }) => {
     }));
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(newWeek([blockId, formData]));
+    handleClose();
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
         <Modal.Title className="bg-white">Add New Week</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-white">
-        <Form className="bg-white">
+        <form className="bg-white" onSubmit={onSubmit} id="weekForm">
           <Form.Select name="week" value={week} onChange={onChange}>
             {weeks.map((week) => (
               <option className="bg-white">{week}</option>
             ))}
           </Form.Select>
-        </Form>
+        </form>
         <p
           className="bg-white mt-4 mx-3 fw-bold fst-italic"
           style={{ fontSize: "0.85rem" }}>
@@ -45,7 +57,9 @@ const NewWeekModal = ({ show, setShow }) => {
         <Button variant="info" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="primary">Add Week</Button>
+        <Button variant="primary" type="submit" form="weekForm">
+          Add Week
+        </Button>
       </Modal.Footer>
     </Modal>
   );
