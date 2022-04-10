@@ -25,7 +25,9 @@ const createTrainingBlock = asyncHandler(async (req, res) => {
     weeks: [],
   });
 
-  res.json(newBlock);
+  const allBlocks = await TrainingBlock.find({ user: req.user.id });
+
+  res.json(allBlocks);
 });
 
 // @desc    Delete a Training Block

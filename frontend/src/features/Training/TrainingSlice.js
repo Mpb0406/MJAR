@@ -12,6 +12,8 @@ const initialState = {
   message: "",
 };
 
+// ****** Training Blocks ******
+
 // Get All Training Blocks
 export const getBlocks = createAsyncThunk(
   "training/getBlocks",
@@ -31,6 +33,27 @@ export const getBlocks = createAsyncThunk(
   }
 );
 
+// Create New Block
+export const newBlock = createAsyncThunk(
+  "training/newBlock",
+  async (formData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.newBlock(token, formData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// ****** Training Weeks ******
+
 // Get Training Weeks by Block ID
 export const getWeeks = createAsyncThunk(
   "training/getWeeks",
@@ -49,6 +72,8 @@ export const getWeeks = createAsyncThunk(
     }
   }
 );
+
+// ****** Training Days ******
 
 // Get Training Days by Week ID
 export const getDays = createAsyncThunk(
@@ -120,6 +145,14 @@ export const trainingSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(newBlock.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(newBlock.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.blocks = action.payload;
       });
   },
 });

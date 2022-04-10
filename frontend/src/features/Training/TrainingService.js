@@ -14,6 +14,17 @@ const getBlocks = async (token) => {
   return response.data;
 };
 
+const newBlock = async (token, formData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post("/api/trainingblocks/", formData, config);
+
+  return response.data;
+};
+
 // ****** Training Weeks ******
 
 const getWeeks = async (blockId, token) => {
@@ -51,6 +62,7 @@ const TrainingService = {
   getBlocks,
   getWeeks,
   getDays,
+  newBlock,
 };
 
 export default TrainingService;

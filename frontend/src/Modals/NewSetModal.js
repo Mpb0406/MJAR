@@ -5,6 +5,7 @@ const NewSetModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
 
   const rpeArr = ["<6", 6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+  const setTypeArr = ["Warm Up", "Top Set", "Working Set"];
 
   const [formData, setFormData] = useState({
     weight: "",
@@ -19,8 +20,6 @@ const NewSetModal = ({ show, setShow }) => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-
-  console.log(formData);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -43,7 +42,6 @@ const NewSetModal = ({ show, setShow }) => {
             value={reps}
             onChange={onChange}
           />
-
           <Form.Select
             className="mx-1"
             name="rpe"
@@ -63,15 +61,9 @@ const NewSetModal = ({ show, setShow }) => {
             name="setType"
             value={setType}
             onChange={onChange}>
-            <option className="bg-white" value="warmUp">
-              Warm Up
-            </option>
-            <option className="bg-white" value="topSet">
-              Top Set
-            </option>
-            <option className="bg-white" value="workSet">
-              Working Set
-            </option>
+            {setTypeArr.map((setType) => (
+              <option className="bg-white">{setType}</option>
+            ))}
           </Form.Select>
         </Form>
         <p
