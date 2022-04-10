@@ -23,8 +23,6 @@ const NewDayModal = ({ show, setShow }) => {
       [e.target.name]: e.target.value,
     }));
 
-  console.log(formData);
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">

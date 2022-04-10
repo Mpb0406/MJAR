@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   Form,
@@ -11,6 +11,19 @@ import {
 const NewLiftModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
 
+  const lifts = ["Squat", "Bench Press", "Deadlift"];
+
+  const [formData, setFormData] = useState({
+    lift: "",
+  });
+  const { lift } = formData;
+
+  const onChange = (e) =>
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
@@ -19,17 +32,16 @@ const NewLiftModal = ({ show, setShow }) => {
       <Modal.Body className="bg-white">
         <Form className="bg-white">
           <InputGroup className="mb-3 bg-white">
-            <Form.Select className="bg-white">
-              <option className="bg-white">Main Lift</option>
-              <option value="1" className="bg-white">
-                Squat
-              </option>
-              <option value="2" className="bg-white">
-                Bench Press
-              </option>
-              <option value="3" className="bg-white">
-                Deadlift
-              </option>
+            <Form.Select
+              className="bg-white"
+              name="lift"
+              value={lift}
+              onChange={onChange}>
+              {lifts.map((lift) => (
+                <option value={lift} className="bg-white">
+                  {lift}
+                </option>
+              ))}
             </Form.Select>
           </InputGroup>
           <InputGroup className="bg-white">

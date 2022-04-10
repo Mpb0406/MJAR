@@ -16,8 +16,6 @@ const TrainingDay = () => {
   const { days } = useSelector((state) => state.training);
   const day = days.filter((day) => day._id === dayId)[0];
 
-  console.log(day);
-
   return (
     <div className="mt-5 text-light">
       <h1 className="pb-1">Training Day</h1>
