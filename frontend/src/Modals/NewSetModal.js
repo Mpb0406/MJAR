@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Badge, Button } from "react-bootstrap";
 
 const NewSetModal = ({ show, setShow }) => {
   const handleClose = () => setShow(false);
 
-  const rpe = ["<6", 6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+  const rpeArr = ["<6", 6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+
+  const [formData, setFormData] = useState({
+    weight: "",
+    reps: "",
+    rpe: "",
+    setType: "",
+  });
+  const { weight, reps, rpe, setType } = formData;
+
+  const onChange = (e) =>
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+
+  console.log(formData);
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -13,20 +29,40 @@ const NewSetModal = ({ show, setShow }) => {
       </Modal.Header>
       <Modal.Body className="bg-white">
         <Form className="bg-white d-flex justify-content-between">
-          <Form.Control className="mx-1" placeholder="Weight" />
-          <Form.Control className="mx-1" placeholder="Reps" />
+          <Form.Control
+            className="mx-1"
+            placeholder="Weight"
+            name="weight"
+            value={weight}
+            onChange={onChange}
+          />
+          <Form.Control
+            className="mx-1"
+            placeholder="Reps"
+            name="reps"
+            value={reps}
+            onChange={onChange}
+          />
 
-          <Form.Select className="mx-1">
+          <Form.Select
+            className="mx-1"
+            name="rpe"
+            value={rpe}
+            onChange={onChange}>
             <option className="bg-white" value="placeholder">
               RPE
             </option>
-            {rpe.map((x) => (
-              <option className="bg-white" value={x}>
-                {x}
+            {rpeArr.map((value) => (
+              <option className="bg-white" value={value}>
+                {value}
               </option>
             ))}
           </Form.Select>
-          <Form.Select className="mx-1">
+          <Form.Select
+            className="mx-1"
+            name="setType"
+            value={setType}
+            onChange={onChange}>
             <option className="bg-white" value="warmUp">
               Warm Up
             </option>
