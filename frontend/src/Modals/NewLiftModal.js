@@ -7,16 +7,22 @@ import {
   Badge,
   FormControl,
 } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { newLift } from "../features/Training/TrainingSlice";
 
 const NewLiftModal = ({ show, setShow }) => {
+  const dispatch = useDispatch();
+  const { dayId } = useParams();
+
   const handleClose = () => setShow(false);
 
   const lifts = ["Squat", "Bench Press", "Deadlift"];
 
   const [formData, setFormData] = useState({
-    lift: "",
+    exercise: "",
   });
-  const { lift } = formData;
+  const { exercise } = formData;
 
   const onChange = (e) =>
     setFormData((prevState) => ({
@@ -24,18 +30,27 @@ const NewLiftModal = ({ show, setShow }) => {
       [e.target.name]: e.target.value,
     }));
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(newLift([dayId, formData]));
+    handleClose();
+  };
+
+  console.log(formData);
+  console.log(dayId);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
         <Modal.Title className="bg-white">Add New Lift</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-white">
-        <Form className="bg-white">
+        <form className="bg-white" id="liftForm" onSubmit={onSubmit}>
           <InputGroup className="mb-3 bg-white">
             <Form.Select
               className="bg-white"
-              name="lift"
-              value={lift}
+              name="exercise"
+              value={exercise}
               onChange={onChange}>
               {lifts.map((lift) => (
                 <option value={lift} className="bg-white">
@@ -48,7 +63,7 @@ const NewLiftModal = ({ show, setShow }) => {
             <InputGroup.Text>Accessory</InputGroup.Text>
             <FormControl />
           </InputGroup>
-        </Form>
+        </form>
         <p
           className="bg-white mt-4 mx-3 fw-bold fst-italic"
           style={{ fontSize: "0.85rem" }}>
@@ -63,7 +78,9 @@ const NewLiftModal = ({ show, setShow }) => {
         <Button variant="info" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="primary">Add Lift</Button>
+        <Button variant="primary" type="submit" form="liftForm">
+          Add Lift
+        </Button>
       </Modal.Footer>
     </Modal>
   );

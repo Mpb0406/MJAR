@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // ****** Training Blocks ******
@@ -95,6 +96,19 @@ const newDay = async (token, weekId, formData) => {
   return response.data;
 };
 
+// Add New Lift to Training Day
+const newLift = async (token, dayId, formData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(`/api/training/${dayId}`, formData, config);
+
+  return response.data;
+};
+
 const TrainingService = {
   getBlocks,
   getWeeks,
@@ -102,6 +116,7 @@ const TrainingService = {
   newBlock,
   newWeek,
   newDay,
+  newLift,
 };
 
 export default TrainingService;

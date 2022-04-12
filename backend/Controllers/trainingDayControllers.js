@@ -114,7 +114,7 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
 
   try {
     //Find Training Day
-    const day = await TrainingDay.findOne({ _id: req.params.id });
+    const day = await TrainingDay.findOne({ _id: req.params.dayId });
 
     // Check if Day Exists
     if (!day) {

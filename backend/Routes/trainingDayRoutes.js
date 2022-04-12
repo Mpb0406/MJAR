@@ -17,7 +17,7 @@ router.post("/:weekId", protect, newTrainingDay);
 
 router.get("/:weekId/mytraining", protect, getMyTraining);
 
-router.put("/:id", protect, updateTrainingDay);
+router.put("/:dayId", protect, updateTrainingDay);
 
 router.delete("/:weekId/:dayId", protect, deleteTrainingDay);
 
