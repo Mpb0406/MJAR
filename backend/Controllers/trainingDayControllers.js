@@ -48,7 +48,10 @@ const newTrainingDay = asyncHandler(async (req, res) => {
 
   week.save();
 
-  res.status(201).json(trainingDay);
+  // Get all days in specific training week
+  const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+  res.status(201).json(days);
 });
 
 // @desc    Delete Training Day

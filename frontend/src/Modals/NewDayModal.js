@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button, Badge, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { newDay } from "../features/Training/TrainingSlice";
 
 const NewDayModal = ({ show, setShow }) => {
+  const dispatch = useDispatch();
+  const { weekId } = useParams();
+
   const handleClose = () => setShow(false);
 
   const days = [
@@ -23,19 +29,25 @@ const NewDayModal = ({ show, setShow }) => {
       [e.target.name]: e.target.value,
     }));
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(newDay([weekId, formData]));
+    handleClose();
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
         <Modal.Title className="bg-white">Add New Training Day</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-white">
-        <Form className="bg-white">
+        <form className="bg-white" id="dayForm" onSubmit={onSubmit}>
           <Form.Select name="day" value={day} onChange={onChange}>
             {days.map((day) => (
               <option className="bg-white">{day}</option>
             ))}
           </Form.Select>
-        </Form>
+        </form>
         <p
           className="bg-white mt-4 mx-3 fw-bold fst-italic"
           style={{ fontSize: "0.85rem" }}>
@@ -49,7 +61,9 @@ const NewDayModal = ({ show, setShow }) => {
         <Button variant="info" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="primary">Add Week</Button>
+        <Button variant="primary" type="submit" form="dayForm">
+          Add Week
+        </Button>
       </Modal.Footer>
     </Modal>
   );

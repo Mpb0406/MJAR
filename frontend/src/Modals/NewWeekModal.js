@@ -44,8 +44,8 @@ const NewWeekModal = ({ show, setShow }) => {
           </Form.Select>
         </form>
         <p
-          className="bg-white mt-4 mx-3 fw-bold fst-italic"
-          style={{ fontSize: "0.85rem" }}>
+          className="bg-white mt-4 mx-3  fw-bold text-info"
+          style={{ fontSize: "0.75rem" }}>
           <Badge bg="secondary" className="me-2">
             i
           </Badge>

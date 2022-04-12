@@ -79,12 +79,29 @@ const getDays = async (weekId, token) => {
   return response.data;
 };
 
+const newDay = async (token, weekId, formData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.post(
+    `/api/training/${weekId}`,
+    formData,
+    config
+  );
+
+  return response.data;
+};
+
 const TrainingService = {
   getBlocks,
   getWeeks,
   getDays,
   newBlock,
   newWeek,
+  newDay,
 };
 
 export default TrainingService;

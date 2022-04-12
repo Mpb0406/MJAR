@@ -113,6 +113,25 @@ export const getDays = createAsyncThunk(
   }
 );
 
+// Add New Day
+export const newDay = createAsyncThunk(
+  "training/newDay",
+  async ([weekId, formData], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.newDay(token, weekId, formData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,
@@ -184,6 +203,19 @@ export const trainingSlice = createSlice({
       .addCase(newWeek.rejected, (state, action) => {
         state.isLoading = false;
         state.rejected = true;
+        state.message = action.payload;
+      })
+      .addCase(newDay.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(newDay.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.days = action.payload;
+      })
+      .addCase(newDay.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
         state.message = action.payload;
       });
   },
