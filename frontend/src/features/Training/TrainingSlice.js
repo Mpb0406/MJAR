@@ -151,6 +151,9 @@ export const newLift = createAsyncThunk(
   }
 );
 
+//Add New Set to Lift
+const newSet = createAsyncThunk("training/newSet", async());
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,

@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewDayModal from "../Modals/NewDayModal";
+import { reset } from "../features/Training/TrainingSlice";
 
 const TrainingDays = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,10 @@ const TrainingDays = () => {
     }
 
     dispatch(getDays(weekId));
+
+    return () => {
+      dispatch(reset());
+    };
   }, [dispatch, isError, message, user, navigate]);
 
   if (isLoading) {

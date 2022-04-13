@@ -157,7 +157,7 @@ const deleteLift = asyncHandler(async (req, res) => {
 });
 
 // @desc    Add a Set to a Lift
-// @route   PUT /api/training/:dayId/:liftId
+// @route   PUT /api/training/:weekId/:dayId/:liftId
 // @access  Private
 const addNewSet = asyncHandler(async (req, res) => {
   const { weight, reps, rpe, setType } = req.body;
@@ -175,6 +175,9 @@ const addNewSet = asyncHandler(async (req, res) => {
   };
 
   try {
+    //Get Week By ID
+    const week = await TrainingWeek.findOne({ _id: req.params.weekId });
+
     // Get Training Day
     const day = await TrainingDay.findOne({ _id: req.params.dayId });
 
@@ -183,7 +186,11 @@ const addNewSet = asyncHandler(async (req, res) => {
 
     lift.sets.push(setFields);
     await day.save();
-    res.json({ day });
+
+    // Get all days in specific training week
+    const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+    res.json(days);
   } catch (error) {
     console.error(error);
     res.status(400);

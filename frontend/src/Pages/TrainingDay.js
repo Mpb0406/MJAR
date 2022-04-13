@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { getDays } from "../features/Training/TrainingSlice";
+import Loader from "../Components/Loader";
 
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
@@ -12,9 +14,30 @@ const TrainingDay = () => {
   const handleOpenLift = () => setShowLift(true);
   const handleOpenSet = () => setShowSet(true);
 
-  const { dayId } = useParams();
-  const { days } = useSelector((state) => state.training);
+  const { weekId, dayId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  const { days, isError, message, isLoading } = useSelector(
+    (state) => state.training
+  );
   const day = days.filter((day) => day._id === dayId)[0];
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message);
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+
+    dispatch(getDays(weekId));
+  }, [dispatch, isError, message, user, navigate]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="mt-5 text-light">
