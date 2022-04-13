@@ -100,11 +100,14 @@ const deleteTrainingDay = asyncHandler(async (req, res) => {
 });
 
 // @desc    Add New Lift to Training Day
-// @route   PUT /api/training/:id
+// @route   PUT /api/training/:dayId
 // @access  Private
 const updateTrainingDay = asyncHandler(async (req, res) => {
   // Get Form Data
   const { exercise } = req.body;
+
+  // Get Week from Week ID
+  const week = await TrainingWeek.findOne({ _id: req.params.weekId });
 
   // Build out object
   const liftFields = {
@@ -124,7 +127,11 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
 
     day.lifts.push(liftFields);
     await day.save();
-    res.json(day);
+
+    // Get all days in specific training week
+    const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+    res.json(days);
   } catch (error) {
     console.error(error);
     res.status(400);

@@ -97,14 +97,18 @@ const newDay = async (token, weekId, formData) => {
 };
 
 // Add New Lift to Training Day
-const newLift = async (token, dayId, formData) => {
+const newLift = async (token, weekId, dayId, formData) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.put(`/api/training/${dayId}`, formData, config);
+  const response = await axios.put(
+    `/api/training/${weekId}/${dayId}`,
+    formData,
+    config
+  );
 
   return response.data;
 };

@@ -135,10 +135,10 @@ export const newDay = createAsyncThunk(
 // Add New Lift to Training Day
 export const newLift = createAsyncThunk(
   "training/newLift",
-  async ([dayId, formData], thunkAPI) => {
+  async ([weekId, dayId, formData], thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await TrainingService.newLift(token, dayId, formData);
+      return await TrainingService.newLift(token, weekId, dayId, formData);
     } catch (error) {
       const message =
         (error.response &&

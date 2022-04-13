@@ -13,14 +13,14 @@ import { newLift } from "../features/Training/TrainingSlice";
 
 const NewLiftModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
-  const { dayId } = useParams();
+  const { weekId, dayId } = useParams();
 
   const handleClose = () => setShow(false);
 
   const lifts = ["Squat", "Bench Press", "Deadlift"];
 
   const [formData, setFormData] = useState({
-    exercise: "",
+    exercise: "Squat",
   });
   const { exercise } = formData;
 
@@ -32,12 +32,11 @@ const NewLiftModal = ({ show, setShow }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(newLift([dayId, formData]));
+    dispatch(newLift([weekId, dayId, formData]));
     handleClose();
   };
 
   console.log(formData);
-  console.log(dayId);
 
   return (
     <Modal show={show} onHide={handleClose}>
