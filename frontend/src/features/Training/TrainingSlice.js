@@ -176,6 +176,25 @@ export const newSet = createAsyncThunk(
   }
 );
 
+// Delete Set From a Lift
+export const deleteSet = createAsyncThunk(
+  "training/deleteSet",
+  async ([dayId, liftId, setId], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.deleteSet(token, dayId, liftId, setId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,

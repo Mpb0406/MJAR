@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
+import DeleteSetModal from "../Modals/DeleteSetModal";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
@@ -10,12 +11,19 @@ import Loader from "../Components/Loader";
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
   const [lift, setLift] = useState(null);
+  const [set, setSet] = useState(null);
   const [showSet, setShowSet] = useState(false);
+  const [showDeleteSet, setShowDeleteSet] = useState(false);
 
   const handleOpenLift = () => setShowLift(true);
   const handleOpenSet = (e) => {
     setLift(e.target.id);
     setShowSet(true);
+  };
+  const handleOpenDeleteSet = (e) => {
+    setSet(e.target.id);
+    setLift(e.target.name);
+    setShowDeleteSet(true);
   };
 
   const { weekId, dayId } = useParams();
@@ -37,7 +45,7 @@ const TrainingDay = () => {
     }
 
     dispatch(getDays(weekId));
-  }, [dispatch, isError, message, user, navigate, lift]);
+  }, [dispatch, isError, message, user, navigate, lift, set]);
 
   if (isLoading) {
     return <Loader />;
@@ -58,14 +66,15 @@ const TrainingDay = () => {
             responsive="sm">
             <thead>
               <tr className="text-center">
-                <th colSpan={5}>{lift.exercise}</th>
+                <th colSpan={6}>{lift.exercise}</th>
               </tr>
               <tr>
                 <th>Set</th>
                 <th>Weight</th>
                 <th>Reps</th>
                 <th>RPE</th>
-                <th>Set-Type</th>
+                <th>Type</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -76,6 +85,17 @@ const TrainingDay = () => {
                   <td>{set.reps}</td>
                   <td>{set.rpe}</td>
                   <td>{set.setType}</td>
+                  <td>
+                    <div className="button-container bg-none d-flex justify-content-around">
+                      <Button
+                        variant="secondary"
+                        name={lift._id}
+                        id={set._id}
+                        onClick={(e) => handleOpenDeleteSet(e)}>
+                        X
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -99,6 +119,13 @@ const TrainingDay = () => {
 
       <NewSetModal show={showSet} setShow={setShowSet} liftId={lift} />
       <NewLiftModal show={showLift} setShow={setShowLift} />
+      <DeleteSetModal
+        show={showDeleteSet}
+        setShow={setShowDeleteSet}
+        setId={set}
+        liftId={lift}
+        dayId={dayId}
+      />
     </div>
   );
 };
