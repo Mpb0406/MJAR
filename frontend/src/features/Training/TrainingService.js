@@ -113,6 +113,22 @@ const newLift = async (token, weekId, dayId, formData) => {
   return response.data;
 };
 
+// Add New Set to Lift
+const newSet = async (token, weekId, dayId, liftId, formData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.post(
+    `/api/training/${weekId}/${dayId}/${liftId}`,
+    formData,
+    config
+  );
+
+  return response.data;
+};
+
 const TrainingService = {
   getBlocks,
   getWeeks,
@@ -121,6 +137,7 @@ const TrainingService = {
   newWeek,
   newDay,
   newLift,
+  newSet,
 };
 
 export default TrainingService;

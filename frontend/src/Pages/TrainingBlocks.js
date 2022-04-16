@@ -46,7 +46,7 @@ const TrainingBlocks = () => {
           </button>
         </div>
 
-        {blocks.map((block) => (
+        {blocks.slice(0, 3).map((block) => (
           <BlockCard name={block.block} weeks={block.weeks} id={block._id} />
         ))}
       </Container>

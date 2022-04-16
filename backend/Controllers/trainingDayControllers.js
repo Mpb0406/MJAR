@@ -162,10 +162,10 @@ const deleteLift = asyncHandler(async (req, res) => {
 const addNewSet = asyncHandler(async (req, res) => {
   const { weight, reps, rpe, setType } = req.body;
 
-  if (!reps) {
-    res.status(400);
-    throw new Error("Please Add Reps");
-  }
+  // if (!reps) {
+  //   res.status(400);
+  //   throw new Error("Please Add Reps");
+  // }
 
   const setFields = {
     weight,

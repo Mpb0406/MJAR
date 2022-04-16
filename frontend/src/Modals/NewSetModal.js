@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { Modal, Form, Badge, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { newSet } from "../features/Training/TrainingSlice";
 
-const NewSetModal = ({ show, setShow }) => {
+const NewSetModal = ({ show, setShow, liftId }) => {
+  const dispatch = useDispatch();
+  const { weekId, dayId } = useParams();
+
   const handleClose = () => setShow(false);
 
   const rpeArr = ["<6", 6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
-  const setTypeArr = ["Warm Up", "Top Set", "Working Set"];
+  const setTypeArr = ["Warm Up", "Top Set", "AMRAP", "Working Set"];
 
   const [formData, setFormData] = useState({
     weight: "",
     reps: "",
     rpe: "",
-    setType: "",
+    setType: "Warm-Up",
   });
   const { weight, reps, rpe, setType } = formData;
 
@@ -21,13 +27,22 @@ const NewSetModal = ({ show, setShow }) => {
       [e.target.name]: e.target.value,
     }));
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(newSet([weekId, dayId, liftId, formData]));
+    handleClose();
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
         <Modal.Title className="bg-white">Add New Set</Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-white">
-        <Form className="bg-white d-flex justify-content-between">
+        <form
+          className="bg-white d-flex justify-content-between"
+          id="setForm"
+          onSubmit={onSubmit}>
           <Form.Control
             className="mx-1"
             placeholder="Weight"
@@ -65,7 +80,7 @@ const NewSetModal = ({ show, setShow }) => {
               <option className="bg-white">{setType}</option>
             ))}
           </Form.Select>
-        </Form>
+        </form>
         <p
           className="bg-white mt-4 mx-3 fw-bold fst-italic"
           style={{ fontSize: "0.85rem" }}>
@@ -80,7 +95,9 @@ const NewSetModal = ({ show, setShow }) => {
         <Button variant="info" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="primary">Add Lift</Button>
+        <Button variant="primary" type="submit" form="setForm">
+          Add Set
+        </Button>
       </Modal.Footer>
     </Modal>
   );
