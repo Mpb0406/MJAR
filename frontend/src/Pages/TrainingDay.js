@@ -9,15 +9,13 @@ import Loader from "../Components/Loader";
 
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
-  const [lift, setLift] = useState("");
+  const [lift, setLift] = useState(null);
   const [showSet, setShowSet] = useState(false);
 
   const handleOpenLift = () => setShowLift(true);
   const handleOpenSet = (e) => {
-    setShowSet(true);
     setLift(e.target.id);
-
-    console.log(lift);
+    setShowSet(true);
   };
 
   const { weekId, dayId } = useParams();
@@ -39,7 +37,7 @@ const TrainingDay = () => {
     }
 
     dispatch(getDays(weekId));
-  }, [dispatch, isError, message, user, navigate]);
+  }, [dispatch, isError, message, user, navigate, lift]);
 
   if (isLoading) {
     return <Loader />;
