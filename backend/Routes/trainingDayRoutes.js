@@ -25,8 +25,8 @@ router.post("/:weekId/:dayId/:liftId", protect, addNewSet);
 
 router.put("/:dayId/:liftId/:setId", protect, updateSet);
 
-router.delete("/:dayId/:liftId/:setId", protect, deleteSet);
+router.delete("/:weekId/:dayId/:liftId/:setId", protect, deleteSet);
 
-router.delete("/:dayId/:liftId", protect, deleteLift);
+router.delete("/:weekId/:dayId/:liftId", protect, deleteLift);
 
 module.exports = router;

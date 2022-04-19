@@ -179,10 +179,35 @@ export const newSet = createAsyncThunk(
 // Delete Set From a Lift
 export const deleteSet = createAsyncThunk(
   "training/deleteSet",
-  async ([dayId, liftId, setId], thunkAPI) => {
+  async ([weekId, dayId, liftId, setId], thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await TrainingService.deleteSet(token, dayId, liftId, setId);
+      return await TrainingService.deleteSet(
+        token,
+        weekId,
+        dayId,
+        liftId,
+        setId
+      );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Delete Lift from Training Day
+export const deleteLift = createAsyncThunk(
+  "training/deleteLift",
+  async ([weekId, dayId, liftId], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.deleteLift(token, weekId, dayId, liftId);
     } catch (error) {
       const message =
         (error.response &&
@@ -303,6 +328,32 @@ export const trainingSlice = createSlice({
         state.days = action.payload;
       })
       .addCase(newSet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteSet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteSet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.days = action.payload;
+      })
+      .addCase(deleteSet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteLift.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteLift.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.days = action.payload;
+      })
+      .addCase(deleteLift.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

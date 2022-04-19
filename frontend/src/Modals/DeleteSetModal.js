@@ -3,13 +3,13 @@ import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteSet } from "../features/Training/TrainingSlice";
 
-const DeleteSetModal = ({ show, setShow, liftId, setId, dayId }) => {
+const DeleteSetModal = ({ show, setShow, liftId, setId, dayId, weekId }) => {
   const handleClose = () => setShow(false);
 
   const dispatch = useDispatch();
 
   const setDelete = () => {
-    dispatch(deleteSet([dayId, liftId, setId]));
+    dispatch(deleteSet([weekId, dayId, liftId, setId]));
     handleClose();
   };
 

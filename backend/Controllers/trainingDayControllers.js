@@ -139,9 +139,12 @@ const updateTrainingDay = asyncHandler(async (req, res) => {
 });
 
 // @desc    Delete A Lift from a Training Day
-// @route   DELETE /api/training/:dayId/:liftId
+// @route   DELETE /api/training/:weekId/:dayId/:liftId
 // @access  Private
 const deleteLift = asyncHandler(async (req, res) => {
+  // Get Week
+  const week = await TrainingWeek.findOne({ _id: req.params.weekId });
+
   // Get Day
   const day = await TrainingDay.findOne({ _id: req.params.dayId });
 
@@ -153,7 +156,10 @@ const deleteLift = asyncHandler(async (req, res) => {
   day.lifts = updatedLifts;
   await day.save();
 
-  res.send(day);
+  // Get all Days in Training Week
+  const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+  res.send(days);
 });
 
 // @desc    Add a Set to a Lift
@@ -231,6 +237,9 @@ const deleteSet = asyncHandler(async (req, res) => {
   // Get Training Day
   const day = await TrainingDay.findOne({ _id: req.params.dayId });
 
+  //Get Training Week
+  const week = await TrainingWeek.findOne({ _id: req.params.weekId });
+
   // Get Lift
   const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
 
@@ -243,7 +252,10 @@ const deleteSet = asyncHandler(async (req, res) => {
 
   await day.save();
 
-  res.send(set);
+  // Get all days in specific training week
+  const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+  res.send(days);
 });
 
 module.exports = {

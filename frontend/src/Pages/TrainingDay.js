@@ -3,6 +3,7 @@ import { Table, Button } from "react-bootstrap";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
 import DeleteSetModal from "../Modals/DeleteSetModal";
+import DeleteLiftModal from "../Modals/DeleteLiftModal";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
@@ -14,6 +15,7 @@ const TrainingDay = () => {
   const [set, setSet] = useState(null);
   const [showSet, setShowSet] = useState(false);
   const [showDeleteSet, setShowDeleteSet] = useState(false);
+  const [showDeleteLift, setShowDeleteLift] = useState(false);
 
   const handleOpenLift = () => setShowLift(true);
   const handleOpenSet = (e) => {
@@ -24,6 +26,11 @@ const TrainingDay = () => {
     setSet(e.target.id);
     setLift(e.target.name);
     setShowDeleteSet(true);
+  };
+  const handleOpenDeleteLift = (e) => {
+    setLift(e.target.id);
+    setShowDeleteLift(true);
+    console.log(lift);
   };
 
   const { weekId, dayId } = useParams();
@@ -66,7 +73,12 @@ const TrainingDay = () => {
             responsive="sm">
             <thead>
               <tr className="text-center">
-                <th colSpan={6}>{lift.exercise}</th>
+                <th
+                  colSpan={6}
+                  id={lift._id}
+                  onClick={(e) => handleOpenDeleteLift(e)}>
+                  {lift.exercise}
+                </th>
               </tr>
               <tr>
                 <th>Set</th>
@@ -79,7 +91,7 @@ const TrainingDay = () => {
             </thead>
             <tbody>
               {lift.sets.map((set, idx) => (
-                <tr>
+                <tr style={{ cursor: "pointer" }}>
                   <td>{idx + 1}</td>
                   <td>{set.weight}</td>
                   <td>{set.reps}</td>
@@ -125,6 +137,14 @@ const TrainingDay = () => {
         setId={set}
         liftId={lift}
         dayId={dayId}
+        weekId={weekId}
+      />
+      <DeleteLiftModal
+        show={showDeleteLift}
+        setShow={setShowDeleteLift}
+        weekId={weekId}
+        dayId={dayId}
+        liftId={lift}
       />
     </div>
   );
