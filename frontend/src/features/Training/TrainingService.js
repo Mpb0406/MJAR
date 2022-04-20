@@ -159,6 +159,21 @@ const deleteLift = async (token, weekId, dayId, liftId) => {
   return response.data;
 };
 
+const deleteDay = async (token, weekId, dayId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(
+    `/api/training/${weekId}/${dayId}`,
+    config
+  );
+
+  return response.data;
+};
+
 const TrainingService = {
   getBlocks,
   getWeeks,
@@ -170,6 +185,7 @@ const TrainingService = {
   newSet,
   deleteSet,
   deleteLift,
+  deleteDay,
 };
 
 export default TrainingService;

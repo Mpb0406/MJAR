@@ -49,15 +49,18 @@ const TrainingDays = () => {
       <h4 className="text-light dis-font fs-4 mb-4">
         Feb 21, 2022 - Feb 27, 2022{" "}
       </h4>
-      <Container fluid="lg" className="block-container mt-4 px-4">
+      <Container fluid="lg" className="mt-4 px-4">
         {days.map((day) => (
-          <DayCard
-            name={day.day}
-            lifts={day.lifts}
-            id={day._id}
-            block={blockId}
-            week={weekId}
-          />
+          <Container>
+            <DayCard
+              name={day.day}
+              lifts={day.lifts}
+              id={day._id}
+              block={blockId}
+              week={weekId}
+              className=""
+            />
+          </Container>
         ))}
 
         <Container className="d-flex justify-content-center mt-4 mb-5">

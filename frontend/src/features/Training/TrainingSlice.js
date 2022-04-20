@@ -220,6 +220,25 @@ export const deleteLift = createAsyncThunk(
   }
 );
 
+// Delete Training Day
+export const deleteDay = createAsyncThunk(
+  "training/deleteDay",
+  async ([weekId, dayId], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.deleteDay(token, weekId, dayId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,
