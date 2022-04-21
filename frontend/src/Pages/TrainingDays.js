@@ -50,6 +50,12 @@ const TrainingDays = () => {
         Feb 21, 2022 - Feb 27, 2022{" "}
       </h4>
       <Container fluid="lg" className="mt-4 px-4">
+        {days.length === 0 && (
+          <h3 className="text-light text-center">
+            You don't have any days logged yet, bro. <br /> Not Good.
+          </h3>
+        )}
+
         {days.map((day) => (
           <Container>
             <DayCard

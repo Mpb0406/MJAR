@@ -62,6 +62,12 @@ const TrainingDay = () => {
     <div className="mt-5 text-light">
       <h1 className="pb-1">Training Day</h1>
 
+      {day.lifts.length === 0 && (
+        <h3 className="text-light text-center my-5">
+          You don't have any lifts logged yet, bro. <br /> Get busy.
+        </h3>
+      )}
+
       {day.lifts.map((lift) => (
         <>
           <Table
