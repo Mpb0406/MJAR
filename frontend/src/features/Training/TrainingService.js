@@ -62,6 +62,18 @@ const newWeek = async (token, blockId, formData) => {
   return response.data;
 };
 
+const deleteWeek = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(``, config);
+
+  return response.data;
+};
+
 // ****** Training Days ******
 
 // Get Training Days
@@ -186,6 +198,7 @@ const TrainingService = {
   deleteSet,
   deleteLift,
   deleteDay,
+  deleteWeek,
 };
 
 export default TrainingService;

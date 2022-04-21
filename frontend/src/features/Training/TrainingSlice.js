@@ -92,6 +92,25 @@ export const newWeek = createAsyncThunk(
   }
 );
 
+// Delete Training Week
+export const deleteWeek = createAsyncThunk(
+  "training/deleteWeek",
+  async ([], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.deleteWeek([]);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // ****** Training Days ******
 
 // Get Training Days by Week ID
