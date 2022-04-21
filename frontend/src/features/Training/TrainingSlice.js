@@ -376,6 +376,19 @@ export const trainingSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(deleteDay.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteDay.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.days = action.payload;
+      })
+      .addCase(deleteDay.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });

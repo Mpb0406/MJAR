@@ -96,7 +96,10 @@ const deleteTrainingDay = asyncHandler(async (req, res) => {
 
   await trainingDay.remove();
 
-  res.status(200).send(req.params.dayId);
+  // Get all days in specific training week
+  const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
+
+  res.status(200).json(days);
 });
 
 // @desc    Add New Lift to Training Day

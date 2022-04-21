@@ -13,8 +13,6 @@ const DeleteDayModal = ({ show, setShow, weekId, dayId }) => {
     handleClose();
   };
 
-  console.log(dayId);
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header className="bg-white" closeButton>

@@ -44,6 +44,13 @@ const Block = () => {
       <h4 className="text-light dis-font fs-4 mb-4">
         Feb 12, 2022 - Mar 24, 2022{" "}
       </h4>
+
+      {weeks.length === 0 && (
+        <h3 className="text-light mt-3 text-center">
+          You don't have any weeks logged yet, bro. <br /> Not good.
+        </h3>
+      )}
+
       <Container fluid="lg" className="block-container mt-4 px-4">
         {weeks.map((week) => (
           <WeekCard
@@ -53,29 +60,6 @@ const Block = () => {
             blockId={blockId}
           />
         ))}
-
-        {/* <Row>
-          <Col lg={3} md={4} sm={6}>
-            <WeekCard />
-            <WeekCard />
-            <WeekCard />
-          </Col>
-          <Col lg={3} md={4} sm={6}>
-            <WeekCard />
-            <WeekCard />
-            <WeekCard />
-          </Col>
-          <Col lg={3} md={4} sm={6}>
-            <WeekCard />
-            <WeekCard />
-            <WeekCard />
-          </Col>
-          <Col lg={3} md={4} sm={6}>
-            <WeekCard />
-            <WeekCard />
-            <WeekCard />
-          </Col>
-        </Row> */}
         <Container className="d-flex justify-content-center mt-4 mb-5">
           <Button variant="secondary" onClick={handleOpen}>
             Add New Week
