@@ -95,10 +95,10 @@ export const newWeek = createAsyncThunk(
 // Delete Training Week
 export const deleteWeek = createAsyncThunk(
   "training/deleteWeek",
-  async ([], thunkAPI) => {
+  async ([blockId, weekId], thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await TrainingService.deleteWeek([]);
+      return await TrainingService.deleteWeek(token, blockId, weekId);
     } catch (error) {
       const message =
         (error.response &&
@@ -405,6 +405,19 @@ export const trainingSlice = createSlice({
         state.days = action.payload;
       })
       .addCase(deleteDay.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteWeek.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteWeek.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.weeks = action.payload;
+      })
+      .addCase(deleteWeek.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

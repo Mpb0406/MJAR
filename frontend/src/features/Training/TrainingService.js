@@ -62,14 +62,17 @@ const newWeek = async (token, blockId, formData) => {
   return response.data;
 };
 
-const deleteWeek = async (token) => {
+const deleteWeek = async (token, blockId, weekId) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const response = await axios.delete(``, config);
+  const response = await axios.delete(
+    `/api/trainingweeks/${blockId}/${weekId}`,
+    config
+  );
 
   return response.data;
 };
