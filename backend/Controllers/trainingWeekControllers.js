@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const TrainingWeek = require("../Models/trainingWeekModel");
 const TrainingBlock = require("../Models/trainingBlockModel");
+const TrainingDay = require("../Models/trainingDayModel");
 const User = require("../Models/userModel");
 
 // @desc    Get Training Weeks
@@ -80,6 +81,10 @@ const deleteWeek = asyncHandler(async (req, res) => {
     throw new Error("User Not Found");
   }
 
+  // Delete All Training Days in Week
+  await TrainingDay.deleteMany({ _id: { $in: trainingWeek.trainingDays } });
+
+  // Create New Array of All Weeks in Block Except Week Being Deleted
   const updatedWeeks = block.weeks.filter(
     (week) => week.toString() !== req.params.weekId
   );
@@ -89,7 +94,10 @@ const deleteWeek = asyncHandler(async (req, res) => {
 
   await trainingWeek.remove();
 
-  res.json(req.params.blockId);
+  // Get All Training Weeks in Block
+  const remainingWeeks = await TrainingWeek.find({ _id: { $in: block.weeks } });
+
+  res.json(remainingWeeks);
 });
 
 module.exports = {
