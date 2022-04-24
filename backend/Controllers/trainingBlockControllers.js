@@ -41,11 +41,23 @@ const deleteTrainingBlock = asyncHandler(async (req, res) => {
     throw new Error("Training Block Not Found");
   }
 
+  // Loop Through Weeks Array and Deletge Each Day Within The Week Then The Week Itself
+  for (i = 0; i < block.weeks.length; i++) {
+    let week = await TrainingWeek.findById({ _id: block.weeks[i] });
+
+    for (j = 0; j < week.trainingDays.length; j++) {
+      await TrainingDay.deleteMany({ _id: { $in: week.trainingDays } });
+    }
+
+    await week.remove();
+  }
+
   await block.remove();
 
-  res.json(req.params.blockId);
+  // Get All Blocks by User to Return
+  const allBlocks = await TrainingBlock.find({ user: req.user.id });
 
-  res.send(`Delete block ${req.params.blockId}`);
+  res.json(allBlocks);
 });
 
 module.exports = {
