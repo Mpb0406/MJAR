@@ -57,7 +57,7 @@ const BlockCard = ({ name, weeks, id }) => {
         </Row>
       </Container>
 
-      <DeleteBlockModal show={show} setShow={setShow} />
+      <DeleteBlockModal show={show} setShow={setShow} blockId={id} />
     </Card>
   );
 };

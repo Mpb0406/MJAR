@@ -27,6 +27,17 @@ const newBlock = async (token, formData) => {
   return response.data;
 };
 
+const deleteBlock = async (token, blockId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.delete(`/api/trainingblocks/${blockId}`, config);
+
+  return response.data;
+};
+
 // ****** Training Weeks ******
 
 // Get Training Weeks
@@ -202,6 +213,7 @@ const TrainingService = {
   deleteLift,
   deleteDay,
   deleteWeek,
+  deleteBlock,
 };
 
 export default TrainingService;

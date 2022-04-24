@@ -1,10 +1,18 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { deleteBlock } from "../features/Training/TrainingSlice";
 
-const DeleteBlockModal = ({ show, setShow }) => {
+const DeleteBlockModal = ({ show, setShow, blockId }) => {
+  const dispatch = useDispatch();
+
   const handleClose = () => setShow(false);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    dispatch(deleteBlock(blockId));
+    handleClose();
+  };
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header className="bg-white" closeButton>

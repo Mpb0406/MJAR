@@ -52,6 +52,24 @@ export const newBlock = createAsyncThunk(
   }
 );
 
+export const deleteBlock = createAsyncThunk(
+  "training/deleteBlock",
+  async (blockId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.deleteBlock(token, blockId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // ****** Training Weeks ******
 
 // Get Training Weeks by Block ID
@@ -418,6 +436,19 @@ export const trainingSlice = createSlice({
         state.weeks = action.payload;
       })
       .addCase(deleteWeek.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteBlock.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBlock.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.blocks = action.payload;
+      })
+      .addCase(deleteBlock.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
