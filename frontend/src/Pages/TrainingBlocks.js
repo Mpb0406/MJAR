@@ -19,6 +19,12 @@ const TrainingBlocks = () => {
   const handleOpen = () => setShow(true);
   const handleClose = () => setShow(false);
 
+  // Update Amount of Block Cards Shown
+  const [truncateCards, setTruncateCards] = useState(3);
+
+  const showMore = () => setTruncateCards(blocks.length);
+  const showLess = () => setTruncateCards(3);
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -41,12 +47,15 @@ const TrainingBlocks = () => {
       <Container className="ps-0 mt-5">
         <div className="container-header d-flex justify-content-between align-items-center">
           <h4 className="fs-6 text-light ms-4 mb-0">Recent Blocks</h4>
-          <button className="hover-secondary border-0 me-4" variant="link">
-            Show More
+          <button
+            className="hover-secondary border-0 me-4"
+            variant="link"
+            onClick={truncateCards === 3 ? showMore : showLess}>
+            {truncateCards === 3 ? "Show All" : "Show Less"}
           </button>
         </div>
 
-        {blocks.slice(0, 3).map((block) => (
+        {blocks.slice(0, truncateCards).map((block) => (
           <BlockCard name={block.block} weeks={block.weeks} id={block._id} />
         ))}
       </Container>
