@@ -58,6 +58,8 @@ const Block = () => {
             days={week.trainingDays}
             id={week._id}
             blockId={blockId}
+            startDate={week.createdAt}
+            endDate={week.updatedAt}
           />
         ))}
         <Container className="d-flex justify-content-center mt-4 mb-5">

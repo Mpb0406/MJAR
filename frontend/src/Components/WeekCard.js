@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import week from "../img/week.png";
 import DeleteWeekModal from "../Modals/DeleteWeekModal";
+import Moment from "react-moment";
 
-const WeekCard = ({ name, days, id, blockId }) => {
+const WeekCard = ({ name, days, id, blockId, startDate, endDate }) => {
   const [show, setShow] = useState(false);
 
   const handleOpen = () => setShow(true);
@@ -18,7 +19,13 @@ const WeekCard = ({ name, days, id, blockId }) => {
         <Card.Text className="bg-primary z-10">
           {`${days.length} ${days.length === 1 ? "Day" : "Days"} Logged`} <br />
           <Card.Text className="bg-primary z-10 fs-small text-info fw-bold">
-            2/21/22 - 2/27/22
+            <Moment className="bg-none" format="MM/DD/YY">
+              {startDate}
+            </Moment>{" "}
+            -{" "}
+            <Moment className="bg-none" format="MM/DD/YY">
+              {endDate}
+            </Moment>
           </Card.Text>
         </Card.Text>
 
@@ -33,8 +40,8 @@ const WeekCard = ({ name, days, id, blockId }) => {
           alt=""
         />
       </Card.Body>
-      <Button variant="secondary" className="px-4" onClick={handleOpen}>
-        X
+      <Button variant="secondary" className="px-3 fs-2" onClick={handleOpen}>
+        ×
       </Button>
       <DeleteWeekModal
         show={show}

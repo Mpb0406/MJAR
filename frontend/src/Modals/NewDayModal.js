@@ -62,7 +62,7 @@ const NewDayModal = ({ show, setShow }) => {
           Cancel
         </Button>
         <Button variant="primary" type="submit" form="dayForm">
-          Add Week
+          Add Day
         </Button>
       </Modal.Footer>
     </Modal>

@@ -17,7 +17,6 @@ const TrainingBlocks = () => {
 
   const [show, setShow] = useState(false);
   const handleOpen = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   // Update Amount of Block Cards Shown
   const [truncateCards, setTruncateCards] = useState(3);
