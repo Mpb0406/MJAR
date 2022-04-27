@@ -55,7 +55,13 @@ const TrainingBlocks = () => {
         </div>
 
         {blocks.slice(0, truncateCards).map((block) => (
-          <BlockCard name={block.block} weeks={block.weeks} id={block._id} />
+          <BlockCard
+            name={block.block}
+            weeks={block.weeks}
+            id={block._id}
+            startDate={block.createdAt}
+            endDate={block.updatedAt}
+          />
         ))}
       </Container>
       <Container className="d-flex justify-content-center mb-5">

@@ -3,12 +3,20 @@ import { Card, Button } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import blockpic from "../img/block.png";
 import DeleteDayModal from "../Modals/DeleteDayModal";
+import Moment from "react-moment";
 
-const DayCard = ({ name, lifts, id, block, week }) => {
+const DayCard = ({ name, lifts, id, block, week, date }) => {
   const { weekId } = useParams();
   const [show, setShow] = useState(false);
 
   const handleOpen = () => setShow(true);
+
+  const daysArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const parsedDate = new Date(date);
+
+  const dayOfWeek = parsedDate.getDay();
+
+  console.log(dayOfWeek);
 
   return (
     <Card className="my-3 d-flex flex-row" bg="primary">
@@ -16,9 +24,16 @@ const DayCard = ({ name, lifts, id, block, week }) => {
         <Card.Title className=" fs-4 z-10 text-drop-shadow bg-none">
           {name}
         </Card.Title>
+        <Card.Text className="bg-none">
+          {daysArr[dayOfWeek]}{" "}
+          <Moment className="bg-none" format="MM/DD/YY" day>
+            {date}
+          </Moment>
+        </Card.Text>
         <Card.Text className="bg-primary z-10">{`${lifts.length} ${
           lifts.length === 1 ? "Lift" : "Lifts"
         } Logged`}</Card.Text>
+
         <Link
           to={`/training/${block}/${week}/${id}`}
           className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
@@ -30,8 +45,8 @@ const DayCard = ({ name, lifts, id, block, week }) => {
           alt=""
         />
       </Card.Body>
-      <Button variant="secondary" className="px-4" onClick={handleOpen}>
-        X
+      <Button variant="secondary" className="px-3 fs-3" onClick={handleOpen}>
+        ×
       </Button>
       <DeleteDayModal
         show={show}

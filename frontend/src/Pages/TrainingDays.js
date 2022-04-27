@@ -64,7 +64,7 @@ const TrainingDays = () => {
               id={day._id}
               block={blockId}
               week={weekId}
-              className=""
+              date={day.createdAt}
             />
           </Container>
         ))}

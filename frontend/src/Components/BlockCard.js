@@ -3,8 +3,9 @@ import { Card, Container, Col, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import strength from "../img/strength.png";
 import DeleteBlockModal from "../Modals/DeleteBlockModal";
+import Moment from "react-moment";
 
-const BlockCard = ({ name, weeks, id }) => {
+const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
   const [show, setShow] = useState(false);
 
   const handleOpen = () => setShow(true);
@@ -36,7 +37,10 @@ const BlockCard = ({ name, weeks, id }) => {
           <Col>
             <Card.Body className="bg-none text-light text-center ms-4">
               <Card.Text className="d-flex flex-column align-items-xs-center align-items-md-end justify-content-between my-0">
-                <h4 className="fs-6 text-sm-center">2/21/22 - 3/30/22</h4>
+                <h4 className="fs-6 text-sm-center">
+                  <Moment format="MM/DD/YY">{startDate}</Moment> -{" "}
+                  <Moment format="MM/DD/YY">{endDate}</Moment>
+                </h4>
                 <div className="button-wrapper d-flex align-items-center justify-content-between gap-2">
                   <Button variant="secondary rounded-pill d-flex align-items-center justify-content-center mt-1">
                     <Link

@@ -40,7 +40,7 @@ const WeekCard = ({ name, days, id, blockId, startDate, endDate }) => {
           alt=""
         />
       </Card.Body>
-      <Button variant="secondary" className="px-3 fs-2" onClick={handleOpen}>
+      <Button variant="secondary" className="px-3 fs-3" onClick={handleOpen}>
         ×
       </Button>
       <DeleteWeekModal
