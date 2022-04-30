@@ -13,28 +13,27 @@ import Block from "./Pages/Block";
 import TrainingDays from "./Pages/TrainingDays";
 import { Container } from "react-bootstrap";
 import TrainingDay from "./Pages/TrainingDay";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <>
       <Router>
         <Header />
-        <Container className="pt-5">
-          <Routes>
-            <Route path="/Register" element={<Register />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/Training" element={<TrainingBlocks />} />
-            <Route path="/training/:blockId" element={<Block />} />
-            <Route
-              path="/training/:blockId/:weekId"
-              element={<TrainingDays />}
-            />
-            <Route
-              path="/training/:blockId/:weekId/:dayId"
-              element={<TrainingDay />}
-            />
-          </Routes>
-        </Container>
+        {/* <Container className="pt-5 px-0 mx-0"> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Training" element={<TrainingBlocks />} />
+          <Route path="/training/:blockId" element={<Block />} />
+          <Route path="/training/:blockId/:weekId" element={<TrainingDays />} />
+          <Route
+            path="/training/:blockId/:weekId/:dayId"
+            element={<TrainingDay />}
+          />
+        </Routes>
+        {/* </Container> */}
       </Router>
       <ToastContainer />
     </>

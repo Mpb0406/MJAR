@@ -11,9 +11,9 @@ const DayCard = ({ name, lifts, id, block, week, date }) => {
 
   const handleOpen = () => setShow(true);
 
+  // Get Day of the Week
   const daysArr = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const parsedDate = new Date(date);
-
   const dayOfWeek = parsedDate.getDay();
 
   console.log(dayOfWeek);
