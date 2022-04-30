@@ -2,6 +2,7 @@ import React from "react";
 import mjarHero from "../img/mjarHero.jpg";
 import { Button } from "react-bootstrap";
 import Features from "../Components/Features";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -13,12 +14,20 @@ const Home = () => {
           Welcome to <br />{" "}
           <span className="bg-none logo-font space-text">MJAR</span>
         </h1>
-        <div className="button-container bg-none position-absolute z-10">
+        <div className="button-container bg-none position-absolute z-10 w-100 d-flex justify-content-center">
           <Button variant="primary" size="lg" className="mx-3">
-            Login
+            <Link
+              to="/Login"
+              className="bg-none text-light text-decoration-none">
+              Login
+            </Link>
           </Button>
           <Button variant="secondary" size="lg" className="mx-3">
-            Sign Up
+            <Link
+              to="/Register"
+              className="bg-none text-light text-decoration-none">
+              Sign Up
+            </Link>
           </Button>
         </div>
       </div>
