@@ -20,20 +20,26 @@ function App() {
     <>
       <Router>
         <Header />
-        {/* <Container className="pt-5 px-0 mx-0"> */}
+
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Training" element={<TrainingBlocks />} />
-          <Route path="/training/:blockId" element={<Block />} />
-          <Route path="/training/:blockId/:weekId" element={<TrainingDays />} />
-          <Route
-            path="/training/:blockId/:weekId/:dayId"
-            element={<TrainingDay />}
-          />
         </Routes>
-        {/* </Container> */}
+        <Container className="pt-5 d-flex flex-column">
+          <Routes>
+            <Route path="/Register" element={<Register />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Training" element={<TrainingBlocks />} />
+            <Route path="/training/:blockId" element={<Block />} />
+            <Route
+              path="/training/:blockId/:weekId"
+              element={<TrainingDays />}
+            />
+            <Route
+              path="/training/:blockId/:weekId/:dayId"
+              element={<TrainingDay />}
+            />
+          </Routes>
+        </Container>
       </Router>
       <ToastContainer />
     </>

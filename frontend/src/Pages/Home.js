@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <div className="m-0 p-0 d-flex justify-content-start position-relative hero">
+      <div className="d-flex justify-content-start position-relative hero">
         <img src={mjarHero} className="img-fluid hero-img" alt="" />
         <div className="h-100 w-100 position-absolute img-overlay"></div>
         <h1 className="position-absolute text-light hero-text bg-none z-10 top-50 start-50 translate-50">
