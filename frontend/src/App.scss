@@ -113,7 +113,6 @@
 }
 
 .hero-text {
-  // font-size: 7rem;
   white-space: nowrap;
   font-size: clamp(3rem, 9vw, 7rem);
   text-align: center;
@@ -121,7 +120,6 @@
 
 .logo-font {
   font-family: Danube;
-  // font-size: 8.5rem;
   font-size: clamp(3.5rem, 10vw, 8.5rem);
 }
 
@@ -130,9 +128,9 @@
 }
 
 .button-container {
-  top: 80%;
+  top: 90%;
   left: 50%;
-  transform: translate(-50%, -80%);
+  transform: translate(-50%, -90%);
   flex-wrap: nowrap;
 }
 

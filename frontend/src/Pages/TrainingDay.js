@@ -104,7 +104,7 @@ const TrainingDay = () => {
                   <td>{set.rpe}</td>
                   <td>{set.setType}</td>
                   <td>
-                    <div className="hover-delete px-1 button-container bg-none d-flex justify-content-around">
+                    <div className="hover-delete px-1 bg-none d-flex justify-content-around">
                       {
                         <Button
                           variant="secondary"
