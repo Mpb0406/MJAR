@@ -5,6 +5,13 @@ import weekIcon from "../img/weekIcon.png";
 import blockIcon from "../img/blockIcon.png";
 import rpeUnder6 from "../img/rpeUnder6.png";
 import rpe6 from "../img/rpe6.png";
+import rpe7 from "../img/rpe7.png";
+import rpe75 from "../img/rpe7-5.png";
+import rpe8 from "../img/rpe8.png";
+import rpe85 from "../img/rpe8-5.png";
+import rpe9 from "../img/rpe9.png";
+import rpe95 from "../img/rpe9-5.png";
+import rpe10 from "../img/rpe10.png";
 
 const Features = () => {
   return (
@@ -37,12 +44,14 @@ const Features = () => {
         <h2 className="bg-none text-center text-light py-4">
           RPE (Rate of Perceived Exertion)
         </h2>
-        <Tab.Container className="w-100 rpe-table" defaultActiveKey="first">
-          <Row className="rpe-table-row ms-3 my-2">
-            <Col sm={2} xs={4} className="rpe-table-col-1">
+        <Tab.Container
+          className="d-flex justify-content-center"
+          defaultActiveKey="first">
+          <Row className="rpe-table-row">
+            <Col sm={2} xs={4} className="rpe-table-col-1 m-auto">
               <Nav
                 variant="tabs"
-                className="flex-column rpe-nav bg-light w-100 bg-primary border-0"
+                className="flex-column rpe-nav w-100 bg-primary border-0"
                 navbar>
                 <Nav.Item className="bg-primary rpe-item">
                   <Nav.Link
@@ -99,7 +108,7 @@ const Features = () => {
                 </Nav.Item>
               </Nav>
             </Col>
-            <Col sm={6} xs={7} className="bg-primary">
+            <Col sm={6} xs={7} md={10} className="bg-primary">
               <Tab.Content className="bg-none">
                 <Tab.Pane className="bg-none" eventKey="first">
                   <div className="bg-none m-3 d-flex flex-column align-items-center justify-content-start">
@@ -109,7 +118,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could have done a lot more reps.
                     </p>
                   </div>
@@ -124,7 +133,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could have done about 4 more reps for an all out max
                     </p>
                   </div>
@@ -135,11 +144,11 @@ const Features = () => {
                       Moderately Easy
                     </h2>
                     <img
-                      src={rpe6}
+                      src={rpe7}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could have definitely done 3 more reps but no more than
                       that.
                     </p>
@@ -151,11 +160,11 @@ const Features = () => {
                       Getting Difficult
                     </h2>
                     <img
-                      src={rpe6}
+                      src={rpe75}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could maybe have done 3 more reps on a good day.
                     </p>
                   </div>
@@ -166,11 +175,11 @@ const Features = () => {
                       Moderately Difficult
                     </h2>
                     <img
-                      src={rpe6}
+                      src={rpe8}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could have done 2 more reps for an all out max.
                     </p>
                   </div>
@@ -181,11 +190,11 @@ const Features = () => {
                       Difficult
                     </h2>
                     <img
-                      src={rpe6}
+                      src={rpe85}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could have maybe done 2 more reps.
                     </p>
                   </div>
@@ -196,11 +205,11 @@ const Features = () => {
                       Very Difficult
                     </h2>
                     <img
-                      src={rpe6}
+                      src={rpe9}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could have only done one more rep for an all out max.
                     </p>
                   </div>
@@ -211,11 +220,11 @@ const Features = () => {
                       Max Effort
                     </h2>
                     <img
-                      src={rpe6}
+                      src={rpe95}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could maybe have done one more rep or the same amount of
                       reps with slightly more weight.
                     </p>
@@ -225,11 +234,11 @@ const Features = () => {
                   <div className="bg-none m-3 d-flex flex-column align-items-center justify-content-start">
                     <h2 className="bg-none text-light text-center">Max</h2>
                     <img
-                      src={rpe6}
+                      src={rpe10}
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5">
+                    <p className="bg-none text-light fs-5 mt-4">
                       Could not have done any more reps or the same amount of
                       reps with any more weight
                     </p>
