@@ -17,18 +17,30 @@ const NewLiftModal = ({ show, setShow }) => {
 
   const handleClose = () => setShow(false);
 
-  const lifts = ["Squat", "Bench Press", "Deadlift"];
+  const lifts = ["Main Lift", "Squat", "Bench Press", "Deadlift"];
 
   const [formData, setFormData] = useState({
-    exercise: "Squat",
+    exercise: "",
   });
   const { exercise } = formData;
 
-  const onChange = (e) =>
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  const onChange = (e) => {
+    if (e.target.name === "mainLift") {
+      setFormData((prevState) => ({
+        ...prevState,
+        exercise: e.target.value,
+      }));
+    }
+
+    if (e.target.name === "accessory") {
+      setFormData((prevState) => ({
+        ...prevState,
+        exercise: e.target.value,
+      }));
+    }
+  };
+
+  console.log(formData);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +58,7 @@ const NewLiftModal = ({ show, setShow }) => {
           <InputGroup className="mb-3 bg-white">
             <Form.Select
               className="bg-white"
-              name="exercise"
+              name="mainLift"
               value={exercise}
               onChange={onChange}>
               {lifts.map((lift) => (
@@ -58,7 +70,11 @@ const NewLiftModal = ({ show, setShow }) => {
           </InputGroup>
           <InputGroup className="bg-white">
             <InputGroup.Text>Accessory</InputGroup.Text>
-            <FormControl />
+            <FormControl
+              name="accessory"
+              value={exercise}
+              onChange={onChange}
+            />
           </InputGroup>
         </form>
         <p
