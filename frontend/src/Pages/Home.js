@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import mjarHero from "../img/mjarHero.jpg";
 import { Button } from "react-bootstrap";
 import Features from "../Components/Features";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Placeholder } from "react-bootstrap";
 
 const Home = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  const { user, loading } = useSelector((state) => state.auth);
+
+  console.log(user);
   return (
     <>
       <div className="d-flex justify-content-start position-relative hero">
@@ -14,22 +27,40 @@ const Home = () => {
           Welcome to <br />{" "}
           <span className="bg-none logo-font space-text">MJAR</span>
         </h1>
-        <div className="button-container bg-none position-absolute z-10 w-100 d-flex justify-content-center">
-          <Button variant="primary" size="lg" className="mx-3">
-            <Link
-              to="/Login"
-              className="bg-none text-light text-decoration-none">
-              Login
-            </Link>
-          </Button>
-          <Button variant="secondary" size="lg" className="mx-3">
-            <Link
-              to="/Register"
-              className="bg-none text-light text-decoration-none">
-              Sign Up
-            </Link>
-          </Button>
-        </div>
+
+        {loading ? (
+          <div className="button-container bg-none position-absolute z-10 w-100 d-flex justify-content-center">
+            <Placeholder.Button />
+            <Placeholder.Button />
+          </div>
+        ) : (
+          <div className="button-container bg-none position-absolute z-10 w-100 d-flex justify-content-center">
+            <Button variant="primary" size="lg" className="mx-3">
+              {loggedIn ? (
+                <Link
+                  to="/training"
+                  className="bg-none text-light text-decoration-none">
+                  View Training
+                </Link>
+              ) : (
+                <Link
+                  to="/Login"
+                  className="bg-none text-light text-decoration-none">
+                  Login
+                </Link>
+              )}
+            </Button>
+            {!loggedIn && (
+              <Button variant="secondary" size="lg" className="mx-3">
+                <Link
+                  to="/Register"
+                  className="bg-none text-light text-decoration-none">
+                  Sign Up
+                </Link>
+              </Button>
+            )}
+          </div>
+        )}
       </div>
       <Features />
     </>
