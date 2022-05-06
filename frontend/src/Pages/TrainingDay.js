@@ -60,7 +60,7 @@ const TrainingDay = () => {
 
   return (
     <div className="mt-5 text-light">
-      <h1 className="pb-1">Training Day</h1>
+      <h1 className="pb-1">{day.day}</h1>
 
       {day.lifts.length === 0 && (
         <h3 className="text-light text-center my-5">
