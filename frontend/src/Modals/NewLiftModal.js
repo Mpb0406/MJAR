@@ -17,7 +17,7 @@ const NewLiftModal = ({ show, setShow }) => {
 
   const handleClose = () => setShow(false);
 
-  const lifts = ["Main Lift", "Squat", "Bench Press", "Deadlift"];
+  const lifts = ["Squat", "Bench Press", "Deadlift"];
 
   const [formData, setFormData] = useState({
     exercise: "",
@@ -40,6 +40,9 @@ const NewLiftModal = ({ show, setShow }) => {
     }
   };
 
+  if (formData.exercise) {
+  }
+
   console.log(formData);
 
   const onSubmit = (e) => {
@@ -61,8 +64,11 @@ const NewLiftModal = ({ show, setShow }) => {
               name="mainLift"
               value={exercise}
               onChange={onChange}>
+              <option className="bg-none" value="" selected>
+                Choose Main Lift
+              </option>
               {lifts.map((lift) => (
-                <option value={lift} className="bg-white">
+                <option value={lift} className="bg-none">
                   {lift}
                 </option>
               ))}
@@ -70,11 +76,7 @@ const NewLiftModal = ({ show, setShow }) => {
           </InputGroup>
           <InputGroup className="bg-white">
             <InputGroup.Text>Accessory</InputGroup.Text>
-            <FormControl
-              name="accessory"
-              value={exercise}
-              onChange={onChange}
-            />
+            <FormControl name="accessory" onChange={onChange} />
           </InputGroup>
         </form>
         <p

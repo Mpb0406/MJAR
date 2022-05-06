@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab, Nav, Col, Row, Navbar } from "react-bootstrap";
 import dayIcon from "../img/dayIcon.png";
 import weekIcon from "../img/weekIcon.png";
@@ -14,6 +14,8 @@ import rpe95 from "../img/rpe9-5.png";
 import rpe10 from "../img/rpe10.png";
 
 const Features = () => {
+  const [featureIcon, setFeatureIcon] = useState(false);
+
   return (
     <div>
       <h1 className="text-light features-text text-center my-5">Features</h1>
@@ -24,15 +26,19 @@ const Features = () => {
         </h2>
         <div className="icons-wrapper bg-none d-flex align-items-center justify-content-around mt-5">
           <div className="icon bg-none d-flex flex-column align-items-center">
-            <img src={dayIcon} className="bg-none icon" alt="" />
+            <img src={dayIcon} className="bg-none icon hover-pointer" alt="" />
             <h3 className="bg-none text-light my-3">Day</h3>
           </div>
           <div className="icon bg-none d-flex flex-column align-items-center">
-            <img src={weekIcon} className="bg-none icon" alt="" />
+            <img src={weekIcon} className="bg-none icon hover-pointer" alt="" />
             <h3 className="bg-none text-light my-3">Week</h3>
           </div>
           <div className="icon bg-none d-flex flex-column align-items-center">
-            <img src={blockIcon} className="bg-none icon" alt="" />
+            <img
+              src={blockIcon}
+              className="bg-none icon hover-pointer"
+              alt=""
+            />
             <h3 className="bg-none text-light my-3">Block</h3>
           </div>
         </div>
@@ -118,7 +124,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could have done a lot more reps.
                     </p>
                   </div>
@@ -133,7 +139,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could have done about 4 more reps for an all out max
                     </p>
                   </div>
@@ -148,7 +154,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could have definitely done 3 more reps but no more than
                       that.
                     </p>
@@ -164,7 +170,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could maybe have done 3 more reps on a good day.
                     </p>
                   </div>
@@ -179,7 +185,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could have done 2 more reps for an all out max.
                     </p>
                   </div>
@@ -194,7 +200,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could have maybe done 2 more reps.
                     </p>
                   </div>
@@ -209,7 +215,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could have only done one more rep for an all out max.
                     </p>
                   </div>
@@ -224,7 +230,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light fs-5 mt-4 text-center">
                       Could maybe have done one more rep or the same amount of
                       reps with slightly more weight.
                     </p>
@@ -238,7 +244,7 @@ const Features = () => {
                       className="bg-none rpe-icon mt-4 img-fluid"
                       alt=""
                     />
-                    <p className="bg-none text-light fs-5 mt-4">
+                    <p className="bg-none text-light text-center fs-5 mt-4">
                       Could not have done any more reps or the same amount of
                       reps with any more weight
                     </p>

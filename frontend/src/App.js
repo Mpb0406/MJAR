@@ -41,7 +41,7 @@ function App() {
           </Routes>
         </Container>
       </Router>
-      <ToastContainer />
+      <ToastContainer className="bg-none" />
     </>
   );
 }

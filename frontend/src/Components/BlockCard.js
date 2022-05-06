@@ -42,7 +42,7 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
                   <Moment format="MM/DD/YY">{endDate}</Moment>
                 </h4>
                 <div className="button-wrapper d-flex align-items-center justify-content-center gap-1">
-                  <Button variant="secondary rounded-pill d-flex align-items-center justify-content-center mt-1">
+                  <Button variant="primary rounded-pill d-flex align-items-center justify-content-center mt-1">
                     <Link
                       to={`/training/${id}`}
                       className="text-decoration-none bg-none text-light px-2">

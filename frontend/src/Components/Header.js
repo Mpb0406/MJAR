@@ -34,7 +34,7 @@ const Header = () => {
         </Navbar.Brand>
         <Navbar.Toggle
           btn-primary
-          className="navbar-dark"
+          className="navbar-dark bg-none"
           aria-controls="basic-navbar-nav"
         />
         <Navbar.Collapse className="navbar-dark bg-none" id="basic-navbar-nav">
