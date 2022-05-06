@@ -15,13 +15,15 @@ const TrainingDays = () => {
   const { blockId, weekId } = useParams();
 
   const { user } = useSelector((state) => state.auth);
-  const { isError, message, isLoading, days } = useSelector(
+  const { isError, message, isLoading, days, weeks } = useSelector(
     (state) => state.training
   );
 
   const [show, setShow] = useState(false);
 
   const handleOpen = () => setShow(true);
+
+  const week = weeks.filter((item) => item._id === weekId)[0];
 
   useEffect(() => {
     if (isError) {
@@ -45,7 +47,7 @@ const TrainingDays = () => {
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-      <h3 className="text-light dis-font fs-1 mb-2">Week 1</h3>
+      <h3 className="text-light dis-font fs-1 mb-2">{week.week}</h3>
       <h4 className="text-light dis-font fs-4 mb-4">
         Feb 21, 2022 - Feb 27, 2022{" "}
       </h4>

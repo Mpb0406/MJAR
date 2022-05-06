@@ -16,8 +16,6 @@ const DayCard = ({ name, lifts, id, block, week, date }) => {
   const parsedDate = new Date(date);
   const dayOfWeek = parsedDate.getDay();
 
-  console.log(dayOfWeek);
-
   return (
     <Card className="my-3 d-flex flex-row" bg="primary">
       <Card.Body className="bg-primary text-light position-relative ">
