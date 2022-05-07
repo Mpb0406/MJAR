@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getWeeks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewWeekModal from "../Modals/NewWeekModal";
+import Moment from "react-moment";
 
 const Block = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ const Block = () => {
   );
 
   const block = blocks.filter((block) => block._id === blockId)[0];
+
+  const blockStart = weeks[0].createdAt;
+  const blockEnd = weeks[weeks.length - 1].updatedAt;
 
   useEffect(() => {
     if (isError) {
@@ -44,7 +48,9 @@ const Block = () => {
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
       <h3 className="text-light dis-font fs-1 mb-2">{block.block}</h3>
       <h4 className="text-light dis-font fs-4 mb-4">
-        Feb 12, 2022 - Mar 24, 2022{" "}
+        <Moment format="MM/DD/YY">{blockStart}</Moment>
+        {" - "}
+        <Moment format="MM/DD/YY">{blockEnd}</Moment>
       </h4>
 
       {weeks.length === 0 && (
