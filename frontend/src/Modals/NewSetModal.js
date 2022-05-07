@@ -10,7 +10,7 @@ const NewSetModal = ({ show, setShow, liftId }) => {
 
   const handleClose = () => setShow(false);
 
-  const rpeArr = ["<6", 6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+  const rpeArr = [6, 7, 7.5, 8, 8.5, 9, 9.5, 10];
   const setTypeArr = ["Warm Up", "Top Set", "AMRAP", "Working Set"];
 
   const [formData, setFormData] = useState({
@@ -64,6 +64,9 @@ const NewSetModal = ({ show, setShow, liftId }) => {
             onChange={onChange}>
             <option className="bg-white" value="placeholder">
               RPE
+            </option>
+            <option className="bg-white" value={5}>
+              {`<6`}
             </option>
             {rpeArr.map((value) => (
               <option className="bg-white" value={value}>

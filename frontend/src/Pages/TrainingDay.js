@@ -101,7 +101,7 @@ const TrainingDay = () => {
                   <td>{idx + 1}</td>
                   <td>{set.weight}</td>
                   <td>{set.reps}</td>
-                  <td>{set.rpe}</td>
+                  <td>{set.rpe === 5 ? "<6" : set.rpe}</td>
                   <td>{set.setType}</td>
                   <td>
                     <div className="hover-delete px-1 bg-none d-flex justify-content-around">
