@@ -25,9 +25,6 @@ const Block = () => {
 
   const block = blocks.filter((block) => block._id === blockId)[0];
 
-  const blockStart = weeks[0].createdAt;
-  const blockEnd = weeks[weeks.length - 1].updatedAt;
-
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -43,6 +40,9 @@ const Block = () => {
   if (isLoading) {
     return <Loader />;
   }
+
+  const blockStart = weeks[0].createdAt;
+  const blockEnd = weeks[weeks.length - 1].updatedAt;
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
