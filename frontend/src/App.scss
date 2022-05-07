@@ -188,3 +188,13 @@
 .rpe-icon {
   width: 14rem;
 }
+
+.delete-set {
+  color: #d03057;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: red;
+  }
+}

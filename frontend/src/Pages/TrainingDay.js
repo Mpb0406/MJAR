@@ -104,17 +104,15 @@ const TrainingDay = () => {
                   <td>{set.rpe === 5 ? "<6" : set.rpe}</td>
                   <td>{set.setType}</td>
                   <td>
-                    <div className="hover-delete px-1 bg-none d-flex justify-content-around">
-                      {
-                        <Button
-                          variant="secondary"
-                          name={lift._id}
-                          id={set._id}
-                          onClick={(e) => handleOpenDeleteSet(e)}>
-                          X
-                        </Button>
-                      }
-                    </div>
+                    {
+                      <p
+                        className="bg-none mb-0 delete-set"
+                        name={lift._id}
+                        id={set._id}
+                        onClick={(e) => handleOpenDeleteSet(e)}>
+                        Delete
+                      </p>
+                    }
                   </td>
                 </tr>
               ))}
