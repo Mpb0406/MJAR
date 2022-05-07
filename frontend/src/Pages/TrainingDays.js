@@ -7,6 +7,7 @@ import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewDayModal from "../Modals/NewDayModal";
 import { reset } from "../features/Training/TrainingSlice";
+import Moment from "react-moment";
 
 const TrainingDays = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,8 @@ const TrainingDays = () => {
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
       <h3 className="text-light dis-font fs-1 mb-2">{week.week}</h3>
       <h4 className="text-light dis-font fs-4 mb-4">
-        Feb 21, 2022 - Feb 27, 2022{" "}
+        <Moment format="MM/DD/YY">{week.createdAt}</Moment> {" - "}
+        <Moment format="MM/DD/YY">{week.updatedAt}</Moment>
       </h4>
       <Container fluid="lg" className="mt-4 px-4">
         {days.length === 0 && (

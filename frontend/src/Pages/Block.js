@@ -18,9 +18,11 @@ const Block = () => {
 
   // Get Pieces of State
   const { user } = useSelector((state) => state.auth);
-  const { weeks, message, isError, isLoading } = useSelector(
+  const { weeks, message, isError, isLoading, blocks } = useSelector(
     (state) => state.training
   );
+
+  const block = blocks.filter((block) => block._id === blockId)[0];
 
   useEffect(() => {
     if (isError) {
@@ -40,7 +42,7 @@ const Block = () => {
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-      <h3 className="text-light dis-font fs-1 mb-2">Hypertrophy Block</h3>
+      <h3 className="text-light dis-font fs-1 mb-2">{block.block}</h3>
       <h4 className="text-light dis-font fs-4 mb-4">
         Feb 12, 2022 - Mar 24, 2022{" "}
       </h4>
