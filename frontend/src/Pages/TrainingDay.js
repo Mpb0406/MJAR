@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
+import deleteLiftButton from "../img/deleteLift.png";
 
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
@@ -79,11 +80,15 @@ const TrainingDay = () => {
             responsive="sm">
             <thead>
               <tr className="text-center">
-                <th
-                  colSpan={6}
-                  id={lift._id}
-                  onClick={(e) => handleOpenDeleteLift(e)}>
+                <th className="fs-5" colSpan={6}>
                   {lift.exercise}
+                  <img
+                    src={deleteLiftButton}
+                    className="bg-none ms-3 delete-lift-button"
+                    alt="delete lift"
+                    id={lift._id}
+                    onClick={(e) => handleOpenDeleteLift(e)}
+                  />
                 </th>
               </tr>
               <tr>

@@ -31,7 +31,9 @@ const Header = () => {
       <Container className="bg-primary">
         <Navbar.Brand href="/" className="bg-primary logo text-light fs-4">
           MJAR
+          <sub className="bg-none beta-tag">beta</sub>
         </Navbar.Brand>
+
         <Navbar.Toggle
           btn-primary
           className="navbar-dark bg-none"
