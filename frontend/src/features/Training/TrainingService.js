@@ -12,6 +12,10 @@ const getBlocks = async (token) => {
   };
   const response = await axios.get("/api/trainingblocks/mytraining", config);
 
+  if (response.data) {
+    localStorage.setItem("blocks", JSON.stringify(response.data));
+  }
+
   return response.data;
 };
 
@@ -52,6 +56,10 @@ const getWeeks = async (blockId, token) => {
     `/api/trainingweeks/${blockId}/mytraining`,
     config
   );
+
+  if (response.data) {
+    localStorage.setItem("weeks", JSON.stringify(response.data));
+  }
 
   return response.data;
 };
@@ -102,6 +110,10 @@ const getDays = async (weekId, token) => {
     `/api/training/${weekId}/mytraining`,
     config
   );
+
+  if (response.data) {
+    localStorage.setItem("days", JSON.stringify(response.data));
+  }
 
   return response.data;
 };

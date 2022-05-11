@@ -3,7 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import WeekCard from "../Components/WeekCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getWeeks } from "../features/Training/TrainingSlice";
+import { getBlocks, getWeeks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewWeekModal from "../Modals/NewWeekModal";
 import Moment from "react-moment";
@@ -23,8 +23,6 @@ const Block = () => {
     (state) => state.training
   );
 
-  const block = blocks.filter((block) => block._id === blockId)[0];
-
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -40,6 +38,8 @@ const Block = () => {
   if (isLoading) {
     return <Loader />;
   }
+
+  const block = blocks.filter((block) => block._id === blockId)[0];
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">

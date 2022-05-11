@@ -16,21 +16,39 @@ import rpe10 from "../img/rpe10.png";
 const Features = () => {
   const [featureIcon, setFeatureIcon] = useState(false);
 
+  const onClick = () => {
+    setFeatureIcon(!featureIcon);
+  };
+
   return (
     <div>
       <h1 className="text-light features-text text-center my-5">Features</h1>
 
-      <div id="track-lifts" className="features-container bg-primary m-auto">
+      <div
+        id="track-lifts"
+        className={`${
+          featureIcon ? "expanded-height" : "collapsed-height"
+        } features-container bg-primary m-auto`}>
         <h2 className="bg-none text-light text-center py-4">
           Track Your Lifts By:
         </h2>
         <div className="icons-wrapper bg-none d-flex align-items-center justify-content-around mt-5">
           <div className="icon bg-none d-flex flex-column align-items-center">
-            <img src={dayIcon} className="bg-none icon hover-pointer" alt="" />
+            <img
+              src={dayIcon}
+              className="bg-none icon hover-pointer"
+              alt=""
+              onClick={onClick}
+            />
             <h3 className="bg-none text-light my-3">Day</h3>
           </div>
           <div className="icon bg-none d-flex flex-column align-items-center">
-            <img src={weekIcon} className="bg-none icon hover-pointer" alt="" />
+            <img
+              src={weekIcon}
+              className="bg-none icon hover-pointer"
+              alt=""
+              onClick={onClick}
+            />
             <h3 className="bg-none text-light my-3">Week</h3>
           </div>
           <div className="icon bg-none d-flex flex-column align-items-center">
@@ -38,6 +56,7 @@ const Features = () => {
               src={blockIcon}
               className="bg-none icon hover-pointer"
               alt=""
+              onClick={onClick}
             />
             <h3 className="bg-none text-light my-3">Block</h3>
           </div>

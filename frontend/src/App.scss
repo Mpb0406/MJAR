@@ -154,9 +154,17 @@
 }
 
 .features-container {
-  height: 20rem;
   width: 90%;
   border-radius: 1rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.collapsed-height {
+  height: 20rem;
+}
+
+.expanded-height {
+  height: 50rem;
 }
 
 .icon {
@@ -207,4 +215,8 @@
 .beta-tag {
   font-size: 0.75rem;
   font-family: "Dangrek";
+}
+
+.expand {
+  height: 25rem;
 }
