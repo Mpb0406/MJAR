@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import TrainingService from "./TrainingService";
 
+const blocks = JSON.parse(localStorage.getItem("blocks"));
+const weeks = JSON.parse(localStorage.getItem("weeks"));
+const days = JSON.parse(localStorage.getItem("days"));
+
 const initialState = {
-  blocks: [],
-  weeks: [],
-  days: [],
-  day: {},
+  blocks: blocks ? blocks : [],
+  weeks: weeks ? weeks : [],
+  days: days ? days : [],
   isLoading: false,
   isSuccess: false,
   isError: true,
