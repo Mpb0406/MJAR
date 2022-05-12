@@ -44,13 +44,13 @@ const Block = () => {
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
       <h3 className="text-light dis-font fs-1 mb-2">{block.block}</h3>
-      {/* <h4 className="text-light dis-font fs-4 mb-4">
+      <h4 className="text-light dis-font fs-4 mb-4">
         <Moment format="MM/DD/YY">{isLoading ? "" : weeks[0].createdAt}</Moment>
         {" - "}
         <Moment format="MM/DD/YY">
           {isLoading ? "" : weeks[weeks.length - 1].updatedAt}
         </Moment>
-      </h4> */}
+      </h4>
 
       {weeks.length === 0 && (
         <h3 className="text-light mt-3 text-center">
