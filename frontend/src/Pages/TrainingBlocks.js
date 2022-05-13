@@ -24,12 +24,14 @@ const TrainingBlocks = () => {
   const showMore = () => setTruncateCards(blocks.length);
   const showLess = () => setTruncateCards(3);
 
+  const localStorageUser = JSON.parse(localStorage.getItem("user"));
+
   useEffect(() => {
     if (isError) {
       console.log(message);
     }
 
-    if (!user) {
+    if (!localStorageUser) {
       navigate("/login");
     }
 

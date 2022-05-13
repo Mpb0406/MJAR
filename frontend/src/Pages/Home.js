@@ -9,15 +9,14 @@ import { Placeholder } from "react-bootstrap";
 const Home = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const { user, loading } = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (localStorage.getItem("user")) {
       setLoggedIn(true);
     }
-  }, []);
+  }, [user]);
 
-  const { user, loading } = useSelector((state) => state.auth);
-
-  console.log(user);
   return (
     <>
       <div className="d-flex justify-content-start position-relative hero">
@@ -36,19 +35,11 @@ const Home = () => {
         ) : (
           <div className="button-container bg-none position-absolute z-10 w-100 d-flex justify-content-center">
             <Button variant="primary" size="lg" className="mx-3">
-              {loggedIn ? (
-                <Link
-                  to="/training"
-                  className="bg-none text-light text-decoration-none">
-                  View Training
-                </Link>
-              ) : (
-                <Link
-                  to="/Login"
-                  className="bg-none text-light text-decoration-none">
-                  Login
-                </Link>
-              )}
+              <Link
+                to={loggedIn ? "/Training" : "/Login"}
+                className="bg-none text-light text-decoration-none">
+                {loggedIn ? "View Training" : "Login"}
+              </Link>
             </Button>
             {!loggedIn && (
               <Button variant="secondary" size="lg" className="mx-3">

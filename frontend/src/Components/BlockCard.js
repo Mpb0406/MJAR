@@ -41,7 +41,7 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
                   <Moment format="MM/DD/YY">{startDate}</Moment> -{" "}
                   <Moment format="MM/DD/YY">{endDate}</Moment>
                 </h4>
-                <div className="button-wrapper d-flex align-items-center justify-content-center gap-1">
+                <div className="button-wrapper d-flex align-items-center justify-content-center gap-2">
                   <Button variant="primary rounded-pill d-flex align-items-center justify-content-center mt-1">
                     <Link
                       to={`/training/${id}`}
@@ -50,9 +50,9 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
                     </Link>
                   </Button>
                   <Button
-                    variant="secondary rounded-circle d-flex align-items-center justify-content-center mt-1"
+                    variant="secondary rounded-pill d-flex align-items-center justify-content-center mt-1"
                     onClick={handleOpen}>
-                    X
+                    ⨉
                   </Button>
                 </div>
               </Card.Text>

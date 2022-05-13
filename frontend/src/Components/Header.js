@@ -61,11 +61,17 @@ const Header = () => {
                 <div className="profile bg-primary d-flex align-items-center ms-3">
                   <div className="profile-pic position-relative">
                     <h5 className="bg-none text-light position-absolute top-50 start-50 translate-50">
-                      {user.name.split("")[0]}
+                      {localStorage.getItem("user")
+                        ? JSON.parse(localStorage.getItem("user")).name.split(
+                            ""
+                          )[0]
+                        : "U"}
                     </h5>
                   </div>
                   <div className="profile-name bg-primary text-light ms-2 fw-bold">
-                    {user.name}
+                    {localStorage.getItem("user")
+                      ? JSON.parse(localStorage.getItem("user")).name
+                      : "User"}
                   </div>
                 </div>
               </Nav>
