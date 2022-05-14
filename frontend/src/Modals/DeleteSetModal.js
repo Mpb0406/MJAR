@@ -11,6 +11,7 @@ const DeleteSetModal = ({ show, setShow, liftId, setId, dayId, weekId }) => {
   const setDelete = () => {
     dispatch(deleteSet([weekId, dayId, liftId, setId]));
     handleClose();
+    // console.log(setId);
   };
 
   return (

@@ -244,13 +244,14 @@ const deleteSet = asyncHandler(async (req, res) => {
   const week = await TrainingWeek.findOne({ _id: req.params.weekId });
 
   // Get Lift
-  const lift = day.lifts.filter((lift) => lift._id == req.params.liftId)[0];
+  const lift = day.lifts.filter(
+    (lift) => lift._id.toString() == req.params.liftId
+  )[0];
 
   //Get Set
   const set = lift.sets.filter(
     (set) => set._id.toString() !== req.params.setId
   );
-
   lift.sets = set;
 
   await day.save();
@@ -258,7 +259,7 @@ const deleteSet = asyncHandler(async (req, res) => {
   // Get all days in specific training week
   const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
 
-  res.send(days);
+  res.json(days);
 });
 
 module.exports = {

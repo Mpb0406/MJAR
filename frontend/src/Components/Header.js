@@ -16,15 +16,15 @@ const Header = () => {
     navigate("/login");
   };
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
 
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setLoggedIn(true);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (localStorage.getItem("user")) {
+  //     setLoggedIn(true);
+  //   }
+  // }, [user]);
 
   return (
     <Navbar fixed="top" className="navbar-dark" bg="primary" expand="lg">
@@ -41,7 +41,7 @@ const Header = () => {
         />
         <Navbar.Collapse className="navbar-dark bg-none" id="basic-navbar-nav">
           <Container className="navbar-dark justify-content-end bg-primary">
-            {loggedIn ? (
+            {user ? (
               <Nav
                 bg-primary
                 className="me-auto bg-primary justify-content-end bg-primary">
@@ -61,17 +61,11 @@ const Header = () => {
                 <div className="profile bg-primary d-flex align-items-center ms-3">
                   <div className="profile-pic position-relative">
                     <h5 className="bg-none text-light position-absolute top-50 start-50 translate-50">
-                      {localStorage.getItem("user")
-                        ? JSON.parse(localStorage.getItem("user")).name.split(
-                            ""
-                          )[0]
-                        : "U"}
+                      {user ? user.name.split("")[0] : "U"}
                     </h5>
                   </div>
                   <div className="profile-name bg-primary text-light ms-2 fw-bold">
-                    {localStorage.getItem("user")
-                      ? JSON.parse(localStorage.getItem("user")).name
-                      : "User"}
+                    {user ? user.name : "User"}
                   </div>
                 </div>
               </Nav>

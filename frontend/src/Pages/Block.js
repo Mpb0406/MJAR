@@ -35,20 +35,20 @@ const Block = () => {
     dispatch(getWeeks(blockId));
   }, [dispatch, isError, message, navigate, user, blockId]);
 
+  const block = blocks.filter((block) => block._id === blockId)[0];
+
   if (isLoading) {
     return <Loader />;
   }
-
-  const block = blocks.filter((block) => block._id === blockId)[0];
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center mt-5">
       <h3 className="text-light dis-font fs-1 mb-2">{block.block}</h3>
       <h4 className="text-light dis-font fs-4 mb-4">
-        <Moment format="MM/DD/YY">{isLoading ? "" : weeks[0].createdAt}</Moment>
+        <Moment format="MM/DD/YY">{weeks[0] ? weeks[0].createdAt : ""}</Moment>
         {" - "}
         <Moment format="MM/DD/YY">
-          {isLoading ? "" : weeks[weeks.length - 1].updatedAt}
+          {weeks[0] ? weeks[weeks.length - 1].updatedAt : ""}
         </Moment>
       </h4>
 

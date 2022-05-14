@@ -43,8 +43,6 @@ const NewLiftModal = ({ show, setShow }) => {
   if (formData.exercise) {
   }
 
-  console.log(formData);
-
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(newLift([weekId, dayId, formData]));

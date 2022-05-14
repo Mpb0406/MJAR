@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, CloseButton } from "react-bootstrap";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
 import DeleteSetModal from "../Modals/DeleteSetModal";
@@ -25,7 +25,7 @@ const TrainingDay = () => {
   };
   const handleOpenDeleteSet = (e) => {
     setSet(e.target.id);
-    setLift(e.target.name);
+    setLift(e.target.getAttribute("name"));
     setShowDeleteSet(true);
   };
   const handleOpenDeleteLift = (e) => {
@@ -76,16 +76,15 @@ const TrainingDay = () => {
             bordered
             hover
             variant="dark"
-            className="mt-4 position-relative"
+            className="mt-5 mb-3 position-relative"
             responsive="sm">
             <thead>
               <tr className="text-center">
                 <th className="fs-5" colSpan={6}>
                   {lift.exercise}
-                  <img
-                    src={deleteLiftButton}
-                    className="bg-none ms-3 delete-lift-button"
-                    alt="delete lift"
+                  <CloseButton
+                    variant="white"
+                    className="bg-none ms-3 align-self-center"
                     id={lift._id}
                     onClick={(e) => handleOpenDeleteLift(e)}
                   />
@@ -126,6 +125,7 @@ const TrainingDay = () => {
           <div className="d-grid w-75 m-auto gap-3 px-2 py-2">
             <Button
               variant="secondary"
+              className="mb-3"
               id={lift._id}
               onClick={(e) => handleOpenSet(e)}>
               New Set
@@ -134,7 +134,7 @@ const TrainingDay = () => {
         </>
       ))}
 
-      <div className="d-grid w-75 m-auto gap-3 px-2 pt-2">
+      <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">
         <Button variant="primary" onClick={handleOpenLift}>
           Add Lift
         </Button>
