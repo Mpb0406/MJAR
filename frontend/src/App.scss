@@ -220,3 +220,21 @@
 .expand {
   height: 25rem;
 }
+
+.enter-button {
+  width: 1rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.popover-delete-hover {
+  color: black;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: #92213c;
+    color: white;
+    width: 100%;
+  }
+}
