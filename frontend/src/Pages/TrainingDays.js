@@ -47,13 +47,13 @@ const TrainingDays = () => {
   }
 
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-      <h3 className="text-light dis-font fs-1 mb-2">{week.week}</h3>
-      <h4 className="text-light dis-font fs-4 mb-4">
+    <div className="mt-5">
+      <h3 className="fs-1 text-light">{week.week}</h3>
+      <h4 className="text-light fs-4 mb-4">
         <Moment format="MM/DD/YY">{week.createdAt}</Moment> {" - "}
         <Moment format="MM/DD/YY">{week.updatedAt}</Moment>
       </h4>
-      <Container fluid="lg" className="mt-4 px-4">
+      <Container fluid="lg" className="mt-5 ps-0">
         {days.length === 0 && (
           <h3 className="text-light text-center">
             You don't have any days logged yet, bro. <br /> Not Good.
@@ -61,7 +61,7 @@ const TrainingDays = () => {
         )}
 
         {days.map((day) => (
-          <Container>
+          <Container className="mt-5 ps-0">
             <DayCard
               name={day.day}
               lifts={day.lifts}

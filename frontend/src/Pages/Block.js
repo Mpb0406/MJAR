@@ -58,7 +58,7 @@ const Block = () => {
         </h3>
       )}
 
-      <Container fluid="lg" className="block-container mt-4 ps-0">
+      <Container fluid="lg" className="mt-4 ps-0">
         {weeks.map((week) => (
           <WeekCard
             name={week.week}
