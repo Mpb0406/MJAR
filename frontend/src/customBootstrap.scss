@@ -30,4 +30,9 @@ $width: (
     auto: auto,
   ),
 );
+
+.navbar-toggler-icon {
+  background: transparent;
+}
+
 @import "~bootstrap/scss/bootstrap";

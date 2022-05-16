@@ -53,7 +53,7 @@ const TrainingDays = () => {
         <Moment format="MM/DD/YY">{week.createdAt}</Moment> {" - "}
         <Moment format="MM/DD/YY">{week.updatedAt}</Moment>
       </h4>
-      <Container fluid="lg" className="mt-5 ps-0">
+      <Container fluid="lg" className="mt-4 ps-0">
         {days.length === 0 && (
           <h3 className="text-light text-center">
             You don't have any days logged yet, bro. <br /> Not Good.
@@ -61,7 +61,7 @@ const TrainingDays = () => {
         )}
 
         {days.map((day) => (
-          <Container className="mt-5 ps-0">
+          <Container className="mt-4 ps-0">
             <DayCard
               name={day.day}
               lifts={day.lifts}

@@ -28,10 +28,12 @@ const Header = () => {
 
         <Navbar.Toggle
           btn-primary
-          className="navbar-dark bg-none"
+          className="navbar-dark bg-primary border-0"
           aria-controls="basic-navbar-nav"
         />
-        <Navbar.Collapse className="navbar-dark bg-none" id="basic-navbar-nav">
+        <Navbar.Collapse
+          className="navbar-dark bg-primary"
+          id="basic-navbar-nav">
           <Container className="navbar-dark justify-content-end bg-primary">
             {user ? (
               <Nav
@@ -50,7 +52,7 @@ const Header = () => {
                   href="/login">
                   Logout
                 </Nav.Link>
-                <div className="profile bg-primary d-flex align-items-center ms-3">
+                <div className="profile bg-primary d-flex align-items-center ms-0 mt-3 ms-lg-3 mt-lg-0">
                   <div className="profile-pic position-relative">
                     <h5 className="bg-none text-light position-absolute top-50 start-50 translate-50">
                       {user ? user.name.split("")[0] : "U"}
