@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -16,15 +16,7 @@ const Header = () => {
     navigate("/login");
   };
 
-  // const [loggedIn, setLoggedIn] = useState(false);
-
   const { pathname } = useLocation();
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("user")) {
-  //     setLoggedIn(true);
-  //   }
-  // }, [user]);
 
   return (
     <Navbar fixed="top" className="navbar-dark" bg="primary" expand="lg">

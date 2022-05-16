@@ -3,7 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import WeekCard from "../Components/WeekCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBlocks, getWeeks } from "../features/Training/TrainingSlice";
+import { getWeeks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewWeekModal from "../Modals/NewWeekModal";
 import Moment from "react-moment";
@@ -42,9 +42,9 @@ const Block = () => {
   }
 
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-      <h3 className="text-light dis-font fs-1 mb-2">{block.block}</h3>
-      <h4 className="text-light dis-font fs-4 mb-4">
+    <div className="mt-5">
+      <h3 className="fs-1 text-light ms-4">{block.block}</h3>
+      <h4 className="text-light fs-4 mb-4 ms-4">
         <Moment format="MM/DD/YY">{weeks[0] ? weeks[0].createdAt : ""}</Moment>
         {" - "}
         <Moment format="MM/DD/YY">

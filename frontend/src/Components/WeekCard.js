@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Container,
+  Row,
+  Col,
+  OverlayTrigger,
+  Popover,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
-import week from "../img/week.png";
+import enterButton from "../img/enterButton.png";
 import DeleteWeekModal from "../Modals/DeleteWeekModal";
 import Moment from "react-moment";
 
@@ -10,39 +18,68 @@ const WeekCard = ({ name, days, id, blockId, startDate, endDate }) => {
 
   const handleOpen = () => setShow(true);
 
-  return (
-    <Card className="my-3 d-flex flex-row" bg="primary">
-      <Card.Body className="bg-primary text-light">
-        <Card.Title className=" fs-4 z-10 text-drop-shadow bg-none">
-          {name}
-        </Card.Title>
-        <Card.Text className="bg-primary z-10">
-          {`${days.length} ${days.length === 1 ? "Day" : "Days"} Logged`} <br />
-          <Card.Text className="bg-primary z-10 fs-small text-info fw-bold">
-            <Moment className="bg-none" format="MM/DD/YY">
-              {startDate}
-            </Moment>{" "}
-            -{" "}
-            <Moment className="bg-none" format="MM/DD/YY">
-              {endDate}
-            </Moment>
-          </Card.Text>
-        </Card.Text>
+  const popover = (
+    <Popover id="delete-popover">
+      <Popover.Body className="bg-none py-0 px-0">
+        <Button
+          variant="link"
+          onClick={handleOpen}
+          className="bg-none fs-6 px-5 py-3 mb-0 cursor-pointer text-secondary">
+          Delete
+        </Button>
+      </Popover.Body>
+    </Popover>
+  );
 
-        <Link
-          to={`/training/${blockId}/${id}`}
-          className="text-decoration-none hover-secondary hover-secondary bg-primary fs-5">
-          View/Edit
-        </Link>
-        <img
-          src={week}
-          className="h-50 position-absolute absolute-center z-5"
-          alt=""
-        />
-      </Card.Body>
-      <Button variant="secondary" className="px-3 fs-3" onClick={handleOpen}>
-        ×
-      </Button>
+  return (
+    <Card className="d-flex flex-row align-items-center my-3" bg="info">
+      <Container>
+        <Row>
+          <Col xs={2} md={1} className="bg-info d-flex align-items-center">
+            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+              <h3 className="text-light bg-none ms-3 fs-2 cursor-pointer">⫶</h3>
+            </OverlayTrigger>
+          </Col>
+          <Col md={8} xs={7} className="bg-info ps-0">
+            <Card.Body className="bg-info text-light ps-0">
+              <Card.Title className="d-flex flex-column align-items-start justify-content-between bg-info my-0">
+                <h3 className="fs-3 hover-primary bg-info">{name}</h3>
+                <h4 className="bg-info fs-6 text-sm-center">
+                  <Moment className="bg-info" format="MM/DD/YY">
+                    {startDate}
+                  </Moment>{" "}
+                  -{" "}
+                  <Moment className="bg-info" format="MM/DD/YY">
+                    {endDate}
+                  </Moment>
+                </h4>
+                <h4 className="fs-6 bg-secondary py-1 px-2 rounded-pill">{`${
+                  days.length
+                } ${days.length === 1 ? "Day" : "Days"}`}</h4>
+              </Card.Title>
+            </Card.Body>
+          </Col>
+          <Col xs={3} md={3} className="bg-info d-flex align-items-center m-0">
+            <Card.Body className="bg-info text-light text-center ms-0">
+              <Card.Text className="bg-info d-flex flex-column align-items-xs-center align-items-md-end justify-content-between my-0">
+                <div className="bg-info button-wrapper d-flex align-items-center justify-content-center gap-2">
+                  <p className="bg-info rounded-pill d-flex align-items-center justify-content-center mt-1">
+                    <Link
+                      to={`/training/${blockId}/${id}`}
+                      className="text-decoration-none bg-none text-light px-2">
+                      <img
+                        className="bg-none enter-button"
+                        src={enterButton}
+                        alt=""
+                      />
+                    </Link>
+                  </p>
+                </div>
+              </Card.Text>
+            </Card.Body>
+          </Col>
+        </Row>
+      </Container>
       <DeleteWeekModal
         show={show}
         setShow={setShow}

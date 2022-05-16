@@ -9,7 +9,6 @@ import {
   OverlayTrigger,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import strength from "../img/strength.png";
 import enterButton from "../img/enterButton.png";
 import DeleteBlockModal from "../Modals/DeleteBlockModal";
 import Moment from "react-moment";
