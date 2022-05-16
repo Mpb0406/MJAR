@@ -224,3 +224,10 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.Toastify__toast-body,
+.Toastify__toast-body > div,
+.Toastify__toast-icon > svg,
+.Toastify__close-button > svg {
+  background: transparent;
+}
