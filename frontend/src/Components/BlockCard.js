@@ -4,6 +4,7 @@ import {
   Container,
   Col,
   Row,
+  Button,
   Popover,
   OverlayTrigger,
 } from "react-bootstrap";
@@ -20,10 +21,13 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
 
   const popover = (
     <Popover id="delete-popover">
-      <Popover.Body className="bg-none py-1 px-0">
-        <h3 className="bg-none fs-6 px-5 py-3 mb-0 cursor-pointer popover-delete-hover">
+      <Popover.Body className="bg-none py-0 px-0">
+        <Button
+          variant="link"
+          onClick={handleOpen}
+          className="bg-none fs-6 px-5 py-3 mb-0 cursor-pointer text-secondary">
           Delete
-        </h3>
+        </Button>
       </Popover.Body>
     </Popover>
   );
@@ -71,11 +75,6 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
                       />
                     </Link>
                   </p>
-                  {/* <Button
-                    variant="secondary rounded-pill d-flex align-items-center justify-content-center mt-1"
-                    onClick={handleOpen}>
-                    ⨉
-                  </Button> */}
                 </div>
               </Card.Text>
             </Card.Body>
