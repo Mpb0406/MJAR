@@ -62,7 +62,7 @@ const WeekCard = ({ name, days, id, blockId, startDate, endDate }) => {
           <Col xs={3} md={3} className="bg-info d-flex align-items-center m-0">
             <Card.Body className="bg-info text-light text-center ms-0">
               <Card.Text className="bg-info d-flex flex-column align-items-xs-center align-items-md-end justify-content-between my-0">
-                <div className="bg-info button-wrapper d-flex align-items-center justify-content-center gap-2">
+                <div className="bg-info rounded-pill d-flex align-items-center justify-content-center mt-1">
                   <p className="bg-info rounded-pill d-flex align-items-center justify-content-center mt-1">
                     <Link
                       to={`/training/${blockId}/${id}`}
