@@ -53,7 +53,7 @@ const Header = () => {
                   Logout
                 </Nav.Link>
                 <div className="profile bg-primary d-flex align-items-center ms-0 mt-3 ms-lg-3 mt-lg-0">
-                  <div className="profile-pic position-relative">
+                  <div className="profile-pic position-relative bg-secondary">
                     <h5 className="bg-none text-light position-absolute top-50 start-50 translate-50">
                       {user ? user.name.split("")[0] : "U"}
                     </h5>

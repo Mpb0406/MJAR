@@ -53,7 +53,7 @@ const WeekCard = ({ name, days, id, blockId, startDate, endDate }) => {
                     {endDate}
                   </Moment>
                 </h4>
-                <h4 className="fs-6 bg-secondary py-1 px-2 rounded-pill">{`${
+                <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${
                   days.length
                 } ${days.length === 1 ? "Day" : "Days"}`}</h4>
               </Card.Title>

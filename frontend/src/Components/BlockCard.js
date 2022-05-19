@@ -53,7 +53,7 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
                     {endDate}
                   </Moment>
                 </h4>
-                <h4 className="fs-6 bg-secondary py-1 px-2 rounded-pill">{`${
+                <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${
                   weeks.length
                 } ${weeks.length === 1 ? "Week" : "Weeks"}`}</h4>
               </Card.Title>
