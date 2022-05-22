@@ -9,7 +9,7 @@ const {
   updateSet,
   deleteSet,
   deleteLift,
-} = require("../Controllers/TrainingDayControllers");
+} = require("../Controllers/trainingDayControllers");
 const { protect } = require("../Middleware/authMiddleware");
 
 router.post("/:weekId", protect, newTrainingDay);
