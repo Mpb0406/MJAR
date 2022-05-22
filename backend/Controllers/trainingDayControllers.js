@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const TrainingDay = require("../Models/trainingDayModel");
+const TrainingDay = require("../Models/trainingDayModel.js");
 const TrainingWeek = require("../Models/trainingWeekModel");
 const User = require("../Models/userModel");
 
