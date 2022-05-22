@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const TrainingWeek = require("../Models/trainingWeekModel");
 const TrainingBlock = require("../Models/trainingBlockModel");
-const TrainingDay = require("../Models/trainingDayModel");
+const TrainingDay = require("../Models/TrainingDayModel");
 const User = require("../Models/userModel");
 
 // @desc    Get Training Weeks
