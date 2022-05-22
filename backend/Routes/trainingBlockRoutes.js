@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const TrainingBlock = require("../Models/trainingBlockModel");
 const { protect } = require("../Middleware/authMiddleware");
 const {
   getTrainingBlocks,

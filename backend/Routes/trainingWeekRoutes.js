@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const TrainingWeek = require("../Models/trainingWeekModel");
 const { protect } = require("../Middleware/authMiddleware");
 const {
   getTrainingWeeks,
