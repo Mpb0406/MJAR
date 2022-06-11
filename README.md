@@ -1,3 +1,3 @@
 # MJAR
 ## MERN STACK WORKOUT TRACKING APP
-### Hosted at: mjartrainingwebapp.herokuapp.com
+[Hosted App](mjartrainingwebapp.herokuapp.com)
