@@ -10,6 +10,16 @@ const trainingBlockSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    lifts: [
+      {
+        liftType: {
+          type: String,
+        },
+        lift: {
+          type: String,
+        },
+      },
+    ],
     weeks: [
       {
         type: mongoose.Schema.Types.ObjectId,

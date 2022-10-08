@@ -30,6 +30,20 @@ const createTrainingBlock = asyncHandler(async (req, res) => {
   res.json(allBlocks);
 });
 
+// @desc    Add Lift to Training Block
+// @route   PUT /api/trainingblocks/:blockid
+// @access  Private
+const addBlockLift = asyncHandler(async (req, res) => {
+  const block = await TrainingBlock.findById({ _id: req.params.blockId });
+
+  const { lift } = req.body;
+
+  block.lifts.push(lift);
+  await block.save();
+
+  res.send(block);
+});
+
 // @desc    Delete a Training Block
 // @route   DELETE /api/trainingblocks/:blockId
 // @access  Private
@@ -63,5 +77,6 @@ const deleteTrainingBlock = asyncHandler(async (req, res) => {
 module.exports = {
   getTrainingBlocks,
   createTrainingBlock,
+  addBlockLift,
   deleteTrainingBlock,
 };
