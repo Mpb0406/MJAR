@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { getBlocks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewBlockModal from "../Modals/NewBlockModal";
+import BlockLiftModal from "../Modals/BlockLiftModal";
 
 const TrainingBlocks = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const TrainingBlocks = () => {
 
   return (
     <div className="mt-5">
+      <BlockLiftModal />
       <h3 className="fs-1 text-light">My Training Blocks</h3>
       <Container className="ps-0 mt-5">
         <div className="container-header d-flex justify-content-between align-items-center">
