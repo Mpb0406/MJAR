@@ -16,8 +16,9 @@ const TrainingBlocks = () => {
     (state) => state.training
   );
 
-  const [show, setShow] = useState(false);
-  const handleOpen = () => setShow(true);
+  const [showNewBlock, setShowNewBlock] = useState(false);
+  const [showLiftPrompt, setShowLiftPrompt] = useState(false);
+  const handleOpen = () => setShowNewBlock(true);
 
   // Update Amount of Block Cards Shown
   const [truncateCards, setTruncateCards] = useState(3);
@@ -59,13 +60,7 @@ const TrainingBlocks = () => {
         </div>
 
         {blocks.slice(0, truncateCards).map((block) => (
-          <BlockCard
-            name={block.block}
-            weeks={block.weeks}
-            id={block._id}
-            startDate={block.createdAt}
-            endDate={block.updatedAt}
-          />
+          <BlockCard block={block} />
         ))}
       </Container>
       <Container className="d-flex justify-content-center mb-5">
@@ -74,7 +69,16 @@ const TrainingBlocks = () => {
         </Button>
       </Container>
 
-      <NewBlockModal show={show} setShow={setShow} />
+      <NewBlockModal
+        showNewBlock={showNewBlock}
+        setShowNewBlock={setShowNewBlock}
+        showLiftPrompt={showLiftPrompt}
+        setShowLiftPrompt={setShowLiftPrompt}
+      />
+      <BlockLiftModal
+        showLiftPrompt={showLiftPrompt}
+        setShowLiftPrompt={setShowLiftPrompt}
+      />
     </div>
   );
 };

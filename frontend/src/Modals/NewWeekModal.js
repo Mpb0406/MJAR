@@ -10,7 +10,7 @@ const NewWeekModal = ({ show, setShow }) => {
 
   const handleClose = () => setShow(false);
 
-  const weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6"];
+  const weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Deload"];
 
   const [formData, setFormData] = useState({
     week: "Week 1",
@@ -43,9 +43,7 @@ const NewWeekModal = ({ show, setShow }) => {
             ))}
           </Form.Select>
         </form>
-        <p
-          className="bg-white mt-4 mx-3  fw-bold text-info"
-          style={{ fontSize: "0.75rem" }}>
+        <p className="bg-white mt-4 mx-3 fs-small fw-bold text-info">
           <Badge bg="secondary" className="me-2">
             i
           </Badge>

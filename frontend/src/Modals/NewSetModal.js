@@ -44,16 +44,18 @@ const NewSetModal = ({ show, setShow, liftId }) => {
           id="setForm"
           onSubmit={onSubmit}>
           <Form.Control
-            className="mx-1"
+            className="mx-1 remove-arrows"
             placeholder="Weight"
             name="weight"
+            type="number"
             value={weight}
             onChange={onChange}
           />
           <Form.Control
-            className="mx-1"
+            className="mx-1 remove-arrows"
             placeholder="Reps"
             name="reps"
+            type="number"
             value={reps}
             onChange={onChange}
           />

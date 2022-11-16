@@ -64,7 +64,7 @@
 }
 
 .fs-small {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .card-img {
@@ -225,4 +225,9 @@
 .Toastify__toast-icon > svg,
 .Toastify__close-button > svg {
   background: transparent;
+}
+
+.remove-arrows::-webkit-inner-spin-button,
+.remove-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }

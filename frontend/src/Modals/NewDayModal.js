@@ -3,20 +3,13 @@ import { Modal, Button, Badge, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { newDay } from "../features/Training/TrainingSlice";
+import { StrengthADays } from "../Data/data";
 
 const NewDayModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
   const { weekId } = useParams();
 
   const handleClose = () => setShow(false);
-
-  const days = [
-    "Day 1 - Squats & Bench",
-    "Day 2 - Bro Chest",
-    "Day 3 - Deadlifts & Legs",
-    "Day 4 - Squats & Bench",
-    "Day 5 - Deadlifts & Back",
-  ];
 
   const [formData, setFormData] = useState({
     day: "Day 1 - Squats & Bench",
@@ -43,8 +36,8 @@ const NewDayModal = ({ show, setShow }) => {
       <Modal.Body className="bg-white">
         <form className="bg-white" id="dayForm" onSubmit={onSubmit}>
           <Form.Select name="day" value={day} onChange={onChange}>
-            {days.map((day) => (
-              <option className="bg-white">{day}</option>
+            {StrengthADays.map((day) => (
+              <option className="bg-white">{day.day}</option>
             ))}
           </Form.Select>
         </form>
@@ -54,7 +47,7 @@ const NewDayModal = ({ show, setShow }) => {
           <Badge bg="secondary" className="me-2">
             i
           </Badge>
-          Squats x 7, Bench x 5, Upper Body Accessories
+          {day.notes}
         </p>
       </Modal.Body>
       <Modal.Footer className="bg-white">

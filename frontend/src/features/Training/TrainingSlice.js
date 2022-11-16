@@ -55,6 +55,10 @@ export const newBlock = createAsyncThunk(
   }
 );
 
+// Add Lifts to Training Block
+export const addBlockLifts = createAsyncThunk;
+
+// Delete Training Block
 export const deleteBlock = createAsyncThunk(
   "training/deleteBlock",
   async (blockId, thunkAPI) => {

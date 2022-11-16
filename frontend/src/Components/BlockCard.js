@@ -7,13 +7,14 @@ import {
   Button,
   Popover,
   OverlayTrigger,
+  Badge,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import enterButton from "../img/enterButton.png";
 import DeleteBlockModal from "../Modals/DeleteBlockModal";
 import Moment from "react-moment";
 
-const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
+const BlockCard = ({ block }) => {
   const [show, setShow] = useState(false);
 
   const handleOpen = () => setShow(true);
@@ -43,19 +44,24 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
           <Col md={8} xs={7} className="bg-info ps-0">
             <Card.Body className="bg-info text-light ps-0">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between bg-info my-0">
-                <h3 className="fs-3 hover-primary bg-info">{name}</h3>
+                <div className="d-flex bg-none">
+                  <h3 className="fs-3 hover-primary bg-info">{block.block}</h3>
+                  <Badge className="align-self-center ms-2 shadow-md">
+                    {block.microBlock}
+                  </Badge>
+                </div>
                 <h4 className="bg-info fs-6 text-sm-center">
                   <Moment className="bg-info" format="MM/DD/YY">
-                    {startDate}
+                    {block.startDate}
                   </Moment>{" "}
                   -{" "}
                   <Moment className="bg-info" format="MM/DD/YY">
-                    {endDate}
+                    {block.endDate}
                   </Moment>
                 </h4>
                 <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${
-                  weeks.length
-                } ${weeks.length === 1 ? "Week" : "Weeks"}`}</h4>
+                  block.weeks.length
+                } ${block.weeks.length === 1 ? "Week" : "Weeks"}`}</h4>
               </Card.Title>
             </Card.Body>
           </Col>
@@ -65,7 +71,7 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
                 <div className="bg-info button-wrapper d-flex align-items-center justify-content-center gap-2">
                   <p className="bg-info rounded-pill d-flex align-items-center justify-content-center mt-1">
                     <Link
-                      to={`/training/${id}`}
+                      to={`/training/${block._id}`}
                       className="text-decoration-none bg-none text-light px-2">
                       <img
                         className="bg-none enter-button"
@@ -81,7 +87,7 @@ const BlockCard = ({ name, weeks, id, startDate, endDate }) => {
         </Row>
       </Container>
 
-      <DeleteBlockModal show={show} setShow={setShow} blockId={id} />
+      <DeleteBlockModal show={show} setShow={setShow} blockId={block.id} />
     </Card>
   );
 };

@@ -10,6 +10,9 @@ const trainingBlockSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    microBlock: {
+      type: String,
+    },
     lifts: [
       {
         liftType: {
