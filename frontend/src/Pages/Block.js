@@ -76,7 +76,7 @@ const Block = () => {
         </Container>
       </Container>
 
-      <NewWeekModal show={show} setShow={setShow} />
+      <NewWeekModal show={show} setShow={setShow} block={block} />
     </div>
   );
 };

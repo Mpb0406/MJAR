@@ -4,23 +4,31 @@ import { useDispatch } from "react-redux";
 import { newWeek } from "../features/Training/TrainingSlice";
 import { useParams } from "react-router-dom";
 
-const NewWeekModal = ({ show, setShow }) => {
+const NewWeekModal = ({ show, setShow, block }) => {
   const dispatch = useDispatch();
   const { blockId } = useParams();
 
   const handleClose = () => setShow(false);
 
-  const weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Deload"];
+  const weeks = [
+    { week: "Week 1", rpe: 6, acc: "12-15" },
+    { week: "Week 2", rpe: 7, acc: "12-15" },
+    { week: "Week 3", rpe: 8, acc: "10-12" },
+    { week: "Week 4", rpe: 9, acc: "10-12" },
+    { week: "Deload", rpe: 7, acc: "12-15" },
+  ];
 
   const [formData, setFormData] = useState({
-    week: "Week 1",
+    week: weeks[0],
+    desc: "",
   });
-  const { week } = formData;
+  const { week, desc } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
+      desc: weeks.filter((week) => week.week === e.target.value),
     }));
   };
 
@@ -39,7 +47,7 @@ const NewWeekModal = ({ show, setShow }) => {
         <form className="bg-white" onSubmit={onSubmit} id="weekForm">
           <Form.Select name="week" value={week} onChange={onChange}>
             {weeks.map((week) => (
-              <option className="bg-white">{week}</option>
+              <option className="bg-white">{week.week}</option>
             ))}
           </Form.Select>
         </form>
@@ -47,8 +55,10 @@ const NewWeekModal = ({ show, setShow }) => {
           <Badge bg="secondary" className="me-2">
             i
           </Badge>
-          Core lifts are performed to a top set at RPE 8 with working sets at
-          80% of the top set.
+          {block.block === "Hypertrophy Block"
+            ? `Core lifts are performed to a top set at RPE ${desc[0].rpe} with working sets at
+          75% of the top set. Accessories will have a rep range of ${desc[0].acc}`
+            : `Strength`}
         </p>
       </Modal.Body>
       <Modal.Footer className="bg-white">
