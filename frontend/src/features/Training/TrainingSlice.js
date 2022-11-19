@@ -56,7 +56,23 @@ export const newBlock = createAsyncThunk(
 );
 
 // Add Lifts to Training Block
-export const addBlockLifts = createAsyncThunk;
+export const addBlockLifts = createAsyncThunk(
+  "training/chooseLifts",
+  async (blockId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.chooseLifts(token, blockId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Delete Training Block
 export const deleteBlock = createAsyncThunk(

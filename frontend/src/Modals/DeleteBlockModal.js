@@ -13,6 +13,8 @@ const DeleteBlockModal = ({ show, setShow, blockId }) => {
     handleClose();
   };
 
+  console.log(blockId);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header className="bg-white" closeButton>

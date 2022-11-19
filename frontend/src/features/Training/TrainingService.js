@@ -31,6 +31,19 @@ const newBlock = async (token, formData) => {
   return response.data;
 };
 
+// Add Lifts to Training Block
+const chooseLifts = async (token, blockId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(`/api/trainingblocks/${blockId}`, config);
+
+  return response.data;
+};
+
+// Delete Training Block
 const deleteBlock = async (token, blockId) => {
   const config = {
     headers: {

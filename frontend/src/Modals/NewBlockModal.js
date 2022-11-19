@@ -14,8 +14,8 @@ const NewBlockModal = ({
   const handleClose = () => setShowNewBlock(false);
 
   const [formData, setFormData] = useState({
-    block: "Hypertrophy Block",
-    microBlock: "Microblock A",
+    block: "Hypertrophy",
+    microBlock: "Block A",
   });
 
   const { block, microBlock } = formData;

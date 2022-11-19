@@ -3,6 +3,7 @@ import { Modal, Form, Button, Badge } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { newWeek } from "../features/Training/TrainingSlice";
 import { useParams } from "react-router-dom";
+import { hypertrophyAWeeks } from "../Data/data";
 
 const NewWeekModal = ({ show, setShow, block }) => {
   const dispatch = useDispatch();
@@ -10,17 +11,9 @@ const NewWeekModal = ({ show, setShow, block }) => {
 
   const handleClose = () => setShow(false);
 
-  const weeks = [
-    { week: "Week 1", rpe: 6, acc: "12-15" },
-    { week: "Week 2", rpe: 7, acc: "12-15" },
-    { week: "Week 3", rpe: 8, acc: "10-12" },
-    { week: "Week 4", rpe: 9, acc: "10-12" },
-    { week: "Deload", rpe: 7, acc: "12-15" },
-  ];
-
   const [formData, setFormData] = useState({
-    week: weeks[0],
-    desc: "",
+    week: hypertrophyAWeeks[0],
+    desc: null,
   });
   const { week, desc } = formData;
 
@@ -28,7 +21,7 @@ const NewWeekModal = ({ show, setShow, block }) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-      desc: weeks.filter((week) => week.week === e.target.value),
+      desc: hypertrophyAWeeks.filter((week) => week.week === e.target.value),
     }));
   };
 
@@ -38,6 +31,8 @@ const NewWeekModal = ({ show, setShow, block }) => {
     handleClose();
   };
 
+  console.log(formData.desc);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
@@ -46,7 +41,7 @@ const NewWeekModal = ({ show, setShow, block }) => {
       <Modal.Body className="bg-white">
         <form className="bg-white" onSubmit={onSubmit} id="weekForm">
           <Form.Select name="week" value={week} onChange={onChange}>
-            {weeks.map((week) => (
+            {hypertrophyAWeeks.map((week) => (
               <option className="bg-white">{week.week}</option>
             ))}
           </Form.Select>
@@ -56,8 +51,14 @@ const NewWeekModal = ({ show, setShow, block }) => {
             i
           </Badge>
           {block.block === "Hypertrophy Block"
-            ? `Core lifts are performed to a top set at RPE ${desc[0].rpe} with working sets at
-          75% of the top set. Accessories will have a rep range of ${desc[0].acc}`
+            ? `Core lifts are performed to a top set at RPE ${
+                desc ? desc[0].rpe : 6
+              } with working sets at
+          ${
+            desc ? desc[0].percent : 75
+          }% of the top set. Accessories will have a rep range of ${
+                desc ? desc[0].acc : "12-15"
+              }`
             : `Strength`}
         </p>
       </Modal.Body>

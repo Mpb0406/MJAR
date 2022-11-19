@@ -6,6 +6,13 @@ const BlockLiftModal = ({ showLiftPrompt, setShowLiftPrompt }) => {
   const [liftPrompts, setLiftPrompts] = useState(0);
 
   const handleClose = () => setShowLiftPrompt(false);
+  const onNext = () => {
+    setLiftPrompts((prevState) => prevState + 1);
+  };
+  const onBack = () => {
+    setLiftPrompts((prevState) => prevState - 1);
+  };
+
   return (
     <Modal show={showLiftPrompt} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
@@ -15,9 +22,7 @@ const BlockLiftModal = ({ showLiftPrompt, setShowLiftPrompt }) => {
       </Modal.Header>
       <Modal.Body className="bg-white">
         <form action="" className="bg-white">
-          <p
-            className="bg-white mt-2 mx-3 fw-bold fst-italic"
-            style={{ fontSize: "0.85rem" }}>
+          <p className="bg-white mt-2 mx-3 fw-bold fst-italic fs-small">
             <Badge bg="secondary" className="me-2">
               i
             </Badge>
@@ -27,14 +32,14 @@ const BlockLiftModal = ({ showLiftPrompt, setShowLiftPrompt }) => {
         </form>
       </Modal.Body>
       <Modal.Footer className="bg-white">
+        <Button variant="link">Choose later</Button>
         <Button
           variant="info"
-          onClick={() => setLiftPrompts((prevState) => prevState - 1)}>
+          onClick={() => onBack()}
+          disabled={liftPrompts <= 0 ? true : false}>
           Back
         </Button>
-        <Button
-          variant="primary"
-          onClick={() => setLiftPrompts((prevState) => prevState + 1)}>
+        <Button variant="primary" onClick={() => onNext()}>
           Next
         </Button>
       </Modal.Footer>
