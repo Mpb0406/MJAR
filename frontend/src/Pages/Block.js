@@ -45,10 +45,12 @@ const Block = () => {
     <div className="mt-5">
       <h3 className="fs-1 text-light">{block.block}</h3>
       <h4 className="text-light fs-4 mb-4">
-        <Moment format="MM/DD/YY">{weeks[0] ? weeks[0].createdAt : ""}</Moment>
+        <Moment format="MM/DD/YY">
+          {weeks[0] ? weeks[0].createdAt : block.createdAt}
+        </Moment>
         {" - "}
         <Moment format="MM/DD/YY">
-          {weeks[0] ? weeks[weeks.length - 1].updatedAt : ""}
+          {weeks[0] ? weeks[weeks.length - 1].updatedAt : block.updatedAt}
         </Moment>
       </h4>
 

@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const TrainingDay = require("../Models/TrainingDayModel");
 const TrainingWeek = require("../Models/trainingWeekModel");
+const TrainingBlock = require("../Models/trainingBlockModel");
 const User = require("../Models/userModel");
 
 // @desc    Get Training Days By Week
@@ -24,6 +25,8 @@ const getMyTraining = asyncHandler(async (req, res) => {
 // @route   POST /api/training/:weekId
 // @access  Private
 const newTrainingDay = asyncHandler(async (req, res) => {
+  const block = await TrainingBlock.find({ _id: req.params.blockId });
+  const blockLifts = block[0].lifts;
   if (!req.body.day) {
     res.status(400);
     throw new Error("Please Add Day");
@@ -45,13 +48,102 @@ const newTrainingDay = asyncHandler(async (req, res) => {
   });
 
   week.trainingDays.push(trainingDay);
-
   week.save();
+
+  // **********ADD BLOCK LIFTS**********
+  // Build out lift object
+  const liftFields = {
+    exercise: "",
+    sets: [],
+  };
+
+  //Check if User has a lift associated with a lift type for a block and loop through and add add to day
+  const addLifts = async (liftsArray) => {
+    // Loop through day one lifts and push corresponding lifts into lifts array for training day
+    for (let i = 0; i <= liftsArray.length - 1; i++) {
+      if (
+        blockLifts.filter((lift) => lift.liftType === liftsArray[i])[0].lift
+      ) {
+        liftFields.exercise = blockLifts.filter(
+          (lift) => lift.liftType === liftsArray[i]
+        )[0].lift;
+
+        trainingDay.lifts.push(liftFields);
+        await trainingDay.save();
+      }
+    }
+  };
+
+  //Add lifts to training day based on which day
+  switch (trainingDay.day) {
+    case "Day 1: Squats & Upper":
+      const dayOneLifts = [
+        "Squat",
+        "Single-Leg Accessory",
+        "Horizontal Pull 1",
+        "Vertical Pull 1",
+        "Shoulder Press",
+        "Bicep Curl 1",
+        "Tricep 1",
+      ];
+      addLifts(dayOneLifts);
+      break;
+
+    case "Day 2: Bench & Push":
+      const dayTwoLifts = [
+        "Bench",
+        "Farmer's Carry",
+        "Incline Press",
+        "Chest Isolation",
+        "Lateral Raise Variation",
+        "Tricep 1",
+      ];
+      addLifts(dayTwoLifts);
+      break;
+
+    case "Day 3: Deadlifts & Legs":
+      const dayThreeLifts = [
+        "Deadlift",
+        "Compound Leg Accesory",
+        "Quad Accessory",
+        "Hamstring Accessory",
+        "Calf Accessory",
+        "Non-Rotational Accessory",
+      ];
+      addLifts(dayThreeLifts);
+      break;
+    case "Day 4: Squats, Bench & Upper":
+      const dayFourLifts = [
+        "Squat",
+        "Bench",
+        "Vertical Pull 1",
+        "Horizontal Pull 1",
+        "Shoulder Press",
+        "Bicep Curl 1",
+        "Tricep 1",
+      ];
+      addLifts(dayFourLifts);
+      break;
+    case "Day 5: Deadlifts & Back":
+      const dayFiveLifts = [
+        "Deadlift",
+        "Vertical Pull 2",
+        "Horizontal Pull 2",
+        "Upper Back Accessory 1",
+        "Upper Back Accessory 2",
+        "Bicep Curl 1",
+        "Rotational Accessory",
+      ];
+      addLifts(dayFiveLifts);
+      break;
+  }
 
   // Get all days in specific training week
   const days = await TrainingDay.find({ _id: { $in: week.trainingDays } });
 
-  res.status(201).json(days);
+  res.json(days);
+
+  // res.status(201).json(days);
 });
 
 // @desc    Delete Training Day

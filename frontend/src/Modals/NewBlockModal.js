@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Form, Button, Badge } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { newBlock } from "../features/Training/TrainingSlice";
 
 const NewBlockModal = ({
@@ -20,6 +20,15 @@ const NewBlockModal = ({
 
   const { block, microBlock } = formData;
 
+  useEffect(() => {
+    if (formData.block === "Peak") {
+      setFormData((prevState) => ({
+        ...prevState,
+        microBlock: null,
+      }));
+    }
+  }, [formData.block]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -34,8 +43,6 @@ const NewBlockModal = ({
     setShowLiftPrompt(true);
   };
 
-  console.log(formData);
-
   return (
     <Modal show={showNewBlock} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">
@@ -48,18 +55,25 @@ const NewBlockModal = ({
             <option className="bg-white">Strength</option>
             <option className="bg-white">Peak</option>
           </Form.Select>
-          <Badge className="ms-3">i</Badge>
+          <Badge className="ms-3 mt-2">i</Badge>
           <label className="bg-none mb-3 ms-1 fs-small fw-bold fst-italic">
             Meso Block
           </label>
-          <Form.Select name="microBlock" value={microBlock} onChange={onChange}>
-            <option className="bg-white">Block A</option>
-            <option className="bg-white">Block B</option>
-          </Form.Select>
-          <Badge className="ms-3">i</Badge>
-          <label className="bg-none mb-2 ms-1 fs-small fw-bold fst-italic">
-            Micro Block
-          </label>
+          {formData.block !== "Peak" && (
+            <>
+              <Form.Select
+                name="microBlock"
+                value={microBlock}
+                onChange={onChange}>
+                <option className="bg-white">Block A</option>
+                <option className="bg-white">Block B</option>
+              </Form.Select>
+              <Badge className="ms-3 mt-2">i</Badge>
+              <label className="bg-none mb-2 ms-1 fs-small fw-bold fst-italic">
+                Micro Block
+              </label>
+            </>
+          )}
         </form>
       </Modal.Body>
       <Modal.Footer className="bg-white">

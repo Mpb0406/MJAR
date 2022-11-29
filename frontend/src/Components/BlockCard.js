@@ -13,21 +13,36 @@ import { Link } from "react-router-dom";
 import enterButton from "../img/enterButton.png";
 import DeleteBlockModal from "../Modals/DeleteBlockModal";
 import Moment from "react-moment";
+import { MdDelete, MdEdit } from "react-icons/md";
 
-const BlockCard = ({ block }) => {
+const BlockCard = ({ showLiftPrompt, setShowLiftPrompt, block }) => {
   const [show, setShow] = useState(false);
 
   const handleOpen = () => setShow(true);
 
+  const handleEditLifts = () => setShowLiftPrompt(true);
+
   const popover = (
-    <Popover id="delete-popover">
-      <Popover.Body className="bg-none py-0 px-0">
+    <Popover className="" id="delete-popover">
+      <div className="bg-none hover-background px-3">
+        <MdEdit className="bg-none fs-4" />
         <Button
+          className="fs-6 px-3 py-3 mb-0 cursor-pointer text-primary fw-bold text-decoration-none"
           variant="link"
-          onClick={handleOpen}
-          className="bg-none fs-6 px-5 py-3 mb-0 cursor-pointer text-secondary">
-          Delete
+          onClick={handleEditLifts}>
+          Edit Lifts
         </Button>
+      </div>
+      <Popover.Body className="bg-none p-1 d-flex flex-column">
+        <div className="bg-none hover-background px-3">
+          <MdDelete className="bg-none fs-4" />
+          <Button
+            variant="link"
+            onClick={handleOpen}
+            className="fs-6 px-3 py-3 mb-0 cursor-pointer text-primary fw-bold  text-decoration-none">
+            Delete
+          </Button>
+        </div>
       </Popover.Body>
     </Popover>
   );
@@ -37,7 +52,11 @@ const BlockCard = ({ block }) => {
       <Container>
         <Row>
           <Col xs={2} md={1} className="bg-info d-flex align-items-center">
-            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <OverlayTrigger
+              trigger="click"
+              rootClose
+              placement="right"
+              overlay={popover}>
               <h3 className="text-light bg-none ms-3 fs-2 cursor-pointer">⫶</h3>
             </OverlayTrigger>
           </Col>
@@ -45,18 +64,26 @@ const BlockCard = ({ block }) => {
             <Card.Body className="bg-info text-light ps-0">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between bg-info my-0">
                 <div className="d-flex bg-none">
-                  <h3 className="fs-3 hover-primary bg-info">{block.block}</h3>
-                  <Badge className="align-self-center ms-2 shadow-md">
-                    {block.microBlock}
-                  </Badge>
+                  <h6 className="fs-4 bg-info hover-primary">
+                    <Link
+                      to={`/training/${block._id}`}
+                      className="text-decoration-none bg-none text-light hover-primary">
+                      {block.block}
+                    </Link>
+                  </h6>
+                  <h6 className="bg-none d-flex align-items-end">
+                    <Badge className="ms-1 shadow-md fs-small">
+                      {block.microBlock}
+                    </Badge>
+                  </h6>
                 </div>
-                <h4 className="bg-info fs-6 text-sm-center">
+                <h4 className="bg-info fs-6 text-sm-center fw-normal">
                   <Moment className="bg-info" format="MM/DD/YY">
-                    {block.startDate}
+                    {block.createdAt}
                   </Moment>{" "}
                   -{" "}
                   <Moment className="bg-info" format="MM/DD/YY">
-                    {block.endDate}
+                    {block.updatedAt}
                   </Moment>
                 </h4>
                 <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${

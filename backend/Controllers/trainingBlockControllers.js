@@ -37,12 +37,14 @@ const createTrainingBlock = asyncHandler(async (req, res) => {
 const addBlockLift = asyncHandler(async (req, res) => {
   const block = await TrainingBlock.findById({ _id: req.params.blockId });
 
-  const { lift } = req.body;
+  const { lifts } = req.body;
 
-  block.lifts.push(lift);
+  block.lifts = lifts;
   await block.save();
 
-  res.send(block);
+  const allBlocks = await TrainingBlock.find({ user: req.user.id });
+
+  res.json(allBlocks);
 });
 
 // @desc    Delete a Training Block

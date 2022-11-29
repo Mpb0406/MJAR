@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Badge, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,14 +7,23 @@ import { StrengthADays } from "../Data/data";
 
 const NewDayModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
+  const { blockId } = useParams();
   const { weekId } = useParams();
 
   const handleClose = () => setShow(false);
 
   const [formData, setFormData] = useState({
-    day: "Day 1 - Squats & Bench",
+    day: StrengthADays[0].day,
+    notes: null,
   });
   const { day } = formData;
+
+  useEffect(() => {
+    setFormData((prevState) => ({
+      ...prevState,
+      notes: StrengthADays.filter((day) => day.day === formData.day)[0].notes,
+    }));
+  }, [formData.day, dispatch]);
 
   const onChange = (e) =>
     setFormData((prevState) => ({
@@ -22,9 +31,9 @@ const NewDayModal = ({ show, setShow }) => {
       [e.target.name]: e.target.value,
     }));
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(newDay([weekId, formData]));
+    dispatch(newDay([blockId, weekId, formData]));
     handleClose();
   };
 
@@ -47,7 +56,7 @@ const NewDayModal = ({ show, setShow }) => {
           <Badge bg="secondary" className="me-2">
             i
           </Badge>
-          {day.notes}
+          {formData.notes}
         </p>
       </Modal.Body>
       <Modal.Footer className="bg-white">

@@ -67,6 +67,10 @@
   font-size: 0.8rem;
 }
 
+span {
+  font-size: .25rem;
+}
+
 .card-img {
   height: 4rem;
   width: 3rem;
@@ -230,4 +234,11 @@
 .remove-arrows::-webkit-inner-spin-button,
 .remove-arrows::-webkit-outer-spin-button {
   -webkit-appearance: none;
+}
+
+
+.hover-background {
+  &:hover {
+    background-color: #ddd;
+  }
 }

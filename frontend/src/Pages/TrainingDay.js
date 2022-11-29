@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, CloseButton } from "react-bootstrap";
+import { Table, Button, CloseButton, Dropdown } from "react-bootstrap";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
 import DeleteSetModal from "../Modals/DeleteSetModal";
@@ -9,6 +9,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import deleteLiftButton from "../img/deleteLift.png";
+import { Link } from "react-router-dom";
 
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
@@ -34,7 +35,7 @@ const TrainingDay = () => {
     console.log(lift);
   };
 
-  const { weekId, dayId } = useParams();
+  const { blockId, weekId, dayId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -61,7 +62,23 @@ const TrainingDay = () => {
 
   return (
     <div className="mt-5 text-light">
-      <h1 className="pb-1">{day.day}</h1>
+      <Dropdown>
+        <Dropdown.Toggle
+          variant="dark"
+          className="bg-none d-flex align-items-center">
+          <h1 className="pb-1 pe-3 bg-none d-flex">{day.day}</h1>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu variant="dark" className="w-25">
+          <Dropdown.Item className="d-flex justify-content-center">
+            <Link
+              className="bg-none text-decoration-none text-light px-5 py-2"
+              to={`/training/${blockId}/${weekId}/${dayId}/overview`}>
+              Training Day Overview
+            </Link>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
 
       {day.lifts.length === 0 && (
         <h3 className="text-light text-center my-5">

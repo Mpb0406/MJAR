@@ -14,6 +14,7 @@ import TrainingDays from "./Pages/TrainingDays";
 import { Container } from "react-bootstrap";
 import TrainingDay from "./Pages/TrainingDay";
 import Home from "./Pages/Home";
+import TrainingDayOverview from "./Pages/TrainingDayOverview";
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
             <Route
               path="/training/:blockId/:weekId/:dayId"
               element={<TrainingDay />}
+            />
+            <Route
+              path="/training/:blockId/:weekId/:dayId/overview"
+              element={<TrainingDayOverview />}
             />
           </Routes>
         </Container>

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Form, Button, Badge } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { newWeek } from "../features/Training/TrainingSlice";
 import { useParams } from "react-router-dom";
-import { hypertrophyAWeeks } from "../Data/data";
+import { weekDetails } from "../Data/data";
 
 const NewWeekModal = ({ show, setShow, block }) => {
   const dispatch = useDispatch();
@@ -11,17 +11,37 @@ const NewWeekModal = ({ show, setShow, block }) => {
 
   const handleClose = () => setShow(false);
 
+  const [selectedWeek, setSelectedWeek] = useState(
+    weekDetails.hypertrophyAWeeks
+  );
   const [formData, setFormData] = useState({
-    week: hypertrophyAWeeks[0],
-    desc: null,
+    week: "Week 1",
+    desc: selectedWeek[0],
   });
-  const { week, desc } = formData;
+  const { week } = formData;
+
+  useEffect(() => {
+    if (block.block === "Hypertrophy") {
+      block.microBlock === "Block A"
+        ? setSelectedWeek(weekDetails.hypertrophyAWeeks)
+        : setSelectedWeek(weekDetails.hypertrophyBWeeks);
+    } else if (block.block === "Strength") {
+      block.microBlock === "Block A"
+        ? setSelectedWeek(weekDetails.strengthAWeeks)
+        : setSelectedWeek(weekDetails.strengthBWeeks);
+    }
+
+    setFormData((prevState) => ({
+      ...prevState,
+      desc: selectedWeek[0],
+    }));
+  }, [selectedWeek, block.block, block.microBlock]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-      desc: hypertrophyAWeeks.filter((week) => week.week === e.target.value),
+      desc: selectedWeek.filter((week) => week.week === e.target.value)[0],
     }));
   };
 
@@ -31,7 +51,7 @@ const NewWeekModal = ({ show, setShow, block }) => {
     handleClose();
   };
 
-  console.log(formData.desc);
+  console.log(block.block === "Strength");
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -41,7 +61,7 @@ const NewWeekModal = ({ show, setShow, block }) => {
       <Modal.Body className="bg-white">
         <form className="bg-white" onSubmit={onSubmit} id="weekForm">
           <Form.Select name="week" value={week} onChange={onChange}>
-            {hypertrophyAWeeks.map((week) => (
+            {selectedWeek.map((week) => (
               <option className="bg-white">{week.week}</option>
             ))}
           </Form.Select>
@@ -50,16 +70,7 @@ const NewWeekModal = ({ show, setShow, block }) => {
           <Badge bg="secondary" className="me-2">
             i
           </Badge>
-          {block.block === "Hypertrophy Block"
-            ? `Core lifts are performed to a top set at RPE ${
-                desc ? desc[0].rpe : 6
-              } with working sets at
-          ${
-            desc ? desc[0].percent : 75
-          }% of the top set. Accessories will have a rep range of ${
-                desc ? desc[0].acc : "12-15"
-              }`
-            : `Strength`}
+          {`Main lift performed to a top set at RPE ${formData.desc.rpe}. Back downs at ${formData.desc.percent}% of top set until RPE ${formData.desc.rpe}. Accessories performed with rep range ${formData.desc.acc}`}
         </p>
       </Modal.Body>
       <Modal.Footer className="bg-white">

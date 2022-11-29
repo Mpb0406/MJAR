@@ -48,6 +48,20 @@ const TrainingBlocks = () => {
     <div className="mt-5">
       <BlockLiftModal />
       <h3 className="fs-1 text-light">My Training Blocks</h3>
+
+      {blocks.length === 0 && (
+        <div className="mt-5">
+          <h3 className="text-light text-center">
+            Get started by adding a new Training Block
+          </h3>
+          <h3 className="text-light text-center fs-5">
+            You will be prompted to choose your lifts. These will be used to
+            autopopulate each training day. Set your lifts this way to ensure
+            better stat tracking
+          </h3>
+        </div>
+      )}
+
       <Container className="ps-0 mt-5">
         <div className="container-header d-flex justify-content-between align-items-center">
           <h4 className="fs-6 text-light ms-4 mb-0">Recent Blocks</h4>
@@ -60,7 +74,11 @@ const TrainingBlocks = () => {
         </div>
 
         {blocks.slice(0, truncateCards).map((block) => (
-          <BlockCard block={block} />
+          <BlockCard
+            showLiftPrompt={showLiftPrompt}
+            setShowLiftPrompt={setShowLiftPrompt}
+            block={block}
+          />
         ))}
       </Container>
       <Container className="d-flex justify-content-center mb-5">

@@ -57,11 +57,11 @@ export const newBlock = createAsyncThunk(
 
 // Add Lifts to Training Block
 export const addBlockLifts = createAsyncThunk(
-  "training/chooseLifts",
-  async (blockId, thunkAPI) => {
+  "training/addBlockLifts",
+  async ([blockId, liftsArray], thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await TrainingService.chooseLifts(token, blockId);
+      return await TrainingService.chooseLifts(token, blockId, liftsArray);
     } catch (error) {
       const message =
         (error.response &&
@@ -176,10 +176,10 @@ export const getDays = createAsyncThunk(
 // Add New Day
 export const newDay = createAsyncThunk(
   "training/newDay",
-  async ([weekId, formData], thunkAPI) => {
+  async ([blockId, weekId, formData], thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await TrainingService.newDay(token, weekId, formData);
+      return await TrainingService.newDay(token, blockId, weekId, formData);
     } catch (error) {
       const message =
         (error.response &&
@@ -358,6 +358,19 @@ export const trainingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.blocks = action.payload;
+      })
+      .addCase(addBlockLifts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addBlockLifts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.blocks = action.payload;
+      })
+      .addCase(addBlockLifts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(newWeek.pending, (state) => {
         state.isLoading = true;
