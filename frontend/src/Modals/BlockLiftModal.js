@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Form, Button, Badge } from "react-bootstrap";
-import { blockLiftsPrompts } from "../Data/data";
+import { blockLiftsPrompts } from "../Data/data.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addBlockLifts } from "../features/Training/TrainingSlice";
 
