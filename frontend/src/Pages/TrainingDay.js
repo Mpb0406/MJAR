@@ -65,11 +65,13 @@ const TrainingDay = () => {
       <Dropdown>
         <Dropdown.Toggle
           variant="dark"
-          className="bg-none d-flex align-items-center">
-          <h1 className="pb-1 pe-3 bg-none d-flex">{day.day}</h1>
+          className="bg-none d-flex align-items-center ps-0">
+          <h1 className="pb-1 pe-3 bg-none d-flex text-wrap text-align-start">
+            {day.day}
+          </h1>
         </Dropdown.Toggle>
 
-        <Dropdown.Menu variant="dark" className="w-25">
+        <Dropdown.Menu variant="dark" className="w-75">
           <Dropdown.Item className="d-flex justify-content-center">
             <Link
               className="bg-none text-decoration-none text-light px-5 py-2"
