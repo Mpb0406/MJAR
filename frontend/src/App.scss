@@ -247,3 +247,28 @@ span {
 .navbar-toggler-icon {
   font-size: 1rem
 }
+
+li > .nav-link {
+  color: #9d2e50;
+  font-weight: bold;
+
+  &:hover {
+    color: #1e2b3f;
+  }
+}
+
+button.accordion-button {
+  background-color: #1e2b3f;
+  color:#ddd;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+// button.accordion-button.collapsed::after {
+//   color: #ddd;
+//   background-color: #ddd;
+// }
+
+.accordion-toggle {
+  background-color: #1e2b3f;
+}
