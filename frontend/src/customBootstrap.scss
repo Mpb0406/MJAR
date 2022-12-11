@@ -4,9 +4,15 @@ $theme-colors: (
   "dark": #0f091b,
   "light": #ddd,
   "info": #2b2e33,
-  "danger": teal,
-  "input": #2c3034,
+  "success": #087706,
+  "danger": #A90000,
+  "input": #4D4D4D,
 );
+
+$colors: (
+  "green": rgba(19, 195, 0, 0.8)
+);
+
 $max-width: (
   "property": max-width,
   "class": mw,

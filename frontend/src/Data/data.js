@@ -163,3 +163,17 @@ export const weekDetails = {
     { week: "Deload", rpe: 7, percent: 70, acc: "12-15" },
   ],
 };
+
+// Conditionally Assign Class for Background Color on Badges for Set-Types
+export const setTypeClass = (setType) => {
+  switch (setType) {
+    case "Warm-Up":
+      return "bg-input";
+    case "Top Set":
+      return "bg-danger";
+    case "Working Set":
+      return "bg-success";
+    case "AMRAP":
+      return "bg-primary";
+  }
+};

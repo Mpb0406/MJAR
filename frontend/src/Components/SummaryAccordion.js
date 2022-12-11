@@ -15,16 +15,15 @@ const SummaryAccordion = ({ trainingDay }) => {
       lift.exercise !== "Deadlift"
   );
 
-  console.log(accessories);
   return (
     <div>
-      <Accordion className="mt-4" defaultActiveKey="0">
+      <Accordion className="mt-4" defaultActiveKey="0" alwaysOpen>
         <Accordion.Item eventKey="0">
-          <Accordion.Header className="bg-primary">Core Lifts</Accordion.Header>
-          <Accordion.Body className="bg-info text-light">
+          <Accordion.Header className="bg-info">Core Lifts</Accordion.Header>
+          <Accordion.Body className="bg-info text-light pb-2">
             {coreLifts.map((lift) => (
               <div className="bg-none d-flex justify-content-around">
-                <p className="bg-none mx-2 fw-bold fs-5 mb-4">
+                <p className="bg-none mx-2 fw-bold fs-5 mb-3">
                   {lift.exercise}
                 </p>
                 <div className="bg-none d-flex flex-column mx-2 mb-4">
@@ -32,7 +31,7 @@ const SummaryAccordion = ({ trainingDay }) => {
                     .filter((set) => set.setType !== "Warm-Up")
                     .map((set) => (
                       <p className="bg-none my-1">
-                        {set.weight}x{set.reps} @{set.rpe}
+                        {set.weight} × {set.reps} @{set.rpe}
                       </p>
                     ))}
                 </div>
@@ -48,17 +47,15 @@ const SummaryAccordion = ({ trainingDay }) => {
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
-          <Accordion.Header className="bg-primary">
-            Accessories
-          </Accordion.Header>
+          <Accordion.Header className="bg-info">Accessories</Accordion.Header>
           <Accordion.Body className="bg-info text-light">
             <div className="bg-none d-flex flex-wrap justify-content-between">
               {accessories.map((lift) => (
-                <div className="bg-none d-flex flex-column align-items-center w-50 mb-5">
+                <div className="bg-none d-flex flex-column align-items-center w-50 mb-3">
                   <p className="bg-none mx-1 fw-bold mb-2">{lift.exercise}</p>
                   {lift.sets.map((set) => (
                     <p className="bg-none my-1">
-                      {set.weight}x{set.reps}
+                      {set.weight} × {set.reps}
                     </p>
                   ))}
                 </div>

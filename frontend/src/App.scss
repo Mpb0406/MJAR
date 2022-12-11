@@ -272,3 +272,11 @@ button.accordion-button {
 .accordion-toggle {
   background-color: #1e2b3f;
 }
+
+.disable-clicks {
+  pointer-events: none;
+}
+
+#fill-tab-example-tab-Week {
+  padding: 0;
+}

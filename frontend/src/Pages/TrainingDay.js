@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, CloseButton, Dropdown } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  CloseButton,
+  Dropdown,
+  Tabs,
+  Tab,
+  Badge,
+} from "react-bootstrap";
+import { MdDelete, MdEdit } from "react-icons/md";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
 import DeleteSetModal from "../Modals/DeleteSetModal";
@@ -8,8 +17,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
-import deleteLiftButton from "../img/deleteLift.png";
 import { Link } from "react-router-dom";
+import { setTypeClass } from "../Data/data";
 
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
@@ -28,6 +37,7 @@ const TrainingDay = () => {
     setSet(e.target.id);
     setLift(e.target.getAttribute("name"));
     setShowDeleteSet(true);
+    console.log(e.target);
   };
   const handleOpenDeleteLift = (e) => {
     setLift(e.target.id);
@@ -39,7 +49,7 @@ const TrainingDay = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { days, isError, message, isLoading } = useSelector(
+  const { days, weeks, isError, message, isLoading } = useSelector(
     (state) => state.training
   );
   const day = days.filter((day) => day._id === dayId)[0];
@@ -59,6 +69,8 @@ const TrainingDay = () => {
   if (isLoading) {
     return <Loader />;
   }
+
+  console.log(weeks.slice(0, weeks.length - 1));
 
   return (
     <div className="mt-5 text-light">
@@ -88,70 +100,90 @@ const TrainingDay = () => {
         </h3>
       )}
 
-      {day.lifts.map((lift) => (
-        <>
-          <Table
-            striped
-            bordered
-            hover
-            variant="dark"
-            className="mt-5 mb-3 position-relative"
-            responsive="sm">
-            <thead>
-              <tr className="text-center">
-                <th className="fs-5" colSpan={6}>
-                  {lift.exercise}
-                  <CloseButton
-                    variant="white"
-                    className="bg-none ms-3 align-self-center"
-                    id={lift._id}
-                    onClick={(e) => handleOpenDeleteLift(e)}
-                  />
-                </th>
-              </tr>
-              <tr>
-                <th>Set</th>
-                <th>Weight</th>
-                <th>Reps</th>
-                <th>RPE</th>
-                <th>Type</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lift.sets.map((set, idx) => (
-                <tr style={{ cursor: "pointer" }}>
-                  <td>{idx + 1}</td>
-                  <td>{set.weight}</td>
-                  <td>{set.reps}</td>
-                  <td>{set.rpe === 5 ? "<6" : set.rpe}</td>
-                  <td>{set.setType}</td>
-                  <td>
-                    {
-                      <p
-                        className="bg-none mb-0 delete-set"
-                        name={lift._id}
-                        id={set._id}
-                        onClick={(e) => handleOpenDeleteSet(e)}>
-                        Delete
-                      </p>
-                    }
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-          <div className="d-grid w-75 m-auto gap-3 px-2 py-2">
-            <Button
-              variant="secondary"
-              className="mb-3"
-              id={lift._id}
-              onClick={(e) => handleOpenSet(e)}>
-              New Set
-            </Button>
-          </div>
-        </>
-      ))}
+      <Tabs
+        defaultActiveKey="today"
+        id="fill-tab-example"
+        className=" mx-auto"
+        fill
+        variant="pills">
+        {weeks.slice(0, weeks.length - 1).map((week, idx) => (
+          <Tab eventKey={week.week} title={`W${idx + 1}`}></Tab>
+        ))}
+
+        <Tab eventKey="today" title="Today">
+          {day.lifts.map((lift) => (
+            <>
+              <Table
+                striped
+                hover
+                variant="dark"
+                className="mt-4 mb-3 position-relative"
+                responsive="sm">
+                <thead>
+                  <tr className="text-center">
+                    <th className="fs-5" colSpan={8}>
+                      {lift.exercise}
+                      <CloseButton
+                        variant="white"
+                        className="bg-none ms-3 align-self-center"
+                        id={lift._id}
+                        onClick={(e) => handleOpenDeleteLift(e)}
+                      />
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Set</th>
+                    <th>Weight</th>
+                    <th>Reps</th>
+                    <th>RPE</th>
+                    <th>Type</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lift.sets.map((set, idx) => (
+                    <tr style={{ cursor: "pointer" }}>
+                      <td className="fw-bold">{idx + 1}</td>
+                      <td>{set.weight}</td>
+                      <td>{set.reps}</td>
+                      <td>{set.rpe === 5 ? "<6" : set.rpe}</td>
+                      <td className="px-1">
+                        <Badge className={setTypeClass(set.setType)}>
+                          {set.setType}
+                        </Badge>
+                      </td>
+                      <td>
+                        <MdEdit className="bg-none disable-clicks fs-2 text-secondary" />
+                      </td>
+                      <td>
+                        {
+                          <p
+                            className="bg-none mb-0 delete-set"
+                            name={lift._id}
+                            id={set._id}
+                            onClick={(e) => handleOpenDeleteSet(e)}>
+                            <MdDelete className="bg-none disable-clicks fs-2" />
+                          </p>
+                        }
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+              <div className="d-grid w-75 m-auto gap-3 px-2 py-2">
+                <Button
+                  variant="secondary"
+                  className="mb-3"
+                  id={lift._id}
+                  onClick={(e) => handleOpenSet(e)}>
+                  New Set
+                </Button>
+              </div>
+            </>
+          ))}
+        </Tab>
+      </Tabs>
 
       <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">
         <Button variant="primary" onClick={handleOpenLift}>
