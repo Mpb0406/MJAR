@@ -354,6 +354,30 @@ const deleteSet = asyncHandler(async (req, res) => {
   res.json(days);
 });
 
+// @desc    Get Training Day From Each Week in Block
+// @route   GET /api/training/:blockId/:weekId/:dayId
+// @access  Private
+const getSelectDays = asyncHandler(async (req, res) => {
+  const { dayType } = req.body;
+  let daysArray = [];
+  // Get Block
+  const block = await TrainingBlock.findById(req.params.blockId);
+  // Double For Loop - Loop through weeks in block - In each block loop through days - If day equals current day (pass in param) add to array - return array
+  let currentWeek;
+  for (i = 0; i < block.weeks.length; i++) {
+    currentWeek = await TrainingWeek.findById(block.weeks[i]);
+    let currentDay;
+    for (j = 0; j < currentWeek.trainingDays.length; j++) {
+      currentDay = await TrainingDay.findById(currentWeek.trainingDays[j]);
+      if (currentDay.day === dayType) {
+        daysArray.push(currentDay);
+      }
+    }
+  }
+
+  res.json(daysArray);
+});
+
 module.exports = {
   newTrainingDay,
   getMyTraining,
@@ -363,4 +387,5 @@ module.exports = {
   updateSet,
   deleteSet,
   deleteLift,
+  getSelectDays,
 };

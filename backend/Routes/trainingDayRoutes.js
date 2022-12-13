@@ -9,6 +9,7 @@ const {
   updateSet,
   deleteSet,
   deleteLift,
+  getSelectDays,
 } = require("../Controllers/trainingDayControllers");
 const { protect } = require("../Middleware/authMiddleware");
 
@@ -27,5 +28,7 @@ router.put("/:dayId/:liftId/:setId", protect, updateSet);
 router.delete("/:weekId/:dayId/:liftId/:setId", protect, deleteSet);
 
 router.delete("/:weekId/:dayId/:liftId", protect, deleteLift);
+
+router.get("/:blockId/:weekId/:dayId", protect, getSelectDays);
 
 module.exports = router;

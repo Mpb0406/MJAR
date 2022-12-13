@@ -153,13 +153,15 @@ const TrainingDay = () => {
                           {set.setType}
                         </Badge>
                       </td>
-                      <td>
-                        <MdEdit className="bg-none disable-clicks fs-2 text-secondary" />
+                      <td className="w-auto">
+                        <p className="bg-none mb-0 delete-set w-auto">
+                          <MdEdit className="bg-none disable-clicks fs-2" />
+                        </p>
                       </td>
-                      <td>
+                      <td className="w-auto">
                         {
                           <p
-                            className="bg-none mb-0 delete-set"
+                            className="bg-none mb-0 delete-set w-auto"
                             name={lift._id}
                             id={set._id}
                             onClick={(e) => handleOpenDeleteSet(e)}>
