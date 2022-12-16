@@ -4,11 +4,13 @@ import TrainingService from "./TrainingService";
 const blocks = JSON.parse(localStorage.getItem("blocks"));
 const weeks = JSON.parse(localStorage.getItem("weeks"));
 const days = JSON.parse(localStorage.getItem("days"));
+const history = JSON.parse(localStorage.getItem("history"));
 
 const initialState = {
   blocks: blocks ? blocks : [],
   weeks: weeks ? weeks : [],
   days: days ? days : [],
+  history: history ? history : [],
   isLoading: false,
   isSuccess: false,
   isError: true,
@@ -299,6 +301,25 @@ export const deleteDay = createAsyncThunk(
   }
 );
 
+// Get Training Day From All Weeks in a Block
+export const getSelectDays = createAsyncThunk(
+  "training/getSelectDays",
+  async ([dayDesc, blockId], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.getSelectDays(token, dayDesc, blockId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const trainingSlice = createSlice({
   name: "training",
   initialState,
@@ -347,6 +368,19 @@ export const trainingSlice = createSlice({
         state.days = action.payload;
       })
       .addCase(getDays.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getSelectDays.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSelectDays.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.history = action.payload;
+      })
+      .addCase(getSelectDays.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

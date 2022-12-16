@@ -29,6 +29,6 @@ router.delete("/:weekId/:dayId/:liftId/:setId", protect, deleteSet);
 
 router.delete("/:weekId/:dayId/:liftId", protect, deleteLift);
 
-router.get("/:blockId/:weekId/:dayId", protect, getSelectDays);
+router.post("/:blockId", protect, getSelectDays);
 
 module.exports = router;

@@ -24,22 +24,22 @@ const BlockCard = ({ showLiftPrompt, setShowLiftPrompt, block }) => {
 
   const popover = (
     <Popover className="" id="delete-popover">
-      <div className="bg-none hover-background px-3">
-        <MdEdit className="bg-none fs-4" />
-        <Button
-          className="fs-6 px-3 py-3 mb-0 cursor-pointer text-primary fw-bold text-decoration-none"
-          variant="link"
-          onClick={handleEditLifts}>
-          Edit Lifts
-        </Button>
-      </div>
       <Popover.Body className="bg-none p-1 d-flex flex-column">
+        <div className="bg-none hover-background px-3">
+          <MdEdit className="bg-none fs-4" />
+          <Button
+            className="fs-6 px-3 py-3 mb-0 cursor-pointer text-primary fw-bold text-decoration-none"
+            variant="link"
+            onClick={handleEditLifts}>
+            Edit Lifts
+          </Button>
+        </div>
         <div className="bg-none hover-background px-3">
           <MdDelete className="bg-none fs-4" />
           <Button
             variant="link"
             onClick={handleOpen}
-            className="fs-6 px-3 py-3 mb-0 cursor-pointer text-primary fw-bold  text-decoration-none">
+            className="fs-6 px-3 py-3 mb-0 cursor-pointer text-primary fw-bold text-decoration-none">
             Delete
           </Button>
         </div>

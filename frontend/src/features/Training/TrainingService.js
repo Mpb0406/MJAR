@@ -25,6 +25,7 @@ const newBlock = async (token, formData) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
   const response = await axios.post("/api/trainingblocks/", formData, config);
 
   return response.data;
@@ -200,6 +201,7 @@ const deleteSet = async (token, weekId, dayId, liftId, setId) => {
   return response.data;
 };
 
+// Delete Lift From Training Day
 const deleteLift = async (token, weekId, dayId, liftId) => {
   const config = {
     headers: {
@@ -230,6 +232,23 @@ const deleteDay = async (token, weekId, dayId) => {
   return response.data;
 };
 
+// Get Specific Day From All Weeks in a Block
+const getSelectDays = async (token, dayDesc, blockId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  console.log(dayDesc);
+  const response = await axios.post(
+    `/api/training/${blockId}`,
+    dayDesc,
+    config
+  );
+
+  return response.data;
+};
+
 const TrainingService = {
   getBlocks,
   getWeeks,
@@ -245,6 +264,7 @@ const TrainingService = {
   deleteDay,
   deleteWeek,
   deleteBlock,
+  getSelectDays,
 };
 
 export default TrainingService;

@@ -15,10 +15,12 @@ import DeleteSetModal from "../Modals/DeleteSetModal";
 import DeleteLiftModal from "../Modals/DeleteLiftModal";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { getDays } from "../features/Training/TrainingSlice";
+import { getDays, getSelectDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import { Link } from "react-router-dom";
 import { setTypeClass } from "../Data/data";
+import Moment from "react-moment";
+import PreviousDayTable from "../Components/PreviousDayTable";
 
 const TrainingDay = () => {
   const [showLift, setShowLift] = useState(false);
@@ -49,10 +51,11 @@ const TrainingDay = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { days, weeks, isError, message, isLoading } = useSelector(
+  const { days, weeks, history, isError, message, isLoading } = useSelector(
     (state) => state.training
   );
   const day = days.filter((day) => day._id === dayId)[0];
+  const daysArr = ["One", "Two", "Three", "Four", "Five", "Six"];
 
   useEffect(() => {
     if (isError) {
@@ -64,13 +67,14 @@ const TrainingDay = () => {
     }
 
     dispatch(getDays(weekId));
+    dispatch(getSelectDays([{ dayType: day.day }, blockId]));
   }, [dispatch, isError, message, user, navigate, lift, set]);
 
   if (isLoading) {
     return <Loader />;
   }
 
-  console.log(weeks.slice(0, weeks.length - 1));
+  // console.log({ dayType: day.day });
 
   return (
     <div className="mt-5 text-light">
@@ -106,8 +110,17 @@ const TrainingDay = () => {
         className=" mx-auto"
         fill
         variant="pills">
-        {weeks.slice(0, weeks.length - 1).map((week, idx) => (
-          <Tab eventKey={week.week} title={`W${idx + 1}`}></Tab>
+        {history.slice(0, history.length - 1).map((day, idx) => (
+          <Tab eventKey={idx} title={`W${idx + 1}`}>
+            <>
+              <h1>
+                <Moment format="MM/DD/YY" day>
+                  {day.createdAt}
+                </Moment>
+              </h1>
+              <PreviousDayTable />
+            </>
+          </Tab>
         ))}
 
         <Tab eventKey="today" title="Today">
@@ -184,14 +197,14 @@ const TrainingDay = () => {
               </div>
             </>
           ))}
+
+          <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">
+            <Button variant="primary" onClick={handleOpenLift}>
+              Add Lift
+            </Button>
+          </div>
         </Tab>
       </Tabs>
-
-      <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">
-        <Button variant="primary" onClick={handleOpenLift}>
-          Add Lift
-        </Button>
-      </div>
 
       <NewSetModal show={showSet} setShow={setShowSet} liftId={lift} />
       <NewLiftModal show={showLift} setShow={setShowLift} />
