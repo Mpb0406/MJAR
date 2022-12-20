@@ -1,51 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-  Table,
-  Button,
-  CloseButton,
-  Dropdown,
-  Tabs,
-  Tab,
-  Badge,
-} from "react-bootstrap";
-import { MdDelete, MdEdit } from "react-icons/md";
-import NewLiftModal from "../Modals/NewLiftModal";
-import NewSetModal from "../Modals/NewSetModal";
-import DeleteSetModal from "../Modals/DeleteSetModal";
-import DeleteLiftModal from "../Modals/DeleteLiftModal";
+import { Dropdown, Tabs, Tab } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays, getSelectDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import { Link } from "react-router-dom";
-import { setTypeClass } from "../Data/data";
 import Moment from "react-moment";
-import PreviousDayTable from "../Components/PreviousDayTable";
+import LiftTable from "../Components/LiftTable";
 
 const TrainingDay = () => {
-  const [showLift, setShowLift] = useState(false);
-  const [lift, setLift] = useState(null);
-  const [set, setSet] = useState(null);
-  const [showSet, setShowSet] = useState(false);
-  const [showDeleteSet, setShowDeleteSet] = useState(false);
-  const [showDeleteLift, setShowDeleteLift] = useState(false);
-
-  const handleOpenLift = () => setShowLift(true);
-  const handleOpenSet = (e) => {
-    setLift(e.target.id);
-    setShowSet(true);
-  };
-  const handleOpenDeleteSet = (e) => {
-    setSet(e.target.id);
-    setLift(e.target.getAttribute("name"));
-    setShowDeleteSet(true);
-    console.log(e.target);
-  };
-  const handleOpenDeleteLift = (e) => {
-    setLift(e.target.id);
-    setShowDeleteLift(true);
-    console.log(lift);
-  };
+  const [activeTab, setActiveTab] = useState("");
+  const [triggerReload, setTriggerReload] = useState(false);
 
   const { blockId, weekId, dayId } = useParams();
   const dispatch = useDispatch();
@@ -55,7 +20,6 @@ const TrainingDay = () => {
     (state) => state.training
   );
   const day = days.filter((day) => day._id === dayId)[0];
-  const daysArr = ["One", "Two", "Three", "Four", "Five", "Six"];
 
   useEffect(() => {
     if (isError) {
@@ -66,15 +30,22 @@ const TrainingDay = () => {
       navigate("/login");
     }
 
+    setActiveTab(
+      weeks
+        .map((week) => week.trainingDays)
+        .map((day) => day.includes(dayId))
+        .indexOf(true)
+    );
+
     dispatch(getDays(weekId));
     dispatch(getSelectDays([{ dayType: day.day }, blockId]));
-  }, [dispatch, isError, message, user, navigate, lift, set]);
+  }, [dispatch, isError, message, user, navigate, weeks, dayId, triggerReload]);
 
   if (isLoading) {
     return <Loader />;
   }
 
-  // console.log({ dayType: day.day });
+  console.log(activeTab);
 
   return (
     <div className="mt-5 text-light">
@@ -105,12 +76,12 @@ const TrainingDay = () => {
       )}
 
       <Tabs
-        defaultActiveKey="today"
+        defaultActiveKey={activeTab}
         id="fill-tab-example"
         className=" mx-auto"
         fill
         variant="pills">
-        {history.slice(0, history.length - 1).map((day, idx) => (
+        {history.map((day, idx) => (
           <Tab eventKey={idx} title={`W${idx + 1}`}>
             <>
               <h1>
@@ -118,12 +89,16 @@ const TrainingDay = () => {
                   {day.createdAt}
                 </Moment>
               </h1>
-              <PreviousDayTable />
+              <LiftTable
+                day={day}
+                setTriggerReload={setTriggerReload}
+                triggerReload={triggerReload}
+              />
             </>
           </Tab>
         ))}
 
-        <Tab eventKey="today" title="Today">
+        {/* <Tab eventKey="today" title="Today">
           {day.lifts.map((lift) => (
             <>
               <Table
@@ -203,26 +178,8 @@ const TrainingDay = () => {
               Add Lift
             </Button>
           </div>
-        </Tab>
+        </Tab> */}
       </Tabs>
-
-      <NewSetModal show={showSet} setShow={setShowSet} liftId={lift} />
-      <NewLiftModal show={showLift} setShow={setShowLift} />
-      <DeleteSetModal
-        show={showDeleteSet}
-        setShow={setShowDeleteSet}
-        setId={set}
-        liftId={lift}
-        dayId={dayId}
-        weekId={weekId}
-      />
-      <DeleteLiftModal
-        show={showDeleteLift}
-        setShow={setShowDeleteLift}
-        weekId={weekId}
-        dayId={dayId}
-        liftId={lift}
-      />
     </div>
   );
 };

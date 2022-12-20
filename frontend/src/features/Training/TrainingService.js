@@ -239,7 +239,7 @@ const getSelectDays = async (token, dayDesc, blockId) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  console.log(dayDesc);
+
   const response = await axios.post(
     `/api/training/${blockId}`,
     dayDesc,

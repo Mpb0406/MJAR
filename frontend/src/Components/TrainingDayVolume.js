@@ -66,11 +66,11 @@ const TrainingDayVolume = ({ trainingDay }) => {
       <div className="bg-none mt-4 d-flex flex-column">
         <div className="bg-none d-flex justify-content-around gap-1 border-bottom border-white">
           <div className="d-flex flex-column align-items-center">
-            <p className="text-light mb-1">{`Total ${selectedLift} Volume`}</p>
+            <p className="text-light mb-1 fs-small fw-bold">{`Total ${selectedLift} Volume`}</p>
             <h3 className="text-light">{liftVolume} lbs</h3>
           </div>
           <div className="d-flex flex-column align-items-center">
-            <p className="text-light mb-1">
+            <p className="text-light mb-1 fs-small fw-bold">
               {`Best ${selectedLift} Volume`}
               <OverlayTrigger
                 placement="top"
@@ -86,13 +86,13 @@ const TrainingDayVolume = ({ trainingDay }) => {
         </div>
         <div className="bg-none d-flex justify-content-around gap-1 mt-3">
           <div className="d-flex flex-column align-items-center">
-            <p className="text-light mb-1">Top Set</p>
+            <p className="text-light mb-1 fs-small fw-bold">Top Set</p>
             <h3 className="text-light">
               {topSet.weight}×{topSet.reps} @{topSet.rpe}
             </h3>
           </div>
           <div className="d-flex flex-column align-items-center">
-            <p className="text-light mb-1">
+            <p className="text-light mb-1 fs-small fw-bold">
               {`Current ${topSet.reps}RM`}
               <OverlayTrigger
                 placement="top"

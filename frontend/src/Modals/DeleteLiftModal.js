@@ -3,7 +3,15 @@ import { Modal, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteLift } from "../features/Training/TrainingSlice";
 
-const DeleteLiftModal = ({ show, setShow, weekId, dayId, liftId }) => {
+const DeleteLiftModal = ({
+  show,
+  setShow,
+  weekId,
+  dayId,
+  liftId,
+  setTriggerReload,
+  triggerReload,
+}) => {
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -13,6 +21,7 @@ const DeleteLiftModal = ({ show, setShow, weekId, dayId, liftId }) => {
   const liftDelete = () => {
     dispatch(deleteLift([weekId, dayId, liftId]));
     handleClose();
+    setTriggerReload(!triggerReload);
   };
 
   return (

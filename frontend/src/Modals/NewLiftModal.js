@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { newLift } from "../features/Training/TrainingSlice";
 
-const NewLiftModal = ({ show, setShow }) => {
+const NewLiftModal = ({ show, setShow, triggerReload, setTriggerReload }) => {
   const dispatch = useDispatch();
   const { weekId, dayId } = useParams();
 
@@ -47,6 +47,7 @@ const NewLiftModal = ({ show, setShow }) => {
     e.preventDefault();
     dispatch(newLift([weekId, dayId, formData]));
     handleClose();
+    setTriggerReload(!triggerReload);
   };
 
   return (

@@ -4,7 +4,13 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { newSet } from "../features/Training/TrainingSlice";
 
-const NewSetModal = ({ show, setShow, liftId }) => {
+const NewSetModal = ({
+  show,
+  setShow,
+  liftId,
+  triggerReload,
+  setTriggerReload,
+}) => {
   const dispatch = useDispatch();
   const { weekId, dayId } = useParams();
 
@@ -31,6 +37,7 @@ const NewSetModal = ({ show, setShow, liftId }) => {
     e.preventDefault();
     dispatch(newSet([weekId, dayId, liftId, formData]));
     handleClose();
+    setTriggerReload(!triggerReload);
   };
 
   return (
