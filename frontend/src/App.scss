@@ -280,3 +280,12 @@ button.accordion-button {
 #fill-tab-example-tab-Week {
   padding: 0;
 }
+
+// Breadcrumb Text Color
+.breadcrumb-item > a {
+  color: #ddd;
+  text-decoration: none;
+  &:hover {
+    color: #9d2e50
+  }
+}
