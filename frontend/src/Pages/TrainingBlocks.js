@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BlockCard from "../Components/BlockCard";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Breadcrumb } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getBlocks } from "../features/Training/TrainingSlice";
@@ -47,6 +47,11 @@ const TrainingBlocks = () => {
   return (
     <div className="mt-5">
       <BlockLiftModal />
+      <Breadcrumb>
+        <Breadcrumb.Item href="#" active>
+          Blocks
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <h3 className="fs-1 text-light">My Training Blocks</h3>
 
       {blocks.length === 0 && (
@@ -62,7 +67,7 @@ const TrainingBlocks = () => {
         </div>
       )}
 
-      <Container className="ps-0 mt-5">
+      <Container className="px-0 mt-5">
         <div className="container-header d-flex justify-content-between align-items-center">
           <h4 className="fs-6 text-light ms-4 mb-0">Recent Blocks</h4>
           <button

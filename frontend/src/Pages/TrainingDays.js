@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Breadcrumb } from "react-bootstrap";
 import DayCard from "../Components/DayCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,7 +16,7 @@ const TrainingDays = () => {
   const { blockId, weekId } = useParams();
 
   const { user } = useSelector((state) => state.auth);
-  const { isError, message, isLoading, days, weeks } = useSelector(
+  const { isError, message, isLoading, days, weeks, blocks } = useSelector(
     (state) => state.training
   );
 
@@ -46,14 +46,29 @@ const TrainingDays = () => {
     return <Loader />;
   }
 
+  console.log(blocks.filter((block) => block._id === blockId)[0].block);
+
   return (
     <div className="mt-5">
+      <Breadcrumb>
+        <Breadcrumb.Item
+          className="text-light text-decoration-none"
+          href="/training">
+          My Training
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href={`/training/${blockId}`}>
+          {blocks.filter((block) => block._id === blockId)[0].block}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="#" active>
+          {week.week}
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <h3 className="fs-1 text-light">{week.week}</h3>
       <h4 className="text-light fs-4 mb-4">
         <Moment format="MM/DD/YY">{week.createdAt}</Moment> {" - "}
         <Moment format="MM/DD/YY">{week.updatedAt}</Moment>
       </h4>
-      <Container fluid="lg" className="mt-4 ps-0">
+      <Container fluid="lg" className="mt-4 px-0">
         {days.length === 0 && (
           <h3 className="text-light text-center">
             You don't have any days logged yet, bro. <br /> Not Good.
@@ -61,7 +76,7 @@ const TrainingDays = () => {
         )}
 
         {days.map((day) => (
-          <Container className="mt-4 ps-0">
+          <Container className="mt-4 px-0">
             <DayCard
               name={day.day}
               lifts={day.lifts}

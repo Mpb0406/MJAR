@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown, Tabs, Tab } from "react-bootstrap";
+import { Dropdown, Tabs, Tab, Breadcrumb } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays, getSelectDays } from "../features/Training/TrainingSlice";
@@ -16,9 +16,8 @@ const TrainingDay = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { days, weeks, history, isError, message, isLoading } = useSelector(
-    (state) => state.training
-  );
+  const { days, weeks, blocks, history, isError, message, isLoading } =
+    useSelector((state) => state.training);
   const day = days.filter((day) => day._id === dayId)[0];
 
   useEffect(() => {
@@ -45,10 +44,22 @@ const TrainingDay = () => {
     return <Loader />;
   }
 
-  console.log(activeTab);
+  console.log(weeks.filter((week) => week._id === weekId)[0].week);
 
   return (
     <div className="mt-5 text-light">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/training">My Training</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/training/${blockId}`}>
+          {blocks.filter((block) => block._id === blockId)[0].block}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href={`/training/${blockId}/${weekId}`}>
+          {weeks.filter((week) => week._id === weekId)[0].week}
+        </Breadcrumb.Item>
+        <Breadcrumb.Item href="#" active>
+          {day.day.split(":")[0]}
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <Dropdown>
         <Dropdown.Toggle
           variant="dark"

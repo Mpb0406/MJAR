@@ -23,7 +23,6 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
     setLift(e.target.id);
     setShowSet(true);
   };
-
   const handleOpenDeleteSet = (e) => {
     setSet(e.target.id);
     setLift(e.target.getAttribute("name"));
@@ -36,7 +35,6 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
     console.log(e.target);
   };
 
-  // console.log(dayId);
   return (
     <>
       {day.lifts.map((lift) => (
@@ -87,7 +85,6 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
                       {set.setType}
                     </Badge>
                   </td>
-
                   {dayId === day._id && (
                     <>
                       <td className="w-auto">
@@ -125,7 +122,6 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
           )}
         </>
       ))}
-
       {dayId === day._id && (
         <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">
           <Button variant="primary" onClick={handleOpenLift}>

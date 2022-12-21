@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Breadcrumb } from "react-bootstrap";
 import WeekCard from "../Components/WeekCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,6 +43,12 @@ const Block = () => {
 
   return (
     <div className="mt-5">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/training">My Training</Breadcrumb.Item>
+        <Breadcrumb.Item href="#" active>
+          {block.block}
+        </Breadcrumb.Item>
+      </Breadcrumb>
       <h3 className="fs-1 text-light">{block.block}</h3>
       <h4 className="text-light fs-4 mb-4">
         <Moment format="MM/DD/YY">
@@ -60,7 +66,7 @@ const Block = () => {
         </h3>
       )}
 
-      <Container fluid="lg" className="mt-4 ps-0">
+      <Container fluid="lg" className="mt-4 px-0">
         {weeks.map((week) => (
           <WeekCard
             name={week.week}
