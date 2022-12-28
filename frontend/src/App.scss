@@ -249,11 +249,11 @@ span {
 }
 
 li > .nav-link {
-  color: #9d2e50;
+  color: #ddd;
   font-weight: bold;
 
   &:hover {
-    color: #1e2b3f;
+    color: #9d2e50;
   }
 }
 
@@ -288,4 +288,13 @@ button.accordion-button {
   &:hover {
     color: #9d2e50
   }
+}
+
+.nav-item > button {
+  padding: 0.5rem 0.25rem;
+  font-size: 0.9rem;
+}
+
+.nav-link.active{
+  background: #d03057 !important
 }

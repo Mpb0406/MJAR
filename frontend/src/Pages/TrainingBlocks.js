@@ -47,11 +47,7 @@ const TrainingBlocks = () => {
   return (
     <div className="mt-5">
       <BlockLiftModal />
-      <Breadcrumb>
-        <Breadcrumb.Item href="#" active>
-          Blocks
-        </Breadcrumb.Item>
-      </Breadcrumb>
+
       <h3 className="fs-1 text-light">My Training Blocks</h3>
 
       {blocks.length === 0 && (

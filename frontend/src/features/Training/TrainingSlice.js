@@ -238,6 +238,32 @@ export const newSet = createAsyncThunk(
   }
 );
 
+// Edit Set In a Lift
+export const editSet = createAsyncThunk(
+  "training/editSet",
+  async ([weekId, dayId, liftId, setId, formData], thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await TrainingService.editSet(
+        token,
+        weekId,
+        dayId,
+        liftId,
+        setId,
+        formData
+      );
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Delete Set From a Lift
 export const deleteSet = createAsyncThunk(
   "training/deleteSet",
@@ -454,6 +480,19 @@ export const trainingSlice = createSlice({
         state.days = action.payload;
       })
       .addCase(newSet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(editSet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editSet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.days = action.payload;
+      })
+      .addCase(editSet.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

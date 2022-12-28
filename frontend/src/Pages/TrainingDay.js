@@ -43,11 +43,12 @@ const TrainingDay = () => {
   if (isLoading) {
     return <Loader />;
   }
+  const weekNames = ["Week 1", "Week 2", "Week 3", "Week 4", "Deload"];
 
   console.log(weeks.filter((week) => week._id === weekId)[0].week);
 
   return (
-    <div className="mt-5 text-light">
+    <div className="mt-4 pt-3 text-light">
       <Breadcrumb>
         <Breadcrumb.Item href="/training">My Training</Breadcrumb.Item>
         <Breadcrumb.Item href={`/training/${blockId}`}>
@@ -89,17 +90,17 @@ const TrainingDay = () => {
       <Tabs
         defaultActiveKey={activeTab}
         id="fill-tab-example"
-        className=" mx-auto"
+        className=" mx-auto mt-2"
         fill
         variant="pills">
         {history.map((day, idx) => (
-          <Tab eventKey={idx} title={`W${idx + 1}`}>
+          <Tab eventKey={idx} title={weekNames[idx]}>
             <>
-              <h1>
-                <Moment format="MM/DD/YY" day>
+              {/* <h3 className="bg-none mt-4 text-center text-input">
+                <Moment className="bg-none" format="MM/DD/YY" day>
                   {day.createdAt}
                 </Moment>
-              </h1>
+              </h3> */}
               <LiftTable
                 day={day}
                 setTriggerReload={setTriggerReload}

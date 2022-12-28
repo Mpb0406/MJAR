@@ -1,27 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Table, CloseButton, Badge, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { setTypeClass } from "../Data/data";
 import { MdDelete, MdEdit } from "react-icons/md";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
 import DeleteSetModal from "../Modals/DeleteSetModal";
 import DeleteLiftModal from "../Modals/DeleteLiftModal";
+import EditSetModal from "../Modals/EditSetModal";
 
 const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
   const { dayId, weekId } = useParams();
+  const { days } = useSelector((state) => state.training);
 
   const [showLift, setShowLift] = useState(false);
   const [showSet, setShowSet] = useState(false);
+  const [showEditSet, setShowEditSet] = useState(false);
   const [showDeleteSet, setShowDeleteSet] = useState(false);
   const [showDeleteLift, setShowDeleteLift] = useState(false);
   const [lift, setLift] = useState(null);
   const [set, setSet] = useState(null);
+  const [setData, setSetData] = useState({});
 
   const handleOpenLift = () => setShowLift(true);
   const handleOpenSet = (e) => {
     setLift(e.target.id);
     setShowSet(true);
+  };
+  const handleOpenEditSet = (e) => {
+    setLift(e.target.getAttribute("name"));
+    setSet(e.target.id);
+    setSetData(
+      days
+        .filter((day) => day._id === dayId)[0]
+        .lifts.filter((lift) => lift._id === e.target.getAttribute("name"))[0]
+        .sets.filter((set) => set._id === e.target.id)[0]
+    );
+    setShowEditSet(true);
   };
   const handleOpenDeleteSet = (e) => {
     setSet(e.target.id);
@@ -34,6 +50,7 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
     setShowDeleteLift(true);
     console.log(e.target);
   };
+  // console.log(set);
 
   return (
     <>
@@ -60,39 +77,46 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
                 </th>
               </tr>
               <tr>
-                <th>Set</th>
-                <th>Weight</th>
-                <th>Reps</th>
-                <th>RPE</th>
-                <th>Type</th>
+                <th className="text-center">Set</th>
+                <th className="text-end">Weight</th>
+                <th className="text-start">Reps</th>
+                <th className="text-center">RPE</th>
+                <th className="text-center">Type</th>
                 {dayId === day._id && (
                   <>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th className="text-center">Edit</th>
+                    <th className="text-center">Delete</th>
                   </>
                 )}
               </tr>
             </thead>
             <tbody>
               {lift.sets.map((set, idx) => (
-                <tr style={{ cursor: "pointer" }}>
-                  <td className="fw-bold">{idx + 1}</td>
-                  <td>{set.weight}</td>
+                <tr className="text-align-center" style={{ cursor: "pointer" }}>
+                  <td className="fw-bold text-center">{idx + 1}</td>
+                  <td className="text-end">{set.weight} ×</td>
                   <td>{set.reps}</td>
-                  <td>{set.rpe === 5 ? "<6" : set.rpe}</td>
-                  <td className="px-1">
+                  <td className="text-center">
+                    {set.rpe && "@"}
+                    {set.rpe === 5 ? "<6" : set.rpe}
+                  </td>
+                  <td className="px-1 text-center">
                     <Badge className={setTypeClass(set.setType)}>
                       {set.setType}
                     </Badge>
                   </td>
                   {dayId === day._id && (
                     <>
-                      <td className="w-auto">
-                        <p className="bg-none mb-0 delete-set w-auto">
+                      <td className="w-auto text-center">
+                        <p
+                          className="bg-none mb-0 delete-set w-auto"
+                          name={lift._id}
+                          id={set._id}
+                          onClick={(e) => handleOpenEditSet(e)}>
                           <MdEdit className="bg-none disable-clicks fs-2" />
                         </p>
                       </td>
-                      <td className="w-auto">
+                      <td className="w-auto text-center">
                         {
                           <p
                             className="bg-none mb-0 delete-set w-auto"
@@ -140,6 +164,15 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
         show={showSet}
         setShow={setShowSet}
         liftId={lift}
+        setTriggerReload={setTriggerReload}
+        triggerReload={triggerReload}
+      />
+      <EditSetModal
+        show={showEditSet}
+        setShow={setShowEditSet}
+        setData={setData}
+        set={set}
+        lift={lift}
         setTriggerReload={setTriggerReload}
         triggerReload={triggerReload}
       />

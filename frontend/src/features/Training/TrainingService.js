@@ -186,6 +186,24 @@ const newSet = async (token, weekId, dayId, liftId, formData) => {
   return response.data;
 };
 
+// Edit a Set
+const editSet = async (token, weekId, dayId, liftId, setId, formData) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.put(
+    `/api/training/${weekId}/${dayId}/${liftId}/${setId}`,
+    formData,
+    config
+  );
+
+  return response.data;
+};
+
+// Delete A Set
 const deleteSet = async (token, weekId, dayId, liftId, setId) => {
   const config = {
     headers: {
@@ -259,6 +277,7 @@ const TrainingService = {
   newDay,
   newLift,
   newSet,
+  editSet,
   deleteSet,
   deleteLift,
   deleteDay,

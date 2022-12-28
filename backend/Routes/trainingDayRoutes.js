@@ -23,7 +23,7 @@ router.delete("/:weekId/:dayId", protect, deleteTrainingDay);
 
 router.post("/:weekId/:dayId/:liftId", protect, addNewSet);
 
-router.put("/:dayId/:liftId/:setId", protect, updateSet);
+router.put("/:weekId/:dayId/:liftId/:setId", protect, updateSet);
 
 router.delete("/:weekId/:dayId/:liftId/:setId", protect, deleteSet);
 
