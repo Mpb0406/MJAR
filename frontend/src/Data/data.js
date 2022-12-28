@@ -168,12 +168,12 @@ export const weekDetails = {
 export const setTypeClass = (setType) => {
   switch (setType) {
     case "Warm-Up":
-      return "bg-input";
+      return "input";
     case "Top Set":
-      return "bg-danger";
+      return "danger";
     case "Working Set":
-      return "bg-success";
+      return "success";
     case "AMRAP":
-      return "bg-primary";
+      return "primary";
   }
 };

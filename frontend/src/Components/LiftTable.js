@@ -101,9 +101,7 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
                     {set.rpe === 5 ? "<6" : set.rpe}
                   </td>
                   <td className="px-1 text-center">
-                    <Badge className={setTypeClass(set.setType)}>
-                      {set.setType}
-                    </Badge>
+                    <Badge bg={setTypeClass(set.setType)}>{set.setType}</Badge>
                   </td>
                   {dayId === day._id && (
                     <>
