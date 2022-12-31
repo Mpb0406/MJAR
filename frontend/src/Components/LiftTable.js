@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Table, CloseButton, Badge, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { newSet } from "../features/Training/TrainingSlice";
 import { setTypeClass } from "../Data/data";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdContentCopy } from "react-icons/md";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
 import DeleteSetModal from "../Modals/DeleteSetModal";
@@ -13,6 +14,7 @@ import EditSetModal from "../Modals/EditSetModal";
 const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
   const { dayId, weekId } = useParams();
   const { days } = useSelector((state) => state.training);
+  const dispatch = useDispatch();
 
   const [showLift, setShowLift] = useState(false);
   const [showSet, setShowSet] = useState(false);
@@ -50,7 +52,27 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
     setShowDeleteLift(true);
     console.log(e.target);
   };
-  // console.log(set);
+
+  const copySet = (e) => {
+    const formData = {
+      weight: e.target.getAttribute("weight"),
+      reps: e.target.getAttribute("reps"),
+      rpe: e.target.getAttribute("rpe"),
+      setType: e.target.getAttribute("setType"),
+    };
+    dispatch(newSet([weekId, dayId, e.target.id, formData]));
+    setTriggerReload(!triggerReload);
+  };
+
+  const getPrevSet = (lift) => {
+    return days
+      .filter((day) => day._id === dayId)[0]
+      .lifts.filter((item) => item._id === lift._id)[0].sets[
+      days
+        .filter((day) => day._id === dayId)[0]
+        .lifts.filter((item) => item._id === lift._id)[0].sets.length - 1
+    ];
+  };
 
   return (
     <>
@@ -132,10 +154,22 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
             </tbody>
           </Table>
           {dayId === day._id && (
-            <div className="d-grid w-75 m-auto gap-3 px-2 py-2">
+            <div className="d-flex justify-content-between w-75 m-auto gap-3 px-2 py-2">
+              <Button
+                variant="link"
+                weight={getPrevSet(lift).weight}
+                reps={getPrevSet(lift).reps}
+                rpe={getPrevSet(lift).rpe}
+                setType={getPrevSet(lift).setType}
+                id={lift._id}
+                className="w-50 mb-3 text-decoration-none text-secondary fw-bold"
+                onClick={(e) => copySet(e)}>
+                <MdContentCopy className="me-2 fs-4" />
+                Copy Last Set
+              </Button>
               <Button
                 variant="secondary"
-                className="mb-3"
+                className="mb-3 w-50"
                 id={lift._id}
                 onClick={(e) => handleOpenSet(e)}>
                 New Set
