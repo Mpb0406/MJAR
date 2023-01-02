@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
 import { Button, Tabs, Tab } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { getWeightLogs } from "../features/Nutrition/WeightLogSlice";
 
 const WeightLog = () => {
+  const dispatch = useDispatch();
+
   const [date, setDate] = useState(new Date());
 
   const changeDate = (e) => {
@@ -15,6 +19,11 @@ const WeightLog = () => {
       setDate(new Date(date.setUTCDate(date.getUTCDate() + 1)));
     }
   };
+
+  useEffect(() => {
+    dispatch(getWeightLogs());
+  }, []);
+
   console.log(date);
   return (
     <div className="mt-5">
