@@ -47,6 +47,13 @@ const Header = () => {
                   My Training
                 </Nav.Link>
                 <Nav.Link
+                  className={`bg-primary fs-5 ${
+                    pathname === "/nutrition" ? "text-light" : "hover-text"
+                  }`}
+                  href="/nutrition">
+                  Nutrition
+                </Nav.Link>
+                <Nav.Link
                   onClick={onLogout}
                   className="bg-primary fs-5 hover-text"
                   href="/login">

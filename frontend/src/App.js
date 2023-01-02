@@ -15,6 +15,8 @@ import { Container } from "react-bootstrap";
 import TrainingDay from "./Pages/TrainingDay";
 import Home from "./Pages/Home";
 import TrainingDayOverview from "./Pages/TrainingDayOverview";
+import NutritionDashboard from "./Pages/NutritionDashboard";
+import WeightLog from "./Pages/WeightLog";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
               path="/training/:blockId/:weekId/:dayId/overview"
               element={<TrainingDayOverview />}
             />
+            <Route path="/nutrition" element={<NutritionDashboard />} />
+            <Route path="/nutrition/weightlog" element={<WeightLog />} />
           </Routes>
         </Container>
       </Router>
