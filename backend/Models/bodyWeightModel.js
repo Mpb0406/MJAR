@@ -20,7 +20,7 @@ const bodyWeightSchema = mongoose.Schema(
       type: String,
     },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("BodyWeight", bodyWeightSchema);

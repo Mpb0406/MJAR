@@ -37,6 +37,8 @@ const Block = () => {
 
   const block = blocks.filter((block) => block._id === blockId)[0];
 
+  console.log(block.lifts);
+
   if (isLoading) {
     return <Loader />;
   }

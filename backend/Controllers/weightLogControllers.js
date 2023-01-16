@@ -14,11 +14,14 @@ const getWeightLogs = asyncHandler(async (req, res) => {
 // @route   POST /api/weightlog/
 // @access  Private
 const newWeightLog = asyncHandler(async (req, res) => {
-  const { bodyWeight, notes } = req.body;
+  const { weight, unit, notes } = req.body;
 
   await BodyWeight.create({
     user: req.user.id,
-    bodyWeight,
+    bodyWeight: {
+      weight,
+      unit,
+    },
     notes,
   });
 

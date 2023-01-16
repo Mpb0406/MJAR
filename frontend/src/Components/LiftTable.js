@@ -157,10 +157,11 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
             <div className="d-flex justify-content-between w-75 m-auto gap-3 px-2 py-2">
               <Button
                 variant="link"
-                weight={getPrevSet(lift).weight}
-                reps={getPrevSet(lift).reps}
-                rpe={getPrevSet(lift).rpe}
-                setType={getPrevSet(lift).setType}
+                disabled={lift.sets.length == 0}
+                weight={getPrevSet(lift)?.weight}
+                reps={getPrevSet(lift)?.reps}
+                rpe={getPrevSet(lift)?.rpe}
+                setType={getPrevSet(lift)?.setType}
                 id={lift._id}
                 className="w-50 mb-3 text-decoration-none text-secondary fw-bold"
                 onClick={(e) => copySet(e)}>

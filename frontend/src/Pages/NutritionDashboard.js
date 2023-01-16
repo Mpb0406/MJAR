@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Nav } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { getWeightLogs } from "../features/Nutrition/WeightLogSlice";
 
 const NutritionDashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getWeightLogs());
+  }, []);
   return (
     <div className="mt-5">
       <h1 className="text-light">Nutrition Dashboard</h1>
