@@ -78,7 +78,11 @@ const WeightLog = () => {
 
   // console.log(new Date().getDate(), new Date().getDay());
 
-  console.log(prevWeekAvg);
+  console.log(
+    new Date(dailyWeight[dailyWeight.length - 1].createdAt)
+      .toUTCString()
+      .slice(0, 16)
+  );
 
   if (isLoading) {
     return <Loader />;
@@ -106,6 +110,23 @@ const WeightLog = () => {
               onClick={changeDate}
             />
           </div>
+          {loggedToday && (
+            <div className="text-center">
+              <Card className="w-50 border-0 rounded mx-auto my-4">
+                <Card.Body className="bg-info p-2">
+                  <div className="bg-none mx-auto d-flex flex-column align-items-center">
+                    <p className="bg-none text-light mb-1">Today's Weight</p>
+                    <h3 className="bg-none text-light fw-bold fs-2 mb-0">
+                      {dailyWeight[dailyWeight.length - 1].bodyWeight.weight}
+                    </h3>
+                    <p className="bg-none text-light fs-small fw-bold mb-1">
+                      Good job
+                    </p>
+                  </div>
+                </Card.Body>
+              </Card>
+            </div>
+          )}
         </Tab>
         <Tab eventKey="week" title="Week">
           <Card className="w-50 border-0 rounded mx-auto my-4">
@@ -160,7 +181,7 @@ const WeightLog = () => {
           </Table>
         </Tab>
         <Tab eventKey="all-time" title="All-Time">
-        <Table variant="dark">
+          <Table variant="dark">
             <thead>
               <tr>
                 <th>Date</th>
