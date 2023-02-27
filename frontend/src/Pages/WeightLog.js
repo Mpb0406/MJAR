@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
@@ -8,17 +8,16 @@ import { useSelector } from "react-redux";
 import Moment from "react-moment";
 import Loader from "../Components/Loader";
 import LogWeightModal from "../Modals/LogWeightModal";
+import { useDispatch } from "react-redux";
+import { getWeightLogs } from "../features/Nutrition/WeightLogSlice";
 
 const WeightLog = () => {
   const { dailyWeight, isLoading } = useSelector((state) => state.weightLog);
+  const dispatch = useDispatch();
 
   const [date, setDate] = useState(new Date());
   const [showLogWeight, setShowLogWeight] = useState(false);
-  const [loggedToday, setLoggedToday] = useState(
-    new Date(dailyWeight[dailyWeight.length - 1].createdAt)
-      .toUTCString()
-      .slice(0, 16) == new Date().toUTCString().slice(0, 16)
-  );
+  const [loggedToday, setLoggedToday] = useState(false);
 
   const changeDate = (e) => {
     if (e.target.getAttribute("toggle") === "prev") {
@@ -76,7 +75,17 @@ const WeightLog = () => {
         100
     ) / 100;
 
-  // console.log(new Date().getDate(), new Date().getDay());
+  useEffect(() => {
+    dispatch(getWeightLogs());
+
+    if (
+      new Date(dailyWeight[dailyWeight.length - 1].createdAt)
+        .toUTCString()
+        .slice(0, 16) == new Date().toUTCString().slice(0, 16)
+    ) {
+      setLoggedToday(true);
+    }
+  }, [dispatch]);
 
   console.log(
     new Date(dailyWeight[dailyWeight.length - 1].createdAt)
@@ -143,7 +152,7 @@ const WeightLog = () => {
                         ? "text-success"
                         : "text-danger"
                     } fs-5 fw-bold me-1`}>
-                    {weekAvg - prevWeekAvg >= 0 ? "+" : "-"}
+                    {weekAvg - prevWeekAvg >= 0 ? "+" : ""}
                     {Math.round(
                       (weekAvg - prevWeekAvg + Number.EPSILON) * 100
                     ) / 100}

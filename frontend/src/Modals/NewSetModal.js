@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Form, Badge, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,7 @@ const NewSetModal = ({
   show,
   setShow,
   liftId,
+  setLift,
   triggerReload,
   setTriggerReload,
 }) => {
@@ -39,6 +40,13 @@ const NewSetModal = ({
     handleClose();
     setTriggerReload(!triggerReload);
   };
+
+  useEffect(() => {
+    console.log(liftId);
+  }, [liftId]);
+
+  console.log(weekId, dayId);
+  console.log(liftId);
 
   return (
     <Modal show={show} onHide={handleClose}>

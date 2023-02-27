@@ -25,7 +25,7 @@ const LogWeightModal = ({ show, setShow, setLoggedToday }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(logWeight(formData));
-    setLoggedToday(false);
+    setLoggedToday(true);
     handleClose();
   };
 

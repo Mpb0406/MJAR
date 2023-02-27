@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Badge, Tooltip, OverlayTrigger } from "react-bootstrap";
 
-const TrainingDayVolume = ({ trainingDay }) => {
+const TrainingDayVolume = ({ lifts, trainingDay }) => {
   // Set Current Lift
   const [selectedLift, setSelectedLift] = useState(
     trainingDay.lifts[0].exercise
@@ -48,6 +48,7 @@ const TrainingDayVolume = ({ trainingDay }) => {
       Sat, May 26, 2022
     </Tooltip>
   );
+
   return (
     <div>
       <Form.Select
@@ -55,7 +56,7 @@ const TrainingDayVolume = ({ trainingDay }) => {
         name="lift"
         onChange={(e) => changeLift(e)}
         className="w-50 mx-auto bg-none mt-4">
-        {trainingDay.lifts.map((lift) => (
+        {lifts.map((lift) => (
           <option className="bg-none" value={lift.exercise}>
             {lift.exercise}
           </option>

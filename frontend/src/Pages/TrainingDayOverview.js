@@ -11,6 +11,10 @@ const TrainingDayOverview = () => {
   const { blockId, weekId, dayId } = useParams();
   const trainingDay = days.filter((day) => day._id === dayId)[0];
 
+  const liftsWithSets = trainingDay.lifts.filter(
+    (lift) => lift.sets.length >= 1
+  );
+
   return (
     <div className="mt-5">
       <button
@@ -25,10 +29,10 @@ const TrainingDayOverview = () => {
 
       <Tabs className="mt-4 w-75 m-auto" fill justify>
         <Tab eventKey="summary" title="Summary">
-          <SummaryAccordion trainingDay={trainingDay} />
+          <SummaryAccordion lifts={liftsWithSets} trainingDay={trainingDay} />
         </Tab>
         <Tab eventKey="volume" title="Volume">
-          <TrainingDayVolume trainingDay={trainingDay} />
+          <TrainingDayVolume lifts={liftsWithSets} trainingDay={trainingDay} />
         </Tab>
       </Tabs>
     </div>

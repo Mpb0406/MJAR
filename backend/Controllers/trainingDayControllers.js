@@ -26,7 +26,7 @@ const getMyTraining = asyncHandler(async (req, res) => {
 // @access  Private
 const newTrainingDay = asyncHandler(async (req, res) => {
   const block = await TrainingBlock.find({ _id: req.params.blockId });
-  const blockLifts = block[0].lifts;
+  const blockLifts = block[0]?.lifts;
   if (!req.body.day) {
     res.status(400);
     throw new Error("Please Add Day");

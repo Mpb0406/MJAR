@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { getWeightLogs } from "../features/Nutrition/WeightLogSlice";
 

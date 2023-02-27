@@ -48,8 +48,6 @@ const EditSetModal = ({
     });
   }, [setData]);
 
-  console.log(set, lift);
-
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton closeVariant="secondary" className="bg-white">

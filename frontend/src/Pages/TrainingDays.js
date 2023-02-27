@@ -3,7 +3,7 @@ import { Container, Button, Breadcrumb } from "react-bootstrap";
 import DayCard from "../Components/DayCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getDays } from "../features/Training/TrainingSlice";
+import { getDays, getBlocks } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import NewDayModal from "../Modals/NewDayModal";
 import { reset } from "../features/Training/TrainingSlice";
@@ -36,6 +36,7 @@ const TrainingDays = () => {
     }
 
     dispatch(getDays(weekId));
+    dispatch(getBlocks());
 
     return () => {
       dispatch(reset());

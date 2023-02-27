@@ -1,14 +1,14 @@
 import React from "react";
 import { Accordion } from "react-bootstrap";
 
-const SummaryAccordion = ({ trainingDay }) => {
-  const coreLifts = trainingDay.lifts.filter(
+const SummaryAccordion = ({ lifts, trainingDay }) => {
+  const coreLifts = lifts.filter(
     (lift) =>
       lift.exercise === "Squat" ||
       lift.exercise === "Bench" ||
       lift.exercise === "Deadlift"
   );
-  const accessories = trainingDay.lifts.filter(
+  const accessories = lifts.filter(
     (lift) =>
       lift.exercise !== "Squat" &&
       lift.exercise !== "Bench" &&

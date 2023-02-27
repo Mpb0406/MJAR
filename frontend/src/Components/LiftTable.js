@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Table, CloseButton, Badge, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,17 +21,17 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
   const [showEditSet, setShowEditSet] = useState(false);
   const [showDeleteSet, setShowDeleteSet] = useState(false);
   const [showDeleteLift, setShowDeleteLift] = useState(false);
-  const [lift, setLift] = useState(null);
+  const [activeLift, setActiveLift] = useState(null);
   const [set, setSet] = useState(null);
   const [setData, setSetData] = useState({});
 
   const handleOpenLift = () => setShowLift(true);
   const handleOpenSet = (e) => {
-    setLift(e.target.id);
     setShowSet(true);
+    setActiveLift(e.target.id);
   };
   const handleOpenEditSet = (e) => {
-    setLift(e.target.getAttribute("name"));
+    setActiveLift(e.target.getAttribute("name"));
     setSet(e.target.id);
     setSetData(
       days
@@ -43,12 +43,12 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
   };
   const handleOpenDeleteSet = (e) => {
     setSet(e.target.id);
-    setLift(e.target.getAttribute("name"));
+    setActiveLift(e.target.getAttribute("name"));
     setShowDeleteSet(true);
     console.log(e.target);
   };
   const handleOpenDeleteLift = (e) => {
-    setLift(e.target.id);
+    setActiveLift(e.target.id);
     setShowDeleteLift(true);
     console.log(e.target);
   };
@@ -154,7 +154,7 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
             </tbody>
           </Table>
           {dayId === day._id && (
-            <div className="d-flex justify-content-between w-75 m-auto gap-3 px-2 py-2">
+            <div className="d-flex justify-content-around m-auto px-2 py-2">
               <Button
                 variant="link"
                 disabled={lift.sets.length == 0}
@@ -163,17 +163,17 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
                 rpe={getPrevSet(lift)?.rpe}
                 setType={getPrevSet(lift)?.setType}
                 id={lift._id}
-                className="w-50 mb-3 text-decoration-none text-secondary fw-bold"
+                className="w-75 mb-3 text-decoration-none text-secondary fw-bold"
                 onClick={(e) => copySet(e)}>
                 <MdContentCopy className="me-2 fs-4" />
                 Copy Last Set
               </Button>
               <Button
                 variant="secondary"
-                className="mb-3 w-50"
+                className="mb-3 fw-bold fs-1 px-4"
                 id={lift._id}
                 onClick={(e) => handleOpenSet(e)}>
-                New Set
+                <p className="bg-none mb-1">+</p>
               </Button>
             </div>
           )}
@@ -196,7 +196,8 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
       <NewSetModal
         show={showSet}
         setShow={setShowSet}
-        liftId={lift}
+        liftId={activeLift}
+        setLift={setActiveLift}
         setTriggerReload={setTriggerReload}
         triggerReload={triggerReload}
       />
@@ -205,7 +206,7 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
         setShow={setShowEditSet}
         setData={setData}
         set={set}
-        lift={lift}
+        lift={activeLift}
         setTriggerReload={setTriggerReload}
         triggerReload={triggerReload}
       />
@@ -213,7 +214,7 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
         show={showDeleteSet}
         setShow={setShowDeleteSet}
         setId={set}
-        liftId={lift}
+        liftId={activeLift}
         dayId={dayId}
         weekId={weekId}
         setTriggerReload={setTriggerReload}
@@ -224,7 +225,7 @@ const LiftTable = ({ day, setTriggerReload, triggerReload }) => {
         setShow={setShowDeleteLift}
         weekId={weekId}
         dayId={dayId}
-        liftId={lift}
+        liftId={activeLift}
         setTriggerReload={setTriggerReload}
         triggerReload={triggerReload}
       />
