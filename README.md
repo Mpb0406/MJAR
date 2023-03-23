@@ -17,4 +17,4 @@ Before contributing please clone the repo, run the app, and get familiar with th
 
 ## Making a Contribution
 Please follow the [Contribution Guide](https://github.com/Mpb0406/MJAR/wiki/Contribution-Guide) in the wiki for this repository
-Please also see the [Figma Design Doc]() for frontend tasks
+Please also see the [Figma Design Doc](https://github.com/Mpb0406/MJAR/wiki/Design-File) for frontend tasks
