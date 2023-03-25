@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
-import deleteLiftButton from "../img/deleteLift.png";
 import { Link } from "react-router-dom";
 
 const TrainingDay = () => {

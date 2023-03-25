@@ -28,6 +28,8 @@ const TrainingBlocks = () => {
 
   const localStorageUser = JSON.parse(localStorage.getItem("user"));
 
+  const reverseBlocks = blocks.map((block) => block).reverse();
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -73,7 +75,7 @@ const TrainingBlocks = () => {
           </button>
         </div>
 
-        {blocks.slice(0, truncateCards).map((block) => (
+        {reverseBlocks.slice(0, truncateCards).map((block) => (
           <BlockCard
             showLiftPrompt={showLiftPrompt}
             setShowLiftPrompt={setShowLiftPrompt}
