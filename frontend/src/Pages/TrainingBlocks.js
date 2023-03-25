@@ -30,8 +30,6 @@ const TrainingBlocks = () => {
 
   const reverseBlocks = blocks.map((block) => block).reverse();
 
-  console.log(reverseBlocks);
-
   useEffect(() => {
     if (isError) {
       console.log(message);
