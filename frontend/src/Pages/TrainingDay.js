@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Table, Button, CloseButton, Dropdown } from "react-bootstrap";
 import NewLiftModal from "../Modals/NewLiftModal";
 import NewSetModal from "../Modals/NewSetModal";
@@ -9,30 +9,25 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getDays } from "../features/Training/TrainingSlice";
 import Loader from "../Components/Loader";
 import { Link } from "react-router-dom";
+import { useStateContext } from "../features/Context/TrainingContext";
 
 const TrainingDay = () => {
-  const [showLift, setShowLift] = useState(false);
-  const [lift, setLift] = useState(null);
-  const [set, setSet] = useState(null);
-  const [showSet, setShowSet] = useState(false);
-  const [showDeleteSet, setShowDeleteSet] = useState(false);
-  const [showDeleteLift, setShowDeleteLift] = useState(false);
-
-  const handleOpenLift = () => setShowLift(true);
-  const handleOpenSet = (e) => {
-    setLift(e.target.id);
-    setShowSet(true);
-  };
-  const handleOpenDeleteSet = (e) => {
-    setSet(e.target.id);
-    setLift(e.target.getAttribute("name"));
-    setShowDeleteSet(true);
-  };
-  const handleOpenDeleteLift = (e) => {
-    setLift(e.target.id);
-    setShowDeleteLift(true);
-    console.log(lift);
-  };
+  const {
+    showLift,
+    setShowLift,
+    lift,
+    set,
+    showSet,
+    setShowSet,
+    showDeleteSet,
+    setShowDeleteSet,
+    showDeleteLift,
+    setShowDeleteLift,
+    handleOpenLift,
+    handleOpenSet,
+    handleOpenDeleteSet,
+    handleOpenDeleteLift,
+  } = useStateContext();
 
   const { blockId, weekId, dayId } = useParams();
   const dispatch = useDispatch();
