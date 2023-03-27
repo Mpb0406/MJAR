@@ -1,6 +1,8 @@
 import React from "react";
-import { Table, CloseButton, Button } from "react-bootstrap";
+import { Table, CloseButton, Button, Badge } from "react-bootstrap";
 import { useStateContext } from "../features/Context/TrainingContext";
+import { setTypeClass } from "../Data/data";
+import { MdDelete } from "react-icons/md";
 
 const LiftTable = ({ lift }) => {
   const { handleOpenDeleteLift, handleOpenDeleteSet, handleOpenSet } =
@@ -9,7 +11,6 @@ const LiftTable = ({ lift }) => {
     <>
       <Table
         striped
-        bordered
         hover
         variant="dark"
         className="mt-5 mb-3 position-relative"
@@ -17,40 +18,46 @@ const LiftTable = ({ lift }) => {
         <thead>
           <tr className="text-center">
             <th className="fs-5" colSpan={6}>
-              {lift.exercise}
+              <p className="d-inline-block bg-none mb-0 align-middle">
+                {lift.exercise}
+              </p>
               <CloseButton
                 variant="white"
-                className="bg-none ms-3 align-self-center"
+                className="bg-none ms-3 mt-1 d-inline-block align-middle align-self-center"
                 id={lift._id}
                 onClick={(e) => handleOpenDeleteLift(e)}
               />
             </th>
           </tr>
           <tr>
-            <th>Set</th>
-            <th>Weight</th>
-            <th>Reps</th>
-            <th>RPE</th>
-            <th>Type</th>
-            <th>Delete</th>
+            <th className="text-center">#</th>
+            <th className="text-center">Set</th>
+            <th className="text-center">RPE</th>
+            <th className="text-center">Type</th>
+            <th className="text-center">Delete</th>
           </tr>
         </thead>
         <tbody>
           {lift.sets.map((set, idx) => (
             <tr style={{ cursor: "pointer" }}>
-              <td>{idx + 1}</td>
-              <td>{set.weight}</td>
-              <td>{set.reps}</td>
-              <td>{set.rpe === 5 ? "<6" : set.rpe}</td>
-              <td>{set.setType}</td>
-              <td>
+              <td className="fw-bold text-center">{idx + 1}</td>
+              <td className="text-center">{`${set.weight} × ${set.reps}`}</td>
+              <td className="text-center">{set.rpe === 5 ? "<6" : set.rpe}</td>
+              <td className="text-center">
+                <Badge
+                  className="shadow-lg set-badge"
+                  bg={setTypeClass(set.setType)}>
+                  {set.setType}
+                </Badge>
+              </td>
+              <td className="text-center">
                 {
                   <p
-                    className="bg-none mb-0 delete-set"
+                    className="bg-none mb-0"
                     name={lift._id}
                     id={set._id}
                     onClick={(e) => handleOpenDeleteSet(e)}>
-                    Delete
+                    <MdDelete className="bg-none text-secondary fs-2 pe-none" />
                   </p>
                 }
               </td>
