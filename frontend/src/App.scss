@@ -247,3 +247,14 @@ span {
 .navbar-toggler-icon {
   font-size: 1rem
 }
+
+.set-badge {
+  width: 100%;
+}
+
+// Media Query for Set Type Badge Width
+@media screen and (min-width: 480px)  {
+  .set-badge {
+    width: 65%;
+  }
+}
