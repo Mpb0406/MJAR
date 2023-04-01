@@ -25,7 +25,6 @@ const LiftInfoBody = ({ isMainLift, mainLiftType }) => {
     setPromptDetails(weekDetails[block]);
   }, [block]);
 
-  console.log(getReps);
   return (
     <Card.Body className="bg-input w-auto p-0">
       <div className="bg-none d-flex justify-content-around mt-3">
