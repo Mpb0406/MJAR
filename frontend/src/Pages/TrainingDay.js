@@ -31,10 +31,22 @@ const TrainingDay = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const { days, isError, message, isLoading } = useSelector(
+  const { days, blocks, isError, message, isLoading } = useSelector(
     (state) => state.training
   );
+  // Get Training Day
   const day = days.filter((day) => day._id === dayId)[0];
+  // Get Current Block
+  const block = blocks.filter((block) => block._id === blockId)[0];
+  // Get Core Lifts for Day
+  const mainLifts = block.lifts
+    .filter(
+      (lift) =>
+        lift.liftType === "Squat" ||
+        lift.liftType === "Bench" ||
+        lift.liftType === "Deadlift"
+    )
+    .map((item) => item.lift);
 
   useEffect(() => {
     if (isError) {
@@ -81,7 +93,7 @@ const TrainingDay = () => {
       )}
 
       {day.lifts.map((lift) => (
-        <LiftTable lift={lift} />
+        <LiftTable lift={lift} mainLifts={mainLifts} block={block} />
       ))}
 
       <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">

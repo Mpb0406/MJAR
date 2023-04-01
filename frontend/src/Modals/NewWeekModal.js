@@ -12,7 +12,7 @@ const NewWeekModal = ({ show, setShow, block }) => {
   const handleClose = () => setShow(false);
 
   const [selectedWeek, setSelectedWeek] = useState(
-    weekDetails.hypertrophyAWeeks
+    weekDetails.HypertrophyA.weeks
   );
   const [formData, setFormData] = useState({
     week: "Week 1",
@@ -23,12 +23,12 @@ const NewWeekModal = ({ show, setShow, block }) => {
   useEffect(() => {
     if (block.block === "Hypertrophy") {
       block.microBlock === "Block A"
-        ? setSelectedWeek(weekDetails.hypertrophyAWeeks)
-        : setSelectedWeek(weekDetails.hypertrophyBWeeks);
+        ? setSelectedWeek(weekDetails.HypertrophyA.weeks)
+        : setSelectedWeek(weekDetails.HypertrophyB.weeks);
     } else if (block.block === "Strength") {
       block.microBlock === "Block A"
-        ? setSelectedWeek(weekDetails.strengthAWeeks)
-        : setSelectedWeek(weekDetails.strengthBWeeks);
+        ? setSelectedWeek(weekDetails.StrengthA.weeks)
+        : setSelectedWeek(weekDetails.StrengthB.weeks);
     }
 
     setFormData((prevState) => ({
