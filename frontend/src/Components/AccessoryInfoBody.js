@@ -16,7 +16,6 @@ const AccessoryInfoBody = () => {
   } else {
     block = blocks.filter((block) => block._id === blockId)[0].block;
   }
-
   const week = weeks.filter((week) => week._id === weekId)[0].week;
   // Get Week from data.js
   const getWeek = weekDetails[block].weeks.filter(

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 const LiftInfoBody = ({ mainLiftType }) => {
   const { blockId, weekId, dayId } = useParams();
   const { blocks, weeks, days } = useSelector((state) => state.training);
-
   // Get Block, Week, Day
   let block;
   if (blocks.filter((block) => block._id === blockId)[0].microBlock) {
@@ -17,11 +16,8 @@ const LiftInfoBody = ({ mainLiftType }) => {
   } else {
     block = blocks.filter((block) => block._id === blockId)[0].block;
   }
-
   const week = weeks.filter((week) => week._id === weekId)[0].week;
   const day = days.filter((day) => day._id === dayId)[0].day.slice(0, 5);
-
-  console.log(block);
   // Get Reps and Week from weekDetails for Prompts
   const getReps = weekDetails[block].reps[mainLiftType][day];
   const getWeek = weekDetails[block].weeks.filter(
