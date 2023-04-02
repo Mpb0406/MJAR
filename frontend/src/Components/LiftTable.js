@@ -13,6 +13,7 @@ import { MdDelete } from "react-icons/md";
 import LiftInfoToggle from "./LiftInfoToggle";
 import LiftInfoBody from "./LiftInfoBody";
 import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
+import AccessoryInfoBody from "./AccessoryInfoBody";
 
 const LiftTable = ({ lift, mainLifts, block }) => {
   const { handleOpenDeleteLift, handleOpenDeleteSet, handleOpenSet } =
@@ -57,12 +58,13 @@ const LiftTable = ({ lift, mainLifts, block }) => {
                       </div>
                     </LiftInfoToggle>
                   </Card.Header>
-                  {isMainLift && (
+                  {isMainLift ? (
                     <Accordion.Collapse className="bg-input w-100" eventKey="0">
-                      <LiftInfoBody
-                        isMainLift={isMainLift}
-                        mainLiftType={mainLiftType}
-                      />
+                      <LiftInfoBody mainLiftType={mainLiftType} />
+                    </Accordion.Collapse>
+                  ) : (
+                    <Accordion.Collapse className="bg-input w-100" eventKey="0">
+                      <AccessoryInfoBody />
                     </Accordion.Collapse>
                   )}
                 </Card>

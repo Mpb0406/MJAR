@@ -151,7 +151,7 @@ export const weekDetails = {
     },
     weeks: [
       { week: "Week 1", rpe: 6, percent: 75, acc: "12-15" },
-      { week: "Week 2", rpe: 7, percent: 80, acc: "12-15" },
+      { week: "Week 2", rpe: 7, percent: 75, acc: "12-15" },
       { week: "Week 3", rpe: 8, percent: 80, acc: "10-12" },
       { week: "Week 4", rpe: 9, percent: 85, acc: "10-12" },
       { week: "Deload", rpe: 7, percent: 70, acc: "12-15" },
@@ -221,6 +221,29 @@ export const weekDetails = {
     weeks: [
       { week: "Week 1", rpe: 7, percent: 90, acc: "6-8" },
       { week: "Week 2", rpe: 8, percent: 90, acc: "6-8" },
+      { week: "Week 3", rpe: 9, percent: 90, acc: "4-6" },
+      { week: "Week 4", rpe: 9, percent: 92.5, acc: "4-6" },
+      { week: "Deload", rpe: 7, percent: 70, acc: "12-15" },
+    ],
+  },
+  Peak: {
+    reps: {
+      Squat: {
+        "Day 1": 2,
+        "Day 4": 1,
+      },
+      Bench: {
+        "Day 2": 1,
+        "Day 4": 2,
+      },
+      Deadlift: {
+        "Day 3": 1,
+        "Day 5": 2,
+      },
+    },
+    weeks: [
+      { week: "Week 1", rpe: 8, percent: 90, acc: "6-8" },
+      { week: "Week 2", rpe: 9, percent: 92.5, acc: "6-8" },
       { week: "Week 3", rpe: 9, percent: 90, acc: "4-6" },
       { week: "Week 4", rpe: 9, percent: 92.5, acc: "4-6" },
       { week: "Deload", rpe: 7, percent: 70, acc: "12-15" },

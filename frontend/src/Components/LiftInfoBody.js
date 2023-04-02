@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import { weekDetails } from "../Data/data";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const LiftInfoBody = ({ isMainLift, mainLiftType }) => {
-  const { HypertrophyA, HypertrophyB, StrengthA, StrengthB } = weekDetails;
+const LiftInfoBody = ({ mainLiftType }) => {
   const { blockId, weekId, dayId } = useParams();
   const { blocks, weeks, days } = useSelector((state) => state.training);
-  const [promptDetails, setPromptDetails] = useState(null);
 
   // Get Block, Week, Day
-  const block =
-    blocks.filter((block) => block._id === blockId)[0].block +
-    blocks.filter((block) => block._id === blockId)[0].microBlock.slice(6);
+  let block;
+  if (blocks.filter((block) => block._id === blockId)[0].microBlock) {
+    block =
+      blocks.filter((block) => block._id === blockId)[0].block +
+      blocks.filter((block) => block._id === blockId)[0]?.microBlock?.slice(6);
+  } else {
+    block = blocks.filter((block) => block._id === blockId)[0].block;
+  }
+
   const week = weeks.filter((week) => week._id === weekId)[0].week;
   const day = days.filter((day) => day._id === dayId)[0].day.slice(0, 5);
+
+  console.log(block);
+  // Get Reps and Week from weekDetails for Prompts
   const getReps = weekDetails[block].reps[mainLiftType][day];
   const getWeek = weekDetails[block].weeks.filter(
     (item) => item.week === week
   )[0];
-
-  useEffect(() => {
-    setPromptDetails(weekDetails[block]);
-  }, [block]);
 
   return (
     <Card.Body className="bg-input w-auto p-0">
@@ -45,8 +48,10 @@ const LiftInfoBody = ({ isMainLift, mainLiftType }) => {
       </div>
       <div className="bg-none text-center mt-3">
         <p className="bg-none px-4 py-2 fs-small fw-bold">
-          {`Complete working sets at ${getReps} reps until you reach RPE ${getWeek.rpe}. If you reach 5
-          sets then complete an AMRAP to RPE ${getWeek.rpe}`}
+          {block !== "Peak"
+            ? `Complete working sets at ${getReps} reps until you reach RPE ${getWeek.rpe}. If you reach 5
+          sets then complete an AMRAP to RPE ${getWeek.rpe}`
+            : `Complete working sets at ${getReps} reps until you reach RPE ${getWeek.rpe}. Stop at 3 sets. No AMRAP.`}
         </p>
       </div>
     </Card.Body>
