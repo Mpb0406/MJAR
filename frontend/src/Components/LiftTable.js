@@ -1,12 +1,29 @@
 import React from "react";
-import { Table, CloseButton, Button, Badge } from "react-bootstrap";
+import {
+  Table,
+  CloseButton,
+  Button,
+  Badge,
+  Accordion,
+  Card,
+} from "react-bootstrap";
 import { useStateContext } from "../features/Context/TrainingContext";
 import { setTypeClass } from "../Data/data";
 import { MdDelete } from "react-icons/md";
+import LiftInfoToggle from "./LiftInfoToggle";
+import LiftInfoBody from "./LiftInfoBody";
+import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
+import AccessoryInfoBody from "./AccessoryInfoBody";
 
-const LiftTable = ({ lift }) => {
+const LiftTable = ({ lift, mainLifts, block }) => {
   const { handleOpenDeleteLift, handleOpenDeleteSet, handleOpenSet } =
     useStateContext();
+
+  // Get Main Lift Variation Name
+  const isMainLift = mainLifts.filter((item) => item === lift.exercise)[0];
+  // Get MainLift Variation Type
+  const mainLiftType = block.lifts.filter((lift) => lift.lift === isMainLift)[0]
+    ?.liftType;
   return (
     <>
       <Table
@@ -15,42 +32,83 @@ const LiftTable = ({ lift }) => {
         variant="dark"
         className="mt-5 mb-3 position-relative"
         responsive="sm">
-        <thead>
-          <tr className="text-center">
-            <th className="fs-5" colSpan={6}>
-              <p className="d-inline-block bg-none mb-0 align-middle">
-                {lift.exercise}
-              </p>
-              <CloseButton
-                variant="white"
-                className="bg-none ms-3 mt-1 d-inline-block align-middle align-self-center"
-                id={lift._id}
-                onClick={(e) => handleOpenDeleteLift(e)}
-              />
-            </th>
+        <thead className="">
+          <tr>
+            <td colSpan={12} className="border-0 p-0">
+              <Accordion className="bg-none w-100">
+                <Card className="bg-none w-100 border-0">
+                  <Card.Header className="bg-info border-0">
+                    <LiftInfoToggle eventKey="0">
+                      <div className="bg-none d-flex justify-content-between align-items-center">
+                        <div></div>
+                        <div className="bg-none">
+                          {lift.exercise}
+                          {
+                            <MdOutlineExpandMore className="bg-none ms-2 text-light" />
+                          }
+                        </div>
+                        <div className="bg-none d-flex justify-content-end">
+                          <CloseButton
+                            variant="white"
+                            className="bg-none mt-1 d-inline-block fs-small"
+                            id={lift._id}
+                            onClick={(e) => handleOpenDeleteLift(e)}
+                          />
+                        </div>
+                      </div>
+                    </LiftInfoToggle>
+                  </Card.Header>
+                  {isMainLift ? (
+                    <Accordion.Collapse className="bg-input w-100" eventKey="0">
+                      <LiftInfoBody mainLiftType={mainLiftType} />
+                    </Accordion.Collapse>
+                  ) : (
+                    <Accordion.Collapse className="bg-input w-100" eventKey="0">
+                      <AccessoryInfoBody />
+                    </Accordion.Collapse>
+                  )}
+                </Card>
+              </Accordion>
+            </td>
           </tr>
           <tr>
-            <th className="text-center">#</th>
-            <th className="text-center">Set</th>
-            <th className="text-center">RPE</th>
-            <th className="text-center">Type</th>
-            <th className="text-center">Delete</th>
+            <th colSpan={1} className="text-center fs-small">
+              #
+            </th>
+            <th colSpan={3} className="text-center fs-small">
+              Set
+            </th>
+            <th colSpan={2} className="text-center fs-small">
+              RPE
+            </th>
+            <th colSpan={4} className="text-center fs-small">
+              Type
+            </th>
+            <th colSpan={2} className="text-center fs-small">
+              Delete
+            </th>
           </tr>
         </thead>
         <tbody>
           {lift.sets.map((set, idx) => (
             <tr style={{ cursor: "pointer" }}>
-              <td className="fw-bold text-center">{idx + 1}</td>
-              <td className="text-center">{`${set.weight} × ${set.reps}`}</td>
-              <td className="text-center">{set.rpe === 5 ? "<6" : set.rpe}</td>
-              <td className="text-center">
+              <td colSpan={1} className="fw-bold text-center">
+                {idx + 1}
+              </td>
+              <td
+                colSpan={3}
+                className="text-center">{`${set.weight} × ${set.reps}`}</td>
+              <td colSpan={2} className="text-center">
+                {set.rpe === 5 ? "<6" : set.rpe}
+              </td>
+              <td colSpan={4} className="text-center">
                 <Badge
                   className="shadow-lg set-badge"
                   bg={setTypeClass(set.setType)}>
                   {set.setType}
                 </Badge>
               </td>
-              <td className="text-center">
+              <td colSpan={2} className="text-center">
                 {
                   <p
                     className="bg-none mb-0"
