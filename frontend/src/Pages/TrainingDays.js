@@ -61,7 +61,7 @@ const TrainingDays = () => {
         )}
 
         {days.map((day) => (
-          <Container className="mt-4 ps-0">
+          <Container className="mt-4 px-0">
             <DayCard
               name={day.day}
               lifts={day.lifts}
