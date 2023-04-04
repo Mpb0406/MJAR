@@ -49,8 +49,6 @@ const TrainingDay = () => {
     )
     .map((item) => item.lift);
 
-  console.log(typeof new Date(day.createdAt));
-
   useEffect(() => {
     if (isError) {
       console.log(message);

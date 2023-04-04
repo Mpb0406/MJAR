@@ -56,7 +56,7 @@ const DayCard = ({ name, lifts, id, block, week, date }) => {
                     {date}
                   </Moment>
                 </h4>
-                <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${
+                <h4 className="fs-small fw-bold bg-secondary py-1 px-3 rounded-pill">{`${
                   lifts.length
                 } ${lifts.length === 1 ? "Lift" : "Lifts"}`}</h4>
               </Card.Title>
