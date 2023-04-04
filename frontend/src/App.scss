@@ -64,7 +64,7 @@
 }
 
 .fs-small {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 span {
@@ -273,4 +273,8 @@ span {
 table {
   table-layout: fixed;
   width: 100%;
+}
+
+.gray-text {
+  color: rgb(169, 169, 169)
 }

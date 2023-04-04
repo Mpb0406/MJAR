@@ -11,6 +11,7 @@ import Loader from "../Components/Loader";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../features/Context/TrainingContext";
 import LiftTable from "../Components/LiftTable";
+import { getTrainingDate } from "../Data/data";
 
 const TrainingDay = () => {
   const {
@@ -48,6 +49,8 @@ const TrainingDay = () => {
     )
     .map((item) => item.lift);
 
+  console.log(typeof new Date(day.createdAt));
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -69,11 +72,12 @@ const TrainingDay = () => {
       <Dropdown>
         <Dropdown.Toggle
           variant="dark"
-          className="bg-none d-flex align-items-center ps-0">
-          <h1 className="pb-1 pe-3 bg-none d-flex text-wrap text-align-start">
-            {day.day}
-          </h1>
+          className="bg-none d-flex align-items-center p-0 border-0">
+          <h3 className="fs-1 fw-bold pe-2">
+            {getTrainingDate(new Date(day.createdAt))}
+          </h3>
         </Dropdown.Toggle>
+        <h3 className="fs-5 fst-italic gray-text">{day.day}</h3>
 
         <Dropdown.Menu variant="dark" className="w-75">
           <Dropdown.Item className="d-flex justify-content-center">
