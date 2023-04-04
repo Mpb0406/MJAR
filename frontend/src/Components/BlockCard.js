@@ -64,7 +64,7 @@ const BlockCard = ({ showLiftPrompt, setShowLiftPrompt, block }) => {
             <Card.Body className="bg-info text-light ps-0">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between bg-info my-0">
                 <div className="d-flex bg-none">
-                  <h6 className="fs-4 bg-info hover-primary">
+                  <h6 className="fs-5 bg-info hover-primary">
                     <Link
                       to={`/training/${block._id}`}
                       className="text-decoration-none bg-none text-light hover-primary">
@@ -72,21 +72,21 @@ const BlockCard = ({ showLiftPrompt, setShowLiftPrompt, block }) => {
                     </Link>
                   </h6>
                   <h6 className="bg-none d-flex align-items-end">
-                    <Badge className="ms-1 shadow-md fs-small">
+                    <Badge className="ms-0 shadow-md fs-small">
                       {block.microBlock}
                     </Badge>
                   </h6>
                 </div>
-                <h4 className="bg-info fs-6 text-sm-center fw-normal">
-                  <Moment className="bg-info" format="MM/DD/YY">
+                <h4 className="bg-info fs-6 text-sm-center">
+                  <Moment className="bg-info gray-text" format="MM/DD/YY">
                     {block.createdAt}
                   </Moment>{" "}
                   -{" "}
-                  <Moment className="bg-info" format="MM/DD/YY">
+                  <Moment className="bg-info gray-text" format="MM/DD/YY">
                     {block.updatedAt}
                   </Moment>
                 </h4>
-                <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${
+                <h4 className="fs-small fw-bold bg-secondary py-1 px-3 rounded-pill">{`${
                   block.weeks.length
                 } ${block.weeks.length === 1 ? "Week" : "Weeks"}`}</h4>
               </Card.Title>

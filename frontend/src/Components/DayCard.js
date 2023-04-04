@@ -49,14 +49,14 @@ const DayCard = ({ name, lifts, id, block, week, date }) => {
           <Col md={8} xs={7} className="bg-info ps-0">
             <Card.Body className="bg-info text-light ps-0">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between bg-info my-0">
-                <h3 className="fs-3 hover-primary bg-info">{name}</h3>
-                <h4 className="bg-info fs-6 text-sm-center">
+                <h3 className="fs-4 fw-bold hover-primary bg-info">{name}</h3>
+                <h4 className="bg-info fs-6 text-sm-center gray-text">
                   {daysArr[dayOfWeek]}{" "}
-                  <Moment className="bg-none" format="MM/DD/YY" day>
+                  <Moment className="bg-none gray-text" format="MM/DD/YY" day>
                     {date}
                   </Moment>
                 </h4>
-                <h4 className="fs-6 bg-secondary py-1 px-3 rounded-pill">{`${
+                <h4 className="fs-small fw-bold bg-secondary py-1 px-3 rounded-pill">{`${
                   lifts.length
                 } ${lifts.length === 1 ? "Lift" : "Lifts"}`}</h4>
               </Card.Title>
