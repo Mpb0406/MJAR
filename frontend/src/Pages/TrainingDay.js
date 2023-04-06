@@ -11,7 +11,7 @@ import Loader from "../Components/Loader";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../features/Context/TrainingContext";
 import LiftTable from "../Components/LiftTable";
-import { getTrainingDate } from "../Data/data";
+import { getTrainingDate } from "../Data/util";
 
 const TrainingDay = () => {
   const {
@@ -95,7 +95,7 @@ const TrainingDay = () => {
       )}
 
       {day.lifts.map((lift) => (
-        <LiftTable lift={lift} mainLifts={mainLifts} block={block} />
+        <LiftTable lift={lift} mainLifts={mainLifts} block={block} day={day} />
       ))}
 
       <div className="d-grid w-75 mx-auto mb-5 gap-3 px-2 pt-2">

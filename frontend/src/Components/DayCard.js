@@ -43,7 +43,9 @@ const DayCard = ({ name, lifts, id, block, week, date }) => {
         <Row>
           <Col xs={2} md={1} className="bg-info d-flex align-items-center">
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-              <h3 className="text-light bg-none ms-3 fs-2 cursor-pointer">⫶</h3>
+              <h3 className="text-light bg-none ms-3 fs-2 cursor-pointer fw-bold">
+                ⫶
+              </h3>
             </OverlayTrigger>
           </Col>
           <Col md={8} xs={7} className="bg-info ps-0">

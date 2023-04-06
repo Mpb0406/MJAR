@@ -49,7 +49,7 @@ const TrainingBlocks = () => {
   return (
     <div className="mt-5">
       <BlockLiftModal />
-      <h3 className="fs-1 text-light">My Training Blocks</h3>
+      <h3 className="fs-1 fw-bold text-light">My Training Blocks</h3>
 
       {blocks.length === 0 && (
         <div className="mt-5">
