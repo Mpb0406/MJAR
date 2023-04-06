@@ -48,10 +48,10 @@ const TrainingDays = () => {
 
   return (
     <div className="mt-5">
-      <h3 className="fs-1 text-light">{week.week}</h3>
-      <h4 className="text-light fs-4 mb-4">
-        <Moment format="MM/DD/YY">{week.createdAt}</Moment> {" - "}
-        <Moment format="MM/DD/YY">{week.updatedAt}</Moment>
+      <h3 className="fs-1 fw-bold text-light">{week.week}</h3>
+      <h4 className="fs-5 fst-italic gray-text mb-4">
+        <Moment format="MMM D">{week.createdAt}</Moment> {" - "}
+        <Moment format="MMM D, YYYY">{week.updatedAt}</Moment>
       </h4>
       <Container fluid="lg" className="mt-4 ps-0">
         {days.length === 0 && (

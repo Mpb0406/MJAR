@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Badge } from "react-bootstrap";
 import WeekCard from "../Components/WeekCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,13 +43,18 @@ const Block = () => {
 
   return (
     <div className="mt-5">
-      <h3 className="fs-1 text-light">{block.block}</h3>
-      <h4 className="text-light fs-4 mb-4">
-        <Moment format="MM/DD/YY">
+      <h3 className="fs-1 fw-bold text-light">
+        {block.block}{" "}
+        <Badge className="fs-6 align-middle">
+          {block?.microBlock?.split(" ")[1]}
+        </Badge>
+      </h3>
+      <h4 className="fst-italic gray-text fs-5 mb-4">
+        <Moment format="MMM D">
           {weeks[0] ? weeks[0].createdAt : block.createdAt}
         </Moment>
         {" - "}
-        <Moment format="MM/DD/YY">
+        <Moment format="MMM D, YYYY">
           {weeks[0] ? weeks[weeks.length - 1].updatedAt : block.updatedAt}
         </Moment>
       </h4>

@@ -10,6 +10,7 @@ export const StateContext = ({ children }) => {
   const [showSet, setShowSet] = useState(false);
   const [showDeleteSet, setShowDeleteSet] = useState(false);
   const [showDeleteLift, setShowDeleteLift] = useState(false);
+  const [adjustedWeight, setAdjustedWeight] = useState(true);
 
   // State Functions
 
@@ -36,6 +37,9 @@ export const StateContext = ({ children }) => {
     console.log(lift);
   };
 
+  // Toggle Adjusted Working Weight and Normally Calculated Working Weight
+  const toggleWeight = () => setAdjustedWeight(!adjustedWeight);
+
   return (
     <TrainingContext.Provider
       value={{
@@ -51,10 +55,12 @@ export const StateContext = ({ children }) => {
         setShowDeleteSet,
         showDeleteLift,
         setShowDeleteLift,
+        adjustedWeight,
         handleOpenLift,
         handleOpenSet,
         handleOpenDeleteSet,
         handleOpenDeleteLift,
+        toggleWeight,
       }}>
       {children}
     </TrainingContext.Provider>

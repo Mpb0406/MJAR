@@ -57,17 +57,19 @@ const BlockCard = ({ showLiftPrompt, setShowLiftPrompt, block }) => {
               rootClose
               placement="right"
               overlay={popover}>
-              <h3 className="text-light bg-none ms-3 fs-2 cursor-pointer">⫶</h3>
+              <h3 className="text-light bg-none ms-3 fs-2 cursor-pointer fw-bold">
+                ⫶
+              </h3>
             </OverlayTrigger>
           </Col>
-          <Col md={8} xs={7} className="bg-info ps-0">
+          <Col md={8} xs={7} className="bg-info px-0">
             <Card.Body className="bg-info text-light ps-0">
               <Card.Title className="d-flex flex-column align-items-start justify-content-between bg-info my-0">
                 <div className="d-flex bg-none">
                   <h6 className="fs-5 bg-info hover-primary">
                     <Link
                       to={`/training/${block._id}`}
-                      className="text-decoration-none bg-none text-light hover-primary">
+                      className="text-decoration-none bg-none fw-bold text-light hover-primary">
                       {block.block}
                     </Link>
                   </h6>

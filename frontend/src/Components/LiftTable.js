@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Table,
   CloseButton,
@@ -8,22 +7,53 @@ import {
   Card,
 } from "react-bootstrap";
 import { useStateContext } from "../features/Context/TrainingContext";
-import { setTypeClass } from "../Data/data";
+import { setTypeClass } from "../Data/util";
 import { MdDelete } from "react-icons/md";
 import LiftInfoToggle from "./LiftInfoToggle";
 import LiftInfoBody from "./LiftInfoBody";
-import { MdOutlineExpandMore, MdOutlineExpandLess } from "react-icons/md";
 import AccessoryInfoBody from "./AccessoryInfoBody";
+import { MdOutlineExpandMore } from "react-icons/md";
+import { weekDetails } from "../Data/data";
+import { calcWorkingWeight, normalWorkingWeight } from "../Data/util";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-const LiftTable = ({ lift, mainLifts, block }) => {
-  const { handleOpenDeleteLift, handleOpenDeleteSet, handleOpenSet } =
-    useStateContext();
+const LiftTable = ({ lift, mainLifts, block, day }) => {
+  const {
+    handleOpenDeleteLift,
+    handleOpenDeleteSet,
+    handleOpenSet,
+    adjustedWeight,
+    toggleWeight,
+  } = useStateContext();
 
   // Get Main Lift Variation Name
   const isMainLift = mainLifts.filter((item) => item === lift.exercise)[0];
   // Get MainLift Variation Type
   const mainLiftType = block.lifts.filter((lift) => lift.lift === isMainLift)[0]
     ?.liftType;
+  // Get Top Set
+  const topSet = lift.sets
+    .filter((set) => set.setType === "Top Set")
+    .slice(-1)[0];
+  // Get Week to compare reps and RPE
+  const { weeks } = useSelector((state) => state.training);
+  const { weekId } = useParams();
+  const week = weeks.filter((week) => week._id === weekId)[0].week;
+  const weekPrompt =
+    block.block === "Peak"
+      ? weekDetails[block.block]?.weeks?.filter((item) => item.week === week)[0]
+      : weekDetails[block.block + block?.microBlock?.slice(6)]?.weeks?.filter(
+          (item) => item.week === week
+        )[0];
+
+  const workingWeight = calcWorkingWeight(
+    topSet?.weight,
+    weekPrompt.percent,
+    topSet?.rpe - weekPrompt.rpe,
+    mainLiftType
+  );
+
   return (
     <>
       <Table
@@ -123,6 +153,26 @@ const LiftTable = ({ lift, mainLifts, block }) => {
           ))}
         </tbody>
       </Table>
+
+      {/* Working Weight Auto Calc */}
+      {isMainLift && (
+        <div className="text-center my-3">
+          {topSet && (
+            <div className="d-flex justify-content-center align-items-center">
+              <h3 onClick={toggleWeight} className="fs-4 fw-bold mb-0">
+                Working Weight:{" "}
+                {adjustedWeight
+                  ? workingWeight
+                  : normalWorkingWeight(topSet?.weight, weekPrompt.percent)}
+              </h3>
+              {adjustedWeight && (
+                <p className="fs-small mb-0 ms-1">{`(Adjusted)`}</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="d-grid w-75 m-auto gap-3 px-2 py-2">
         <Button
           variant="secondary"
