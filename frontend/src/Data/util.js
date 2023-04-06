@@ -51,3 +51,8 @@ export const calcWorkingWeight = (topSet, percent, rpeDif, lift) => {
 
   return Math.ceil((topSet * (percent * 0.01)) / 5) * 5 - adjustment;
 };
+
+// Calculate Working Weight - No Adjustment
+export const normalWorkingWeight = (topSet, percent) => {
+  return Math.ceil((topSet * (percent * 0.01)) / 5) * 5;
+};

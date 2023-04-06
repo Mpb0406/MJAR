@@ -14,7 +14,7 @@ import LiftInfoBody from "./LiftInfoBody";
 import AccessoryInfoBody from "./AccessoryInfoBody";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { weekDetails } from "../Data/data";
-import { calcWorkingWeight } from "../Data/util";
+import { calcWorkingWeight, normalWorkingWeight } from "../Data/util";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -53,8 +53,6 @@ const LiftTable = ({ lift, mainLifts, block, day }) => {
     topSet?.rpe - weekPrompt.rpe,
     mainLiftType
   );
-  const normalWorkingWeight =
-    Math.ceil((topSet?.weight * (weekPrompt.percent * 0.01)) / 5) * 5;
 
   return (
     <>
@@ -163,7 +161,9 @@ const LiftTable = ({ lift, mainLifts, block, day }) => {
             <div className="d-flex justify-content-center align-items-center">
               <h3 onClick={toggleWeight} className="fs-4 fw-bold mb-0">
                 Working Weight:{" "}
-                {adjustedWeight ? workingWeight : normalWorkingWeight}
+                {adjustedWeight
+                  ? workingWeight
+                  : normalWorkingWeight(topSet?.weight, weekPrompt.percent)}
               </h3>
               {adjustedWeight && (
                 <p className="fs-small mb-0 ms-1">{`(Adjusted)`}</p>
